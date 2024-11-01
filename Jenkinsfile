@@ -4,7 +4,14 @@ node {
     }
     
     stage('ansible'){
-        ansiblePlaybook credentialsId: 'private_key', inventory: '${workspace}/hosts.yaml', playbook: '${workspace}/playbook.yaml'
+        //ansiblePlaybook credentialsId: 'private_key', inventory: '${workspace}/hosts.yaml', playbook: '${workspace}/playbook.yaml'
+        ansiColor('xterm') {
+            ansiblePlaybook(
+                playbook: '${workspace}/playbook.yaml',
+                inventory: '${workspace}/hosts.yaml',
+                credentialsId: 'sample-ssh-key',
+                colorized: true)
+}
     }
     
 }
