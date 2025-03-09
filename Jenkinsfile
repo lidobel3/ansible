@@ -9,7 +9,7 @@ pipeline { //Le niveau supérieur du pipeline doit être un bloc, c'est-à-dire 
             echo "test ok"
         }
         
-        //stage('ansible'){
+        /*stage('ansible'){
             ansiblePlaybook credentialsId: 'private_key', inventory: '${workspace}/hosts.yaml', playbook: '${workspace}/playbook.yaml'
             ansiColor('xterm') {
                 ansiblePlaybook(
@@ -19,8 +19,6 @@ pipeline { //Le niveau supérieur du pipeline doit être un bloc, c'est-à-dire 
                     inventory: 'https://github.com/lidobel3/ansible/blob/main//hosts.yaml',
                     credentialsId: 'sample-ssh-key',
                     colorized: true)
-                }
+                }*/
         }
     }
-}
-//} //toto
