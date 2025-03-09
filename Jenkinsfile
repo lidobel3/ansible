@@ -14,7 +14,7 @@ pipeline { //Le niveau supérieur du pipeline doit être un bloc, c'est-à-dire 
         stage('ansible'){
 
              steps {
-                ansiblePlaybook credentialsId: 'private_key', inventory: '${workspace}/hosts.yaml', playbook: '${workspace}/playbook.yaml'
+                //ansiblePlaybook credentialsId: 'private_key', inventory: '${workspace}/hosts.yaml', playbook: '${workspace}/playbook.yaml'
                 ansiColor('xterm') {
                     ansiblePlaybook(
                         playbook: '${workspace}/playbook.yaml',
