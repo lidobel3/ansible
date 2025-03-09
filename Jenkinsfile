@@ -2,9 +2,9 @@
 pipeline { //Le niveau supérieur du pipeline doit être un bloc, c'est-à-dire : pipeline { }.
     agent any
     //node {
-    parameters {
+    /*parameters {
         string(name: 'Greeting', defaultValue: 'Hello', description: 'How should I greet the world?')
-    }
+    }*/
     stages {
         stage('clone'){
             steps {
