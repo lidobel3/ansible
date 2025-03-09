@@ -5,10 +5,11 @@ pipeline { //Le niveau supérieur du pipeline doit être un bloc, c'est-à-dire 
     //node {
     stages {
         stage('clone'){
-            git branch: 'main', url: 'https://github.com/lidobel3/ansible.git'
+            //git branch: 'main', url: 'https://github.com/lidobel3/ansible.git'
+            echo "test ok"
         }
         
-        stage('ansible'){
+        //stage('ansible'){
             ansiblePlaybook credentialsId: 'private_key', inventory: '${workspace}/hosts.yaml', playbook: '${workspace}/playbook.yaml'
             ansiColor('xterm') {
                 ansiblePlaybook(
