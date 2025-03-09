@@ -2,7 +2,7 @@
 
 pipeline { //Le niveau supérieur du pipeline doit être un bloc, c'est-à-dire : pipeline { }.
     agent any
-    node {
+    //node {
         stages {
             stage('clone'){
                 git branch: 'main', url: 'https://github.com/lidobel3/ansible.git'
@@ -22,4 +22,4 @@ pipeline { //Le niveau supérieur du pipeline doit être un bloc, c'est-à-dire 
             }
         }
     }
-} //toto
+//} //toto
