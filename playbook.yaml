@@ -8,4 +8,10 @@
   hosts: all
   become: true
   roles :
-    - role1
+    - maven
+
+- name : install postgres
+  hosts: all
+  become: true
+  roles :
+    - postgresql
