@@ -1,7 +1,7 @@
 #!groovy
 
 pipeline { //Le niveau supérieur du pipeline doit être un bloc, c'est-à-dire : pipeline { }.
-    any agent
+    agent any
     node {
         stages {
             stage('clone'){
