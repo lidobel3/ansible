@@ -6,7 +6,7 @@ pipeline { //Le niveau supérieur du pipeline doit être un bloc, c'est-à-dire 
         stage('clone'){
             //git branch: 'main', url: 'https://github.com/lidobel3/ansible.git'
             steps {
-                echo 'Building..'
+                git branch: 'main', url: 'https://github.com/lidobel3/ansible.git'
             }
         }
     }
