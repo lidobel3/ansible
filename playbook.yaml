@@ -3,3 +3,9 @@
   become: true
   roles :
     - nginx
+
+- name : install idk what
+  hosts: all
+  become: true
+  roles :
+    - role1
