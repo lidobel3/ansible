@@ -5,6 +5,10 @@ pipeline { //Le niveau supérieur du pipeline doit être un bloc, c'est-à-dire 
     /*parameters {
         string(name: 'Greeting', defaultValue: 'Hello', description: 'How should I greet the world?')
     }*/
+    options {
+        ansiColor('xterm') // Active les couleurs ANSI
+    }
+    
     stages {
         stage('clone'){
             steps {
