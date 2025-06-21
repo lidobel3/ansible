@@ -8,9 +8,7 @@ pipeline { //Le niveau supérieur du pipeline doit être un bloc, c'est-à-dire 
     options {
         ansiColor('xterm') // Active les couleurs ANSI
     }
-    parameters {
-    string(name: 'VERBOSITY', defaultValue: '-v', description: 'Verbosity level for Ansible')
-    }
+
     stages {
         stage('clone'){
             steps {
@@ -26,8 +24,7 @@ pipeline { //Le niveau supérieur du pipeline doit être un bloc, c'est-à-dire 
                         playbook: '${workspace}/playbook.yaml',
                         inventory: 'https://github.com/lidobel3/ansible/blob/main/hosts.yaml',
                         credentialsId: 'sample-ssh-key',
-                        colorized: true
-                        options: '${params.VERBOSITY}')
+                        colorized: true)
                     }
               }       
         }
