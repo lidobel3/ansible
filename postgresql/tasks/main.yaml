@@ -11,6 +11,6 @@
 
 - name: Exec SQL scripts
   community.postgresql.postgresql_query:
-    login_db: test_db
+    login_db: postgres
     query: SELECT * FROM version();
   
