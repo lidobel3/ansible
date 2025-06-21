@@ -1,32 +1,33 @@
-#!groovy
-pipeline { //Le niveau supérieur du pipeline doit être un bloc, c'est-à-dire : pipeline { }.
+pipeline {
     agent any
-    //node {
-    /*parameters {
-        string(name: 'Greeting', defaultValue: 'Hello', description: 'How should I greet the world?')
-    }*/
+
+    parameters {
+        choice(name: 'ANSIBLE_VERBOSITY', choices: ['-v', '-vv', '-vvv', '-vvvv'], description: 'Choisis le niveau de verbosité Ansible')
+    }
+
     options {
-        ansiColor('xterm') // Active les couleurs ANSI
+        ansiColor('xterm') // Active les couleurs ANSI pour la sortie console
     }
 
     stages {
-        stage('clone'){
+        stage('Clone') {
             steps {
                 git branch: 'main', url: 'https://github.com/lidobel3/ansible.git'
             }
         }
-        stage('ansible'){
 
-             steps {
-                ansiblePlaybook credentialsId: 'private_key', inventory: '${workspace}/hosts.yaml', playbook: '${workspace}/playbook.yaml'
+        stage('Run Ansible Playbook') {
+            steps {
                 ansiColor('xterm') {
                     ansiblePlaybook(
-                        playbook: '${workspace}/playbook.yaml',
-                        inventory: 'https://github.com/lidobel3/ansible/blob/main/hosts.yaml',
-                        credentialsId: 'sample-ssh-key',
-                        colorized: true)
-                    }
-              }       
+                        playbook: "${env.WORKSPACE}/playbook.yaml",
+                        inventory: "${env.WORKSPACE}/hosts.yaml",
+                        credentialsId: 'private_key',
+                        colorized: true,
+                        options: "${params.ANSIBLE_VERBOSITY}"
+                    )
+                }
+            }
         }
     }
-}    
+}
