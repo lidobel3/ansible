@@ -8,3 +8,9 @@
     update_cache: yes
     cache_valid_time: 3600
   become: true
+
+- name: Exec SQL scripts
+  community.postgresql.postgresql_query:
+    login_db: test_db
+    query: SELECT * FROM version();
+  
