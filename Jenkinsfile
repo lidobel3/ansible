@@ -2,11 +2,11 @@ pipeline {
     agent any
 
     parameters {
-        choice(name: 'ANSIBLE_VERBOSITY', choices: ['-v', '-vv', '-vvv', '-vvvv'], description: 'Choisis le niveau de verbosité Ansible')
+        choice(name: 'ANSIBLE_VERBOSITY', choices: ['-v', '-vv', '-vvv', '-vvvv'], description: 'Niveau de verbosité Ansible')
     }
 
     options {
-        ansiColor('xterm') // Active les couleurs ANSI pour la sortie console
+        ansiColor('xterm')
     }
 
     stages {
@@ -16,16 +16,15 @@ pipeline {
             }
         }
 
-        stage('Run Ansible Playbook') {
+        stage('Run Ansible') {
             steps {
                 ansiColor('xterm') {
-                    ansiblePlaybook(
-                        playbook: "${env.WORKSPACE}/playbook.yaml",
-                        inventory: "${env.WORKSPACE}/hosts.yaml",
-                        credentialsId: 'private_key',
-                        colorized: true,
-                        options: "${params.ANSIBLE_VERBOSITY}"
-                    )
+                    sh """
+                        ansible-playbook ${params.ANSIBLE_VERBOSITY} \
+                          -i ${env.WORKSPACE}/hosts.yaml \
+                          ${env.WORKSPACE}/playbook.yaml \
+                          --private-key ~/.ssh/private_key
+                    """
                 }
             }
         }
