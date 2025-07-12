@@ -36,7 +36,7 @@ pipeline {
                             inventory: "${workspace}/hosts.yaml", // Use workspace path, not a raw URL from GitHub
                             credentialsId: 'sample-ssh-key',
                             colorized: true,
-                            extras: -v "${ansibleVerbosity}"
+                            extras: "-v ${ansibleVerbosity}"
                         )
                     }
                 }
