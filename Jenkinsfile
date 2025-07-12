@@ -30,16 +30,16 @@ pipeline {
                     // First ansiblePlaybook call (you might not need this if the second one is complete)
                     ansiblePlaybook credentialsId: 'private_key', inventory: "${workspace}/hosts.yaml", playbook: "${workspace}/playbook.yaml"
 
-                    ansiColor('xterm') {
-                        ansiblePlaybook(
-                            playbook: "${workspace}/playbook.yaml", // Use workspace path
-                            inventory: "${workspace}/hosts.yaml", // Use workspace path, not a raw URL from GitHub
-                            credentialsId: 'sample-ssh-key',
-                            colorized: true,
-                            extras: "${ansibleVerbosity}"
-                            //verbosity: "${ansibleVerbosity}"
-                        )
-                    }
+                    // ansiColor('xterm') {
+                    //     ansiblePlaybook(
+                    //         playbook: "${workspace}/playbook.yaml", // Use workspace path
+                    //         inventory: "${workspace}/hosts.yaml", // Use workspace path, not a raw URL from GitHub
+                    //         credentialsId: 'sample-ssh-key',
+                    //         colorized: true,
+                    //         extras: "${ansibleVerbosity}"
+                    //         //verbosity: "${ansibleVerbosity}"
+                    //     )
+                    // }
                 }
             } // <--- Close of the 'steps' block for 'stage('ansible')'
         }
