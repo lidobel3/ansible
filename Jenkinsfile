@@ -28,10 +28,9 @@ pipeline { //Le niveau supérieur du pipeline doit être un bloc, c'est-à-dire 
                         inventory: 'https://github.com/lidobel3/ansible/blob/main/hosts.yaml',
                         credentialsId: 'sample-ssh-key',
                         colorized: true
-                        //extras: "${ansibleVerbosity}"
-                        )
-                    }
-              }       
+                        extras: "${ansibleVerbosity}")
+                }
+            }       
         }
         stage('clone_2'){
             steps {
