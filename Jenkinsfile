@@ -29,7 +29,7 @@ pipeline { //Le niveau supérieur du pipeline doit être un bloc, c'est-à-dire 
                         credentialsId: 'sample-ssh-key',
                         colorized: true
                         //extras: "${ansibleVerbosity}")
-                        extras: "-vvvv")
+                        extras: '-vvvv')
                 }
             }       
         }
