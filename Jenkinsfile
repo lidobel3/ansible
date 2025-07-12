@@ -5,8 +5,8 @@ pipeline {
     parameters {
         // Define your ANSIBLE_VERBOSITY parameter here
         choice(name: 'ANSIBLE_VERBOSITY',
-               choices: ['', '-v', '-vv', '-vvv', '-vvvv', '-vvvvv'],
-               //choices: ['', '0', '1', '2', '3', '4', '5','6'],
+               //choices: ['', '-v', '-vv', '-vvv', '-vvvv', '-vvvvv'],
+               choices: ['', '0', '1', '2', '3', '4', '5','6'],
                description: 'Choisissez le niveau de verbosité pour Ansible.')
     }
 
@@ -28,7 +28,7 @@ pipeline {
                     }
 
                     // First ansiblePlaybook call (you might not need this if the second one is complete)
-                    ansiblePlaybook credentialsId: 'private_key', inventory: "${workspace}/hosts.yaml", playbook: "${workspace}/playbook.yaml"
+                    //ansiblePlaybook credentialsId: 'private_key', inventory: "${workspace}/hosts.yaml", playbook: "${workspace}/playbook.yaml"
 
                     ansiColor('xterm') {
                         ansiblePlaybook(
@@ -36,8 +36,8 @@ pipeline {
                             inventory: "${workspace}/hosts.yaml", // Use workspace path, not a raw URL from GitHub
                             credentialsId: 'sample-ssh-key',
                             colorized: true,
-                            //extras: "${ansibleVerbosity}"
-                            verbosity: "${ansibleVerbosity}"
+                            extras: "${ansibleVerbosity}"
+                            //verbosity: "${ansibleVerbosity}"
                         )
                     }
                 }
