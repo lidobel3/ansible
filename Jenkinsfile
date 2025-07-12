@@ -5,8 +5,8 @@ pipeline {
     parameters {
         // Define your ANSIBLE_VERBOSITY parameter here
         choice(name: 'ANSIBLE_VERBOSITY',
-               //choices: ['', '-v', '-vv', '-vvv', '-vvvv', '-vvvvv'],
-               choices: ['', '0', '1', '2', '3', '4', '5','6'],
+               choices: ['', '-v', '-vv', '-vvv', '-vvvv', '-vvvvv'],
+               //choices: ['', '0', '1', '2', '3', '4', '5','6'],
                description: 'Choisissez le niveau de verbosité pour Ansible.')
     }
 
