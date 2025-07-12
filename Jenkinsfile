@@ -1,43 +1,45 @@
 #!groovy
-pipeline { //Le niveau supérieur du pipeline doit être un bloc, c'est-à-dire : pipeline { }.
+pipeline {
     agent any
-    //node {
-    /*parameters {
-        string(name: 'Greeting', defaultValue: 'Hello', description: 'How should I greet the world?')
-    }*/
+
+    parameters {
+        // Define your ANSIBLE_VERBOSITY parameter here
+        choice(name: 'ANSIBLE_VERBOSITY',
+               choices: ['', '-v', '-vv', '-vvv', '-vvvv', '-vvvvv'],
+               description: 'Choisissez le niveau de verbosité pour Ansible.')
+    }
+
     stages {
         stage('clone'){
             steps {
                 git branch: 'main', url: 'https://github.com/lidobel3/ansible.git'
             }
         }
+        //----------------------------------------------------------------------------------------------------
         stage('ansible'){
-            steps {
+            steps { // <--- This is the correct and ONLY 'steps' block for this stage
+
                 script {
-                    // Vérifie si un niveau de verbosité a été sélectionné
+                    // Check if a verbosity level was selected
                     def ansibleVerbosity = ""
                     if (params.ANSIBLE_VERBOSITY != "") {
                         ansibleVerbosity = params.ANSIBLE_VERBOSITY
                     }
 
-             steps {
-                ansiblePlaybook credentialsId: 'private_key', inventory: '${workspace}/hosts.yaml', playbook: '${workspace}/playbook.yaml'
-                ansiColor('xterm') {
-                    ansiblePlaybook(
-                        playbook: '${workspace}/playbook.yaml',
-                        inventory: 'https://github.com/lidobel3/ansible/blob/main/hosts.yaml',
-                        credentialsId: 'sample-ssh-key',
-                        colorized: true,
-                        extras: "${ansibleVerbosity}")
+                    // First ansiblePlaybook call (you might not need this if the second one is complete)
+                    ansiblePlaybook credentialsId: 'private_key', inventory: "${workspace}/hosts.yaml", playbook: "${workspace}/playbook.yaml"
+
+                    ansiColor('xterm') {
+                        ansiblePlaybook(
+                            playbook: "${workspace}/playbook.yaml", // Use workspace path
+                            inventory: "${workspace}/hosts.yaml", // Use workspace path, not a raw URL from GitHub
+                            credentialsId: 'sample-ssh-key',
+                            colorized: true,
+                            extras: "${ansibleVerbosity}"
+                        )
+                    }
                 }
-            }       
+            } // <--- Close of the 'steps' block for 'stage('ansible')'
         }
-        /*stage('clone_2'){
-            steps {
-                sh 'echo test ok'
-            }
-        }*/
-    }
-}    
     }
 }
