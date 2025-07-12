@@ -12,6 +12,13 @@ pipeline { //Le niveau supérieur du pipeline doit être un bloc, c'est-à-dire 
             }
         }
         stage('ansible'){
+            steps {
+                script {
+                    // Vérifie si un niveau de verbosité a été sélectionné
+                    def ansibleVerbosity = ""
+                    if (params.ANSIBLE_VERBOSITY != "") {
+                        ansibleVerbosity = params.ANSIBLE_VERBOSITY
+                    }
 
              steps {
                 ansiblePlaybook credentialsId: 'private_key', inventory: '${workspace}/hosts.yaml', playbook: '${workspace}/playbook.yaml'
@@ -20,7 +27,8 @@ pipeline { //Le niveau supérieur du pipeline doit être un bloc, c'est-à-dire 
                         playbook: '${workspace}/playbook.yaml',
                         inventory: 'https://github.com/lidobel3/ansible/blob/main/hosts.yaml',
                         credentialsId: 'sample-ssh-key',
-                        colorized: true)
+                        colorized: true
+                        extras: "${ansibleVerbosity}")
                     }
               }       
         }
