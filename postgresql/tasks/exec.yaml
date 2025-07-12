@@ -1,0 +1,9 @@
+---
+
+- name: Exec SQL scripts
+  community.postgresql.postgresql_query:
+    login_user: postgres
+    login_db: postgres
+    query: SELECT * FROM version();
+  become: yes
+  become_user: postgres

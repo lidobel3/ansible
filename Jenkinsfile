@@ -24,5 +24,10 @@ pipeline { //Le niveau supérieur du pipeline doit être un bloc, c'est-à-dire 
                     }
               }       
         }
+        stage('clone'){
+            steps {
+                'sh echo test ok'
+            }
+        }
     }
 }    
