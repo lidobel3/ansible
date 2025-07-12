@@ -28,7 +28,7 @@ pipeline {
                     }
 
                     // First ansiblePlaybook call (you might not need this if the second one is complete)
-                    //ansiblePlaybook credentialsId: 'private_key', inventory: "${workspace}/hosts.yaml", playbook: "${workspace}/playbook.yaml"
+                    ansiblePlaybook credentialsId: 'private_key', inventory: "${workspace}/hosts.yaml", playbook: "${workspace}/playbook.yaml"
 
                     ansiColor('xterm') {
                         ansiblePlaybook(
