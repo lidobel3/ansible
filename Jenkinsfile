@@ -39,3 +39,5 @@ pipeline { //Le niveau supérieur du pipeline doit être un bloc, c'est-à-dire 
         }*/
     }
 }    
+    }
+}
