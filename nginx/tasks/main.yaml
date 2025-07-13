@@ -1,7 +1,7 @@
 ---
 
 - name: install nginx2
-  import_task: install.yaml
+  import_tasks: install.yaml
 
 # - name : start nginx
 #   service:
