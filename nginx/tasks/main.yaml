@@ -3,12 +3,6 @@
 - name: install nginx2
   import_tasks: install.yaml
 
-- name : start nginx
-  service:
-    name: nginx
-    state: started
-  become: true
-
 - name: Copier la configuration Nginx
   ansible.builtin.template:
     src: nginx.conf.j2
