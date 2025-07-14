@@ -9,29 +9,29 @@
 #     dest: /etc/nginx/nginx.conf
 #   notify: restart nginx
 
-- name: install nginx2
-  tasks:
-    - name: Install, configure, and start Nginx
-      when: ansible_facts['distribution'] == 'Ubuntu'
-      block:
-        - name: Install httpd and memcached
-          ansible.builtin.apt:
-            name:
-            - ngnix
-            state: present
+# - name: install nginx2
 
-        - name: Apply the foo config template
-          ansible.builtin.template:
-            src: templates/nginx.conf.j2
-            dest: /etc/nginx/nginx.conf
+- name: Install, configure, and start Nginx
+  when: ansible_facts['distribution'] == 'Ubuntu'
+  block:
+    - name: Install httpd and memcached
+      ansible.builtin.apt:
+        name:
+        - ngnix
+        state: present
 
-        - name: Start service bar and enable it
-          ansible.builtin.service:
-            name: nginx
-            state: restarted
-            enabled: True
-      become: true
-      become_user: root
-      ignore_errors: true
+    - name: Apply the foo config template
+      ansible.builtin.template:
+        src: templates/nginx.conf.j2
+        dest: /etc/nginx/nginx.conf
+
+    - name: Start service bar and enable it
+      ansible.builtin.service:
+        name: nginx
+        state: restarted
+        enabled: True
+  become: true
+  become_user: root
+  ignore_errors: true
 
 ...
