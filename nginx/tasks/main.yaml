@@ -14,7 +14,7 @@
 - name: Install, configure, and start Nginx
   when: ansible_facts['distribution'] == 'Ubuntu'
   block:
-    - name: Install httpd and memcached
+    - name: Installation
       ansible.builtin.apt:
         name:
         - nginx
