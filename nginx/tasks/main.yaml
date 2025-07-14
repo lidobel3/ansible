@@ -28,7 +28,7 @@
     - name: Start service bar and enable it
       ansible.builtin.service:
         name: nginx
-        state: restarted
+        state: started
         enabled: True
   become: true
   become_user: root
