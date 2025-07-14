@@ -17,7 +17,7 @@
     - name: Install httpd and memcached
       ansible.builtin.apt:
         name:
-        - ngnix
+        - nginx
         state: present
 
     - name: Apply the foo config template
