@@ -5,9 +5,9 @@ pipeline {
     parameters {
         // Define your ANSIBLE_VERBOSITY parameter here
         choice(name: 'ANSIBLE_VERBOSITY',
-               //choices: ['', '-v', '-vv', '-vvv', '-vvvv', '-vvvvv'],
-               choices: ['', '0', '1', '2', '3', '4', '5','6'],
-               description: 'Choisissez le niveau de verbosité pour Ansible.')
+               // We're using numerical choices because the 'verbosity' parameter of the plugin expects an integer.
+               choices: ['0', '1', '2', '3', '4', '5', '6'], // '0' for no verbosity, '1' for -v, '2' for -vv, etc.
+               description: 'Choisissez le niveau de verbosité pour Ansible (0=silencieux, 6=très verbeux).')
     }
 
     stages {
@@ -21,24 +21,27 @@ pipeline {
             steps { // <--- This is the correct and ONLY 'steps' block for this stage
 
                 script {
-                    // Check if a verbosity level was selected
-                    def ansibleVerbosity = ""
+                    // Initialize verbosity to 0 (no verbosity) if nothing is selected or if it's an empty string.
+                    def ansibleVerbosity = 0
                     if (params.ANSIBLE_VERBOSITY != "") {
-                        ansibleVerbosity = params.ANSIBLE_VERBOSITY
+                        // Convert the string parameter (e.g., "3") to an integer (e.g., 3)
+                        ansibleVerbosity = params.ANSIBLE_VERBOSITY.toInteger()
                     }
 
-                    // First ansiblePlaybook call (you might not need this if the second one is complete)
-                    ansiblePlaybook credentialsId: 'private_key', inventory: "${workspace}/hosts.yaml", playbook: "${workspace}/playbook.yaml"
+                    // REMOVE OR COMMENT OUT THIS LINE:
+                    // This ansiblePlaybook call does NOT support 'colorized' or 'verbosity' parameters directly.
+                    // ansiblePlaybook credentialsId: 'private_key', inventory: "${workspace}/hosts.yaml", playbook: "${workspace}/playbook.yaml"
 
-                    // ansiColor('xterm') {
-                    //     ansiblePlaybook(
-                    //         playbook: "${workspace}/playbook.yaml", // Use workspace path
-                    //         inventory: "${workspace}/hosts.yaml", // Use workspace path, not a raw URL from GitHub
-                    //         credentialsId: 'sample-ssh-key',
-                    //         colorized: true,
-                    //         extras: "-v ${ansibleVerbosity}"
-                    //     )
-                    // }
+                    // THIS IS THE BLOCK THAT NEEDS TO BE ACTIVE FOR COLORS AND VERBOSITY
+                    ansiColor('xterm') { // <-- UNCOMMENT THIS LINE
+                        ansiblePlaybook(
+                            playbook: "${workspace}/playbook.yaml", // Use workspace path
+                            inventory: "${workspace}/hosts.yaml", // Use workspace path, not a raw URL from GitHub
+                            credentialsId: 'private_key', // Ensure this matches your Jenkins credential ID
+                            colorized: true, // <-- UNCOMMENT THIS LINE: ESSENTIAL for Ansible to output colors
+                            verbosity: ansibleVerbosity // <-- UNCOMMENT THIS LINE: Pass the integer verbosity level
+                        )
+                    }
                 }
             } // <--- Close of the 'steps' block for 'stage('ansible')'
         }
