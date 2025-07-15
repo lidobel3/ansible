@@ -1,4 +1,13 @@
 ---
+- name: Build image and with build args
+  docker_image:
+    name: myimagebel
+    build:
+      path: ../tools/Dockerfile
+      args:
+        log_volume: /var/log/myapp
+        listen_port: 8080
+    source: build
 
 - name: Deploiement du conteneur
   docker_container:
