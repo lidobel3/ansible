@@ -5,11 +5,11 @@
     - nginx
   tags: nginx
 
-- name : install idk what
+- name : docker deploy
   hosts: all
   become: true
   roles :
-    - maven
+    - docker
 
 - name : install postgres
   hosts: all
