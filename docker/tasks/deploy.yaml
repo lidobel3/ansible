@@ -5,7 +5,9 @@
     name: web1
     state: started
     image: ubuntu:14.04
+    ports: 9000:80
     command: sleep infinity
+
 
 
 ...
