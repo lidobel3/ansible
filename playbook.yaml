@@ -10,9 +10,11 @@
   become: true
   roles :
     - docker
+  tags: docker
 
 - name : install postgres
   hosts: all
   become: true
   roles :
     - postgresql
+  tags: postgres
