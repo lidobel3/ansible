@@ -3,7 +3,7 @@
   docker_image:
     name: myimagebel
     build:
-      path: ../tools/Dockerfile
+      path: ./tools/Dockerfile
       args:
         log_volume: /var/log/myapp
         listen_port: 8080
