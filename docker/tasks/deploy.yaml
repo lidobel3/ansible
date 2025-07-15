@@ -2,7 +2,7 @@
 
 - name: Deploiement du conteneur
   docker_container:
-    name: mycontainer
+    name: web1
     state: started
     image: ubuntu:14.04
     command: sleep infinity
