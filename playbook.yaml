@@ -3,6 +3,7 @@
   become: true
   roles :
     - nginx
+  tags: nginx
 
 - name : install idk what
   hosts: all
