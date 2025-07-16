@@ -1,6 +1,6 @@
 #templates du 14/07/25
 
-user www-data;
+user {{ nginx_user }};
 worker_processes auto;
 pid /run/nginx.pid;
 include /etc/nginx/modules-enabled/*.conf;
