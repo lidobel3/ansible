@@ -20,7 +20,7 @@
         - nginx
         state: present
 
-    - name: Apply the foo config template
+    - name: Apply the nginx config template
       ansible.builtin.template:
         src: templates/nginx.conf.j2
         dest: /etc/nginx/nginx.conf
