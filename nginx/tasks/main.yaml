@@ -30,7 +30,7 @@
     - name: Start service nginx and enable it
       ansible.builtin.service:
         name: nginx
-        state: started
+        state: restarted
         enabled: True
   become: true
   become_user: root
