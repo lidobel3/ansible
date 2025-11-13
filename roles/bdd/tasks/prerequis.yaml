@@ -1,9 +1,9 @@
 ---
 # roles/bdd/tasks/psycopg2.yml
 
-# -------------------------------------------------------
-# 1. Installer les dépendances nécessaires
-# -------------------------------------------------------
+# -----------------------
+# 1. Dépendances système
+# -----------------------
 - name: Install build dependencies (Debian/Ubuntu)
   apt:
     name:
@@ -11,34 +11,23 @@
       - libpq-dev
       - build-essential
       - pkg-config
+      - python3-setuptools
+      - python3-wheel
     state: present
     update_cache: yes
   when: ansible_os_family == "Debian"
 
-- name: Install build dependencies (RedHat/CentOS/Rocky)
-  yum:
-    name:
-      - python3-devel
-      - postgresql-devel
-      - gcc
-      - make
-    state: present
-  when: ansible_os_family == "RedHat"
+# -----------------------
+# 2. Upgrade pip (Critical)
+# -----------------------
+- name: Upgrade pip
+  command: python3 -m pip install --upgrade pip
+  changed_when: false
 
-
-# -------------------------------------------------------
-# 2. Installer pip si absent
-# -------------------------------------------------------
-- name: Ensure pip is installed
-  package:
-    name: python3-pip
-    state: present
-
-
-# -------------------------------------------------------
-# 3. Forcer une version pré-compilée de psycopg2-binary
-# -------------------------------------------------------
-- name: Install psycopg2 from pip (binary)
+# -----------------------
+# 3. Installer psycopg2-binary compatible avec vieux OS
+# -----------------------
+- name: Install psycopg2 (binary, compatible)
   pip:
-    name: psycopg2-binary==2.9.9
+    name: psycopg2-binary==2.9.8
     state: present
