@@ -39,7 +39,7 @@ pipeline {
                     def inventoryPath = "inventaires/${params.ENV}/hosts.ini"
                     ansiblePlaybook(
                         installation: 'Ansible', // Nom configuré dans Jenkins (Manage Jenkins > Global Tool Configuration)
-                        playbook: "${PLAYBOOK}",
+                        playbook: "${workspace}/playbook.yaml",
                         inventory: "${inventoryPath}",
                         //vaultPassword: params.VAULT_PASS,
                         limit: params.GROUP,
