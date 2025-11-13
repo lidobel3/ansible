@@ -20,6 +20,22 @@ pipeline {
                 git branch: params.GIT_BRANCH, url: params.GIT_REPO
             }
         }
+stages {
+        stage('Afficher les paramètres') {
+            steps {
+                script {
+                    echo "=== Paramètres du pipeline ==="
+                    echo "ENV : ${params.ENV}"
+                    echo "GROUP : ${params.GROUP}"
+                    echo "VAULT_PASS : ******** (non affiché pour sécurité)"
+                    echo "GIT_REPO : ${params.GIT_REPO}"
+                    echo "GIT_BRANCH : ${params.GIT_BRANCH}"
+                    echo "INVENTORY : ${env.INVENTORY}"
+                    echo "PLAYBOOK : ${env.PLAYBOOK}"
+                }
+            }
+        }
+    }
 
         stage('Run Ansible Playbook') {
             steps {
