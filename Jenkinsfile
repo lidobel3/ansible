@@ -29,6 +29,7 @@ stages {
             }
         }
     }
+}
     /*stages {
         stage('Checkout Git') {
             steps {
