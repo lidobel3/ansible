@@ -16,3 +16,4 @@
     - postgres_user: lidobel
     - postgres_password: securepassword
     - postgres_db: mydatabase
+  become: true
