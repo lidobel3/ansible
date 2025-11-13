@@ -1,0 +1,17 @@
+- name: Installer Java
+  apt:
+    name: openjdk-11-jdk
+    state: present
+    update_cache: yes
+
+- name: Installer Tomcat
+  apt:
+    name: tomcat{{ tomcat_version }}
+    state: present
+    update_cache: yes
+
+- name: Démarrer et activer Tomcat
+  service:
+    name: tomcat{{ tomcat_version }}
+    state: started
+    enabled: true
