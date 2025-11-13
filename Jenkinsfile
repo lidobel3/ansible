@@ -10,7 +10,7 @@ pipeline {
     }
 
     environment {
-        PLAYBOOK = "playbooks/site.yml"
+        PLAYBOOK = "playbooks/playbook.yml"
     }
 
     stages {
