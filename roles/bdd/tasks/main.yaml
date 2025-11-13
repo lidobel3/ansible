@@ -1,11 +1,11 @@
 - name: install prerequis
-  tasks: prerequis.yaml
+  include_tasks: prerequis.yaml
 
 - name: install sgbd
-  tasks: install.yaml
+  include_tasks: install.yaml
 
 - name: install bdd
-  tasks: createdb.yaml
+  include_tasks: createdb.yaml
 
 #- name: 
 #  tasks: 
