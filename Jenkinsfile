@@ -26,8 +26,8 @@ pipeline {
                 script {
                     ansiblePlaybook(
                         installation: 'Ansible',
-                        playbook: "${PLAYBOOK}",
-                        inventory: "${INVENTORY}",
+                        playbook: "${workspace}/playbook.yaml", // Use workspace path
+                        inventory: "${workspace}/hosts.yaml"
                         vaultPassword: params.VAULT_PASS,
                         limit: params.GROUP,
                         extraVars: [
