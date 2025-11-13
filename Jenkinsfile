@@ -14,7 +14,7 @@ pipeline {
         PLAYBOOK = "playbooks/site.yml"
     }
 
-    stages {
+    /*stages {
         stage('Checkout Git') {
             steps {
                 git branch: params.GIT_BRANCH, url: params.GIT_REPO
@@ -39,7 +39,7 @@ pipeline {
             }
         }
     }
-}
+}*/
 
 /*node {
     stage('clone'){
