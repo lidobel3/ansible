@@ -10,10 +10,10 @@ pipeline {
     }
 
     environment {
-        INVENTORY = "inventaires/${params.ENV}/hosts.ini"
         PLAYBOOK = "playbooks/site.yml"
     }
-stages {
+
+    stages {
         stage('Afficher les paramètres') {
             steps {
                 script {
@@ -23,43 +23,24 @@ stages {
                     echo "VAULT_PASS : ******** (non affiché pour sécurité)"
                     echo "GIT_REPO : ${params.GIT_REPO}"
                     echo "GIT_BRANCH : ${params.GIT_BRANCH}"
-                    echo "INVENTORY : ${env.INVENTORY}"
-                    echo "PLAYBOOK : ${env.PLAYBOOK}"
                 }
             }
         }
-    }
-}
-    /*stages {
+
         stage('Checkout Git') {
             steps {
-                git branch: params.GIT_BRANCH, url: params.GIT_REPO
+                git branch: "${params.GIT_BRANCH}", url: "${params.GIT_REPO}"
             }
         }
-stages {
-        stage('Afficher les paramètres') {
-            steps {
-                script {
-                    echo "=== Paramètres du pipeline ==="
-                    echo "ENV : ${params.ENV}"
-                    echo "GROUP : ${params.GROUP}"
-                    echo "VAULT_PASS : ******** (non affiché pour sécurité)"
-                    echo "GIT_REPO : ${params.GIT_REPO}"
-                    echo "GIT_BRANCH : ${params.GIT_BRANCH}"
-                    echo "INVENTORY : ${env.INVENTORY}"
-                    echo "PLAYBOOK : ${env.PLAYBOOK}"
-                }
-            }
-        }
-    }
 
-        stage('Run Ansible Playbook') {
+        stage('Exécuter le playbook Ansible') {
             steps {
                 script {
+                    def inventoryPath = "inventaires/${params.ENV}/hosts.ini"
                     ansiblePlaybook(
-                        installation: 'Ansible',
-                        playbook: "${workspace}/playbook.yaml", // Use workspace path
-                        inventory: "${workspace}/hosts.yaml"
+                        installation: 'Ansible', // Nom configuré dans Jenkins (Manage Jenkins > Global Tool Configuration)
+                        playbook: "${PLAYBOOK}",
+                        inventory: "${inventoryPath}",
                         vaultPassword: params.VAULT_PASS,
                         limit: params.GROUP,
                         extraVars: [
@@ -71,15 +52,4 @@ stages {
             }
         }
     }
-}*/
-
-/*node {
-    stage('clone'){
-        git branch: 'main', url: 'https://github.com/lidobel3/ansible.git'
-    }
-    
-    stage('ansible'){
-        ansiblePlaybook credentialsId: 'private_key', inventory: '${workspace}/hosts.yaml', playbook: '${workspace}/playbook.yaml'
-    }
-    
-}*/
+}
