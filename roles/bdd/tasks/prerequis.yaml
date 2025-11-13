@@ -1,25 +1,44 @@
 ---
 # roles/bdd/tasks/psycopg2.yml
 
-- name: Install psycopg2 on Debian/Ubuntu
-  ansible.builtin.apt:
-    name: python3-psycopg2
+# -------------------------------------------------------
+# 1. Installer les dépendances nécessaires
+# -------------------------------------------------------
+- name: Install build dependencies (Debian/Ubuntu)
+  apt:
+    name:
+      - python3-dev
+      - libpq-dev
+      - build-essential
+      - pkg-config
     state: present
     update_cache: yes
   when: ansible_os_family == "Debian"
 
-- name: Install psycopg2 on RedHat family
-  ansible.builtin.yum:
-    name: python3-psycopg2
+- name: Install build dependencies (RedHat/CentOS/Rocky)
+  yum:
+    name:
+      - python3-devel
+      - postgresql-devel
+      - gcc
+      - make
     state: present
   when: ansible_os_family == "RedHat"
 
-- name: Install pip
-  ansible.builtin.package:
+
+# -------------------------------------------------------
+# 2. Installer pip si absent
+# -------------------------------------------------------
+- name: Ensure pip is installed
+  package:
     name: python3-pip
     state: present
 
-- name: Install psycopg2 via pip fallback
-  ansible.builtin.pip:
-    name: psycopg2-binary
+
+# -------------------------------------------------------
+# 3. Forcer une version pré-compilée de psycopg2-binary
+# -------------------------------------------------------
+- name: Install psycopg2 from pip (binary)
+  pip:
+    name: psycopg2-binary==2.9.9
     state: present
