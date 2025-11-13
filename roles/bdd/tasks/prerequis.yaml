@@ -1,0 +1,29 @@
+---
+- name: Fix psycopg2 missing Python library
+  hosts: bdd
+  become: yes
+
+  tasks:
+    - name: Install psycopg2 on Debian/Ubuntu
+      apt:
+        name: python3-psycopg2
+        state: present
+        update_cache: yes
+      when: ansible_os_family == "Debian"
+
+    - name: Install psycopg2 on RedHat/CentOS/Rocky/Alma
+      yum:
+        name: python3-psycopg2
+        state: present
+      when: ansible_os_family == "RedHat"
+
+    - name: Install pip if missing
+      package:
+        name: python3-pip
+        state: present
+
+    - name: Install psycopg2 via pip as fallback
+      pip:
+        name: psycopg2-binary
+        state: present
+      when: ansible_python_version is defined
