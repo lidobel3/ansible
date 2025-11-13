@@ -3,15 +3,18 @@
     name: openjdk-11-jdk
     state: present
     update_cache: yes
+  become: true
 
 - name: Installer Tomcat
   apt:
     name: tomcat{{ tomcat_version }}
     state: present
     update_cache: yes
+  become: true
 
 - name: Démarrer et activer Tomcat
   service:
     name: tomcat{{ tomcat_version }}
     state: started
     enabled: true
+  become: true
