@@ -37,17 +37,19 @@ pipeline {
             steps {
                 script {
                     def inventoryPath = "${workspace}/inventaires/${params.ENV}/hosts.ini"
-                    ansiblePlaybook(
-                        installation: 'Ansible', // Nom configuré dans Jenkins (Manage Jenkins > Global Tool Configuration)
-                        playbook: "${workspace}/playbook.yaml",
-                        inventory: "${inventoryPath}",
-                        //vaultPassword: params.VAULT_PASS,
-                        limit: params.GROUP,
-                        extraVars: [
-                            env: params.ENV
-                        ],
-                        colorized: true
-                    )
+                    ansiColor('xterm') { 
+                        ansiblePlaybook(
+                            installation: 'Ansible', // Nom configuré dans Jenkins (Manage Jenkins > Global Tool Configuration)
+                            playbook: "${workspace}/playbook.yaml",
+                            inventory: "${inventoryPath}",
+                            //vaultPassword: params.VAULT_PASS,
+                            limit: params.GROUP,
+                            extraVars: [
+                                env: params.ENV
+                            ],
+                            colorized: true
+                        )
+                    }
                 }
             }
         }
