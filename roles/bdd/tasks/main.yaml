@@ -1,6 +1,5 @@
 - name: install prerequis
   include_tasks: prerequis.yaml
-  become: true
 
 - name: install sgbd
   include_tasks: install.yaml
