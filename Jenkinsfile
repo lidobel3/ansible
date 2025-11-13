@@ -36,7 +36,7 @@ pipeline {
         stage('Exécuter le playbook Ansible') {
             steps {
                 script {
-                    def inventoryPath = "inventaires/${params.ENV}/hosts.ini"
+                    def inventoryPath = "${workspace}/inventaires/${params.ENV}/hosts.ini"
                     ansiblePlaybook(
                         installation: 'Ansible', // Nom configuré dans Jenkins (Manage Jenkins > Global Tool Configuration)
                         playbook: "${workspace}/playbook.yaml",
