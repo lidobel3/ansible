@@ -1,17 +1,25 @@
-- name: Installer Java
+- name: Installer PostgreSQL
   apt:
-    name: openjdk-11-jdk
+    name: "postgresql-{{ postgres_version }}"
     state: present
     update_cache: yes
 
-- name: Installer Tomcat
-  apt:
-    name: tomcat{{ tomcat_version }}
-    state: present
-    update_cache: yes
-
-- name: Démarrer et activer Tomcat
+- name: Démarrer et activer PostgreSQL
   service:
-    name: tomcat{{ tomcat_version }}
+    name: postgresql
     state: started
     enabled: true
+
+- name: Créer un utilisateur PostgreSQL
+  become_user: postgres
+  postgresql_user:
+    name: "{{ postgres_user }}"
+    password: "{{ postgres_password }}"
+    state: present
+
+- name: Créer une base de données
+  become_user: postgres
+  postgresql_db:
+    name: "{{ postgres_db }}"
+    owner: "{{ postgres_user }}"
+    state: present
