@@ -1,5 +1,11 @@
-- name : install nginx
-  hosts: all
-  become: true
-  roles :
-    - nginx
+- hosts: frontend
+  roles:
+    - frontend
+
+- hosts: middle
+  roles:
+    - middle
+
+- hosts: bdd
+  roles:
+    - bdd
