@@ -47,7 +47,7 @@ pipeline {
                             extraVars: [
                                 env: params.ENV
                             ],
-                            colorized: false
+                            colorized: true
                         )
                     }
                 }
