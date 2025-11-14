@@ -5,15 +5,8 @@
 - hosts: middle
   roles:
     - middle
-  vars:
-    - tomcat_version : 9
 
 - hosts: bdd
   roles:
     - bdd
-  vars:
-    #- postgres_version: 10
-    - postgres_user: lidobel
-    - postgres_password: securepassword
-    #- postgres_db: mydatabase
   become: true
