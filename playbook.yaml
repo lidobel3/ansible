@@ -15,5 +15,5 @@
     #- postgres_version: 10
     - postgres_user: lidobel
     - postgres_password: securepassword
-    - postgres_db: mydatabase
+    #- postgres_db: mydatabase
   become: true
