@@ -67,26 +67,6 @@ http {
         }
         }
 
-    ##
-    # Bloc http (port 80) — sans redirection
-    ##
-    # server {
-    #     listen      80;
-    #     server_name www.lidobel.ovh lidobel.ovh;
-
-    #     root /usr/share/nginx/html/;
-    #     index index.html;
-
-    #     location / {
-    #         try_files $uri $uri/ =404;
-    #     }
-    # Important : permet à Certbot d’accéder aux challenges
-    # location /.well-known/acme-challenge/ {
-    #     root /usr/share/nginx/html;
-    # }
-
-    #     }
-    # }
     server {
     listen 80;
     server_name lidobel.ovh;
@@ -117,4 +97,5 @@ http {
     #     root /usr/share/nginx/html;
     # }
 
+    }
 }
