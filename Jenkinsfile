@@ -40,7 +40,7 @@ pipeline {
                     ansiColor('xterm') { 
                         ansiblePlaybook(
                             installation: 'Ansible', // Nom configuré dans Jenkins (Manage Jenkins > Global Tool Configuration)
-                            playbook: "${workspace}/playbook.yaml",
+                            playbook: "${workspace}/playbooks/playbook.yaml",
                             inventory: "${inventoryPath}",
                             //vaultPassword: params.VAULT_PASS,
                             limit: params.GROUP,
