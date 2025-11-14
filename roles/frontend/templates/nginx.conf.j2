@@ -1,0 +1,120 @@
+user  nginx;
+worker_processes  auto;
+
+error_log  /var/log/nginx/error.log notice;
+pid        /var/run/nginx.pid;
+
+events {
+    worker_connections  1024;
+}
+
+http {
+    include       /etc/nginx/mime.types;
+    default_type  application/octet-stream;
+
+    log_format  main  '$remote_addr - $remote_user [$time_local] "$request" '
+                      '$status $body_bytes_sent "$http_referer" '
+                      '"$http_user_agent" "$http_x_forwarded_for"';
+
+    access_log  /var/log/nginx/access.log  main;
+
+    sendfile        on;
+    keepalive_timeout  65;
+
+    # gzip  on;
+
+    include /etc/nginx/conf.d/*.conf;
+
+    ssl_session_cache   shared:SSL:10m;
+    ssl_session_timeout 10m;
+
+    ##
+    # Bloc httpS (port 443)
+    ##
+    server {
+        listen              443 ssl;
+        server_name         www.lidobel.ovh lidobel.ovh;
+        ssl_certificate     /etc/nginx/ssl/fullchain.pem;
+        ssl_certificate_key /etc/nginx/ssl/privkey.pem;
+        ssl_protocols       TLSv1.2 TLSv1.3;
+        ssl_ciphers         HIGH:!aNULL:!MD5;
+
+        root /usr/share/nginx/html/;
+        index index.html;
+
+        # location / {
+        #     try_files $uri $uri/ =404;
+        # }
+        location / {
+        # Si le fichier "maintenance_on" existe, on sert "maintenance.html"
+        if (-f $document_root/maintenance_https_on) {
+            return 503;
+        }
+
+        try_files $uri $uri/ =404;
+        }
+
+        # Servir une vraie page HTML personnalisée pour le 503
+        error_page 503 @maintenance;
+
+        location @maintenance {
+            rewrite ^ /maintenance_https_on.html break;
+        }
+
+        # Optionnel : pour que maintenance.html s'affiche bien (images, css...)
+        location = /maintenance_https_on.html {
+            internal;
+        }
+        }
+
+    ##
+    # Bloc http (port 80) — sans redirection
+    ##
+    # server {
+    #     listen      80;
+    #     server_name www.lidobel.ovh lidobel.ovh;
+
+    #     root /usr/share/nginx/html/;
+    #     index index.html;
+
+    #     location / {
+    #         try_files $uri $uri/ =404;
+    #     }
+    # Important : permet à Certbot d’accéder aux challenges
+    # location /.well-known/acme-challenge/ {
+    #     root /usr/share/nginx/html;
+    # }
+
+    #     }
+    # }
+    server {
+    listen 80;
+    server_name lidobel.ovh;
+    root /usr/share/nginx/html;
+    location / {
+        # Si le fichier "maintenance_on" existe, on sert "maintenance.html"
+        if (-f $document_root/maintenance_on) {
+            return 503;
+        }
+
+        try_files $uri $uri/ =404;
+    }
+
+    # Servir une vraie page HTML personnalisée pour le 503
+    error_page 503 @maintenance;
+
+    location @maintenance {
+        rewrite ^ /maintenance_on.html break;
+    }
+
+    # Optionnel : pour que maintenance.html s'affiche bien (images, css...)
+    location = /maintenance_on.html {
+        internal;
+    }
+
+    # # Important : permet à Certbot d’accéder aux challenges
+    # location /.well-known/acme-challenge/ {
+    #     root /usr/share/nginx/html;
+    # }
+
+}

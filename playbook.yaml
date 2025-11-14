@@ -12,7 +12,7 @@
   roles:
     - bdd
   vars:
-    - postgres_version: 10
+    #- postgres_version: 10
     - postgres_user: lidobel
     - postgres_password: securepassword
     - postgres_db: mydatabase
