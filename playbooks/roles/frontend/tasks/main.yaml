@@ -12,3 +12,7 @@
     state: started
   become: true
 
+# - name: start nginx
+#   block:
+#     - include_tasks: start.yaml
+#   notify: Reload nginx
