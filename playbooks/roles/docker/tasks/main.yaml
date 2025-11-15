@@ -4,4 +4,7 @@
   include_tasks: prerequisite.yaml
 
 - name: "Installing container portfolio"
+  include_tasks: config.yaml
+
+- name: "Installing container portfolio"
   include_tasks: deploy.yaml
