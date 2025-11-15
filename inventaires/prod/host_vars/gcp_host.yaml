@@ -7,7 +7,7 @@ user:
   home: /home/lidobel 
   project: portfolio_ssl
 docker:
-  container_name: mon_portfolio
+  container_name: portfolio
   image: lidobel3/portfolio
   deploy_portfolio: true
 

@@ -6,13 +6,13 @@
 
 - name: Arrêter et supprimer le conteneur existant s'il est en cours d'exécution
   docker_container:
-    name: portfolio
+    name: "{{ docker.container_name }}"
     state: absent
   when: container_info.exists
 
 - name: Deploy container 
   docker_container:
-    name: portfolio
+    name: "{{ docker.container_name }}"
     image: lidobel3/portfolio
     state: started
     published_ports:
