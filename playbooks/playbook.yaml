@@ -6,6 +6,10 @@
   roles:
     - middle
 
+- hosts: middle
+  roles:
+    - docker
+
 - hosts: bdd
   roles:
     - bdd
