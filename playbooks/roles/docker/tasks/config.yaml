@@ -2,6 +2,7 @@
 
 - name: Clonage du repository Gutenify-Lynx
   git:
-    repo: 'https://{{ git.token }}/lidobel3/portfolio_ssl.git'
+    repo: 'https://github.com/lidobel3/portfolio_ssl.git'
+    #repo: 'https://{{ git.token }}/lidobel3/portfolio_ssl.git'
     dest: "{{ user.home }}/gutenify-lynx/"
     version: main
