@@ -2,7 +2,7 @@ pipeline {
     agent any
 
     options {
-        ansiColor('xterm')   // <<< Ajout AnsiColor
+        ansiColor('xterm')   // Active les couleurs ANSI
     }
 
     parameters {
@@ -50,44 +50,45 @@ pipeline {
             steps {
                 script {
 
+                    echo "\u001B[34m=== 📦 Préparation du vault ===\u001B[0m"
+
                     // Création du fichier vault avec permissions sécurisées
                     sh """
                         umask 077
                         echo "${params.VAULT_PASSWORD}" > vault_pass.txt
                     """
 
+                    echo "\u001B[33m>>> Génération de la commande Ansible...\u001B[0m"
+
                     // Construction dynamique
                     def cmd = "ansible-playbook ${params.PLAYBOOK} -i ${params.INVENTORY} --vault-password-file vault_pass.txt"
 
                     if (params.LIMIT?.trim()) {
                         cmd += " --limit '${params.LIMIT}'"
+                        echo "\u001B[36m • LIMIT ajouté : ${params.LIMIT}\u001B[0m"
                     }
 
                     if (params.TAGS?.trim()) {
                         cmd += " --tags '${params.TAGS}'"
+                        echo "\u001B[36m • TAGS ajoutés : ${params.TAGS}\u001B[0m"
                     }
 
                     if (params.EXTRA_VARS?.trim()) {
                         cmd += " --extra-vars '${params.EXTRA_VARS}'"
+                        echo "\u001B[36m • EXTRA_VARS ajoutés\u001B[0m"
                     }
 
-                    echo "Commande exécutée (sanitisée) :"
+                    echo "\u001B[32m✔ Commande exécutée (sanitisée) :\u001B[0m"
                     echo cmd.replace("--vault-password-file vault_pass.txt", "--vault-password-file *****")
 
-                    // Exécution
+                    echo "\u001B[35m=== 🚀 Exécution du playbook ===\u001B[0m"
+
+                    // Exécution d’Ansible
                     sh """#!/bin/bash
                         set -e
                         ${cmd}
                     """
+
+                    echo "\u001B[32m✔ Playbook exécuté avec succès !\u001B[0m"
                 }
             }
-        }
-    }
-
-    post {
-        always {
-            echo "\u001B[36mNettoyage du fichier vault...\u001B[0m"
-            sh "rm -f vault_pass.txt || true"
-        }
-    }
-}
