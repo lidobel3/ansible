@@ -2,9 +2,9 @@
   roles:
     - frontend
 
-- hosts: middle
-  roles:
-    - middle
+# - hosts: middle
+#   roles:
+#     - middle
 
 - hosts: docker
   roles:
