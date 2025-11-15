@@ -1,3 +1,14 @@
+- name: Vérification du statut du conteneur
+  docker_container_info:
+    name: portfolio
+  register: container_info
+  ignore_errors: true
+
+- name: Arrêter et supprimer le conteneur existant s'il est en cours d'exécution
+  docker_container:
+    name: portfolio
+    state: absent
+  when: container_info.container is defined and container_info.container.State.Running 
 
 - name: Deploy container 
   docker_container:
