@@ -8,12 +8,17 @@
       - 443:443
     mounts:
       - type: bind 
-        source: "/home/terraform-user/gutenify-lynx/ssl/privkey.pem"
-        target:
-      - type:
-        source:
-        target:
-      - type:
-        source:
-        target:
+        source: "{{ user.home }}/gutenify-lynx/ssl/privkey.pem"
+        target: "/etc/ssl/private/privkey.pem"
+      - type: bind
+        source: "{{ user.home }}/gutenify-lynx/ssl/fullchain.pem"
+        target: "/etc/ssl/certs/fullchain.pem"
+      - type: bind
+        source: "{{ user.home }}/gutenify-lynx/"
+        target: "/usr/share/nginx/html/"
+      - type: bind
+        source: "{{ user.home }}/gutenify-lynx/nginx.conf"
+        target: "/etc/nginx/nginx.conf"
   become: true
+
+      

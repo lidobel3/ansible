@@ -1,1 +1,10 @@
 tomcat_version : 9
+
+#Docker section
+
+user:
+  name: vagrant
+  home: /home/vagrant 
+docker:
+  container_name: mon_portfolio
+  image: lidobel3/portfolio   
