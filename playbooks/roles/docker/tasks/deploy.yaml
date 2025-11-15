@@ -6,19 +6,29 @@
     published_ports:
       - 80:80
       - 443:443
-    mounts:
-      - type: bind 
-        source: "{{ user.home }}/gutenify-lynx/ssl/privkey.pem"
-        target: "/etc/ssl/private/privkey.pem"
-      - type: bind
-        source: "{{ user.home }}/gutenify-lynx/ssl/fullchain.pem"
-        target: "/etc/ssl/certs/fullchain.pem"
-      - type: bind
-        source: "{{ user.home }}/gutenify-lynx/"
-        target: "/usr/share/nginx/html/"
-      - type: bind
-        source: "{{ user.home }}/gutenify-lynx/nginx.conf"
-        target: "/etc/nginx/nginx.conf"
   become: true
+
+# - name: Deploy container 
+#   docker_container:
+#     name: mon_portfolio
+#     image: lidobel3/portfolio
+#     state: present
+#     published_ports:
+#       - 80:80
+#       - 443:443
+#     mounts:
+#       - type: bind 
+#         source: "{{ user.home }}/gutenify-lynx/ssl/privkey.pem"
+#         target: "/etc/ssl/private/privkey.pem"
+#       - type: bind
+#         source: "{{ user.home }}/gutenify-lynx/ssl/fullchain.pem"
+#         target: "/etc/ssl/certs/fullchain.pem"
+#       - type: bind
+#         source: "{{ user.home }}/gutenify-lynx/"
+#         target: "/usr/share/nginx/html/"
+#       - type: bind
+#         source: "{{ user.home }}/gutenify-lynx/nginx.conf"
+#         target: "/etc/nginx/nginx.conf"
+#   become: true
 
       
