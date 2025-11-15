@@ -80,10 +80,15 @@ pipeline {
 
                     echo "\u001B[35m=== 🚀 Exécution du playbook ===\u001B[0m"
 
+                    // sh """#!/bin/bash
+                    //     set -e
+                    //     ${cmd}
+                    // """
                     sh """#!/bin/bash
-                        set -e
-                        ${cmd}
-                    """
+                    set -e
+                    ANSIBLE_FORCE_COLOR=1 PY_COLORS=1 ${cmd}
+                """
+
 
                     echo "\u001B[32m✔ Playbook exécuté avec succès !\u001B[0m"
                 }
