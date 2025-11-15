@@ -6,7 +6,7 @@ pipeline {
         choice(name: 'GROUP', choices: ['frontend', 'middle', 'bdd','docker'], description: 'Choisir le groupe d’hôtes')
         /*password(name: 'VAULT_PASS', defaultValue: '', description: 'Mot de passe pour Ansible Vault')*/
         string(name: 'GIT_REPO', defaultValue: 'https://github.com/lidobel3/ansible.git', description: 'URL du repository Git')
-        string(name: 'GIT_BRANCH', defaultValue: 'main', description: 'Branche Git à utiliser')
+        string(name: 'GIT_BRANCH', defaultValue: 'master', description: 'Branche Git à utiliser')
     }
 
     environment {
