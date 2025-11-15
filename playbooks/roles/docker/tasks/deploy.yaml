@@ -22,7 +22,7 @@
         target: "/etc/ssl/private/privkey.pem"
       - type: bind
         source: "{{ user.home }}/gutenify-lynx/ssl/fullchain.pem"
-        target: "/etc/ssl/certs/fullchain.pem"
+        target: "/etc/nginx/ssl/fullchain.pem"
       - type: bind
         source: "{{ user.home }}/gutenify-lynx/"
         target: "/usr/share/nginx/html/"
