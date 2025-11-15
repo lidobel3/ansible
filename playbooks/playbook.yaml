@@ -1,17 +1,4 @@
-- hosts: frontend
-  roles:
-    - frontend
-
-# - hosts: middle
-#   roles:
-#     - middle
-
 - hosts: docker
   roles:
     - docker
-  become: true
-
-- hosts: bdd
-  roles:
-    - bdd
   become: true
