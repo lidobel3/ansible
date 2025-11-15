@@ -13,21 +13,21 @@ pipeline {
         // Playbook à lancer
         string(
             name: 'PLAYBOOK',
-            defaultValue: 'site.yml',
+            defaultValue: 'playbooks/playbook.yml',
             description: 'Playbook Ansible à exécuter'
         )
 
         // Inventory
         string(
             name: 'INVENTORY',
-            defaultValue: 'inventory/hosts',
+            defaultValue: 'inventaires/dev/hosts.ini',
             description: 'Fichier d’inventaire Ansible'
         )
 
         // Limit (optionnel, groupe ou host)
         string(
             name: 'LIMIT',
-            defaultValue: '',
+            defaultValue: 'docker',
             description: 'Cible : groupe/host (ex: webservers). Laisser vide si non utilisé.'
         )
 
