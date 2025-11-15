@@ -5,6 +5,7 @@
 
 - name: "Installing container portfolio"
   include_tasks: config.yaml
+  when: docker.deploy_portfolio | default(false)
 
 - name: "Installing container portfolio"
   include_tasks: deploy.yaml
