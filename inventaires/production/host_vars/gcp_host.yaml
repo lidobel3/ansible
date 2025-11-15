@@ -5,7 +5,7 @@ tomcat_version : 9
 user:
   name: lidobel
   home: /home/lidobel 
-  project: portfolio_ssl
+  project: 
 docker:
   container_name: mon_portfolio
   image: lidobel3/portfolio
@@ -14,6 +14,6 @@ docker:
 #Git section
 git:
   key_file: /home/{{user.name}}/.ssh/id_rsa
-  repo_url: 'git@github.com:lidobel3/"{{user.project}}".git' 
+  repo_url: 'git@github.com:lidobel3/portfolio_ssl.git' 
   dest: /home/{{user.name}}/portfolio_ssl/
   version: main 
