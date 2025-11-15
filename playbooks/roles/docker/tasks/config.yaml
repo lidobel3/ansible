@@ -2,9 +2,9 @@
 
 - name: Clonage du repository Gutenify-Lynx
   git:
-    repo: 'git@github.com:lidobel3/portfolio_ssl.git'
-    dest: "{{ user.home }}/gutenify-lynx/"
-    version: main
-    key_file: "~/.ssh/id_rsa"   # chemin vers la clé privée SSH
+    repo: "{{ git.repo_url }}"
+    dest: "{{ git.dest }}"
+    version: "{{ git.version }}"
+    key_file: "{{ git.key_file }}"   # chemin vers la clé privée SSH
     accept_hostkey: yes
     update: yes
