@@ -8,7 +8,7 @@
   docker_container:
     name: portfolio
     state: absent
-  when: container_info.container is defined and container_info.container.State.Running 
+  when: container_info.container.State.Running 
 
 - name: Deploy container 
   docker_container:
