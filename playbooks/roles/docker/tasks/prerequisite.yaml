@@ -10,9 +10,9 @@
     name: docker.io
     state: absent
     update_cache: yes
-  #when: docker_check.failed
+  when: docker_check.failed
   become: true 
-#  become_user: vagrant
+  become_user: vagrant
 
 - name: Démarrer et activer le service Docker
   systemd:
