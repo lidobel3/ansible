@@ -1,0 +1,9 @@
+- name: Deploy container 
+  docker_container:
+    name: mon_portfolio
+    image: lidobel3/portfolio
+    state: created
+    published_ports:
+      - 80:80
+      - 443:443
+    
