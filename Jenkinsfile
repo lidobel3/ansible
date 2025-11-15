@@ -63,7 +63,8 @@ pipeline {
                         -i inventories/${params.ENV}/hosts.ini \
                         playbooks/playbook.yaml \
                         --vault-password-file vault_pass.txt \
-                        --limit ${params.GROUP}
+                        --limit ${params.GROUP} \
+                        -v
                     """
 
                     sh "rm -f vault_pass.txt"
