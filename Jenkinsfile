@@ -2,55 +2,86 @@ pipeline {
     agent any
 
     parameters {
-        choice(name: 'ENV', choices: ['dev', 'staging', 'prod'], description: 'Choisir l’environnement')
-        choice(name: 'GROUP', choices: ['frontend', 'middle', 'bdd','docker'], description: 'Choisir le groupe d’hôtes')
-        /*password(name: 'VAULT_PASS', defaultValue: '', description: 'Mot de passe pour Ansible Vault')*/
-        string(name: 'GIT_REPO', defaultValue: 'https://github.com/lidobel3/ansible.git', description: 'URL du repository Git')
-        string(name: 'GIT_BRANCH', defaultValue: 'master', description: 'Branche Git à utiliser')
-    }
 
-    environment {
-        PLAYBOOK = "playbook.yml"
+        // Mot de passe Ansible Vault (masqué)
+        password(
+            name: 'VAULT_PASSWORD',
+            defaultValue: '',
+            description: 'Mot de passe Ansible Vault'
+        )
+
+        // Playbook à lancer
+        string(
+            name: 'PLAYBOOK',
+            defaultValue: 'site.yml',
+            description: 'Playbook Ansible à exécuter'
+        )
+
+        // Inventory
+        string(
+            name: 'INVENTORY',
+            defaultValue: 'inventory/hosts',
+            description: 'Fichier d’inventaire Ansible'
+        )
+
+        // Limit (optionnel, groupe ou host)
+        string(
+            name: 'LIMIT',
+            defaultValue: '',
+            description: 'Cible : groupe/host (ex: webservers). Laisser vide si non utilisé.'
+        )
+
+        // Tags (optionnel)
+        string(
+            name: 'TAGS',
+            defaultValue: '',
+            description: 'Tags Ansible (ex: app,deploy). Laisser vide si non utilisé.'
+        )
+
+        // Extra vars (optionnelles)
+        text(
+            name: 'EXTRA_VARS',
+            defaultValue: '',
+            description: 'Variables supplémentaires (JSON ou KEY=VALUE). Exemple: {"env":"prod"}'
+        )
     }
 
     stages {
-        stage('Afficher les paramètres') {
-            steps {
-                script {
-                    echo "=== Paramètres du pipeline ==="
-                    echo "ENV : ${params.ENV}"
-                    echo "GROUP : ${params.GROUP}"
-                    //echo "VAULT_PASS : ******** (non affiché pour sécurité)"
-                    echo "GIT_REPO : ${params.GIT_REPO}"
-                    echo "GIT_BRANCH : ${params.GIT_BRANCH}"
-                }
-            }
-        }
 
-        stage('Checkout Git') {
+        stage('Run Ansible') {
             steps {
-                git branch: "${params.GIT_BRANCH}", url: "${params.GIT_REPO}"
-            }
-        }
 
-        stage('Exécuter le playbook Ansible') {
-            steps {
-                script {
-                    def inventoryPath = "${workspace}/inventaires/${params.ENV}/hosts.ini"
-                    ansiColor('xterm') { 
-                        ansiblePlaybook(
-                            installation: 'Ansible', // Nom configuré dans Jenkins (Manage Jenkins > Global Tool Configuration)
-                            playbook: "${workspace}/playbooks/playbook.yaml",
-                            inventory: "${inventoryPath}",
-                            //vaultPassword: params.VAULT_PASS,
-                            limit: params.GROUP,
-                            extraVars: [
-                                env: params.ENV
-                            ],
-                            colorized: true
-                        )
-                    }
-                }
+                sh """
+                    # On crée le fichier vault temporaire
+                    echo "${params.VAULT_PASSWORD}" > vault_pass.txt
+
+                    # Construction dynamique de la commande
+                    CMD="ansible-playbook ${params.PLAYBOOK} -i ${params.INVENTORY} --vault-password-file vault_pass.txt"
+
+                    # Add limit if provided
+                    if [ ! -z "${params.LIMIT}" ]; then
+                        CMD="$CMD --limit ${params.LIMIT}"
+                    fi
+
+                    # Add tags if provided
+                    if [ ! -z "${params.TAGS}" ]; then
+                        CMD="$CMD --tags ${params.TAGS}"
+                    fi
+
+                    # Add extra vars if provided
+                    if [ ! -z "${params.EXTRA_VARS}" ]; then
+                        CMD="$CMD --extra-vars '${params.EXTRA_VARS}'"
+                    fi
+
+                    echo "Commande exécutée :"
+                    echo "\$CMD"
+
+                    # Run ansible
+                    eval \$CMD
+
+                    # Nettoyage
+                    rm -f vault_pass.txt
+                """
             }
         }
     }
