@@ -1,12 +1,3 @@
-# - name: Deploy container 
-#   docker_container:
-#     name: portfolio
-#     image: lidobel3/portfolio
-#     state: started
-#     published_ports:
-#       - 80:80
-#       - 443:443
-#   become: true
 
 - name: Deploy container 
   docker_container:
