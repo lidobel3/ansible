@@ -19,7 +19,7 @@
     mounts:
       - type: bind 
         source: "{{ user.home }}/gutenify-lynx/ssl/privkey.pem"
-        target: "/etc/ssl/private/privkey.pem"
+        target: "/etc/nginx/ssl/privkey.pem"
       - type: bind
         source: "{{ user.home }}/gutenify-lynx/ssl/fullchain.pem"
         target: "/etc/nginx/ssl/fullchain.pem"
