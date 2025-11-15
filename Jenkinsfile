@@ -20,7 +20,7 @@ pipeline {
                     echo "=== Paramètres du pipeline ==="
                     echo "ENV : ${params.ENV}"
                     echo "GROUP : ${params.GROUP}"
-                    //echo "VAULT_PASS : ******** (non affiché pour sécurité)"
+                    echo "VAULT_PASS : ******** (non affiché pour sécurité)"
                     echo "GIT_REPO : ${params.GIT_REPO}"
                     echo "GIT_BRANCH : ${params.GIT_BRANCH}"
                 }
@@ -42,7 +42,7 @@ pipeline {
                             installation: 'Ansible', // Nom configuré dans Jenkins (Manage Jenkins > Global Tool Configuration)
                             playbook: "${workspace}/playbooks/playbook.yaml",
                             inventory: "${inventoryPath}",
-                            //vaultPassword: params.VAULT_PASS,
+                            vaultPassword: params.VAULT_PASS,
                             limit: params.GROUP,
                             extraVars: [
                                 env: params.ENV
