@@ -1,0 +1,4 @@
+---
+
+- name: "Verifying docker state"
+  include_tasks: prerequisite.yaml
