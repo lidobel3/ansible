@@ -12,7 +12,7 @@ docker:
 
 #Git section
 git:
-  key_file: /home/vagrant/.ssh/id_rsa
+  key_file: /home/{{user.name}}/.ssh/id_rsa
   repo_url: 'git@github.com:lidobel3/portfolio_ssl.git' 
-  dest: /home/vagrant/portfolio_ssl/
+  dest: /home/{{user.name}}/portfolio_ssl/
   version: main 
