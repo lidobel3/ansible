@@ -6,7 +6,7 @@
   roles:
     - middle
 
-- hosts: middle
+- hosts: docker
   roles:
     - docker
 
