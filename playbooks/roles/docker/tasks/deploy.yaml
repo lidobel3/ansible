@@ -1,6 +1,6 @@
 - name: Deploy container 
   docker_container:
-    name: mon_portfolio
+    name: portfolio
     image: lidobel3/portfolio
     state: present
     published_ports:
