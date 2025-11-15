@@ -9,16 +9,16 @@
       - 443:443
     mounts:
       - type: bind 
-        source: "{{ user.home }}/gutenify-lynx/ssl/privkey.pem"
+        source: "{{ user.home }}/{{ user.project}}/ssl/privkey.pem"
         target: "/etc/nginx/ssl/privkey.pem"
       - type: bind
-        source: "{{ user.home }}/gutenify-lynx/ssl/fullchain.pem"
+        source: "{{ user.home }}/{{ user.project}}/ssl/fullchain.pem"
         target: "/etc/nginx/ssl/fullchain.pem"
       - type: bind
-        source: "{{ user.home }}/gutenify-lynx/"
+        source: "{{ user.home }}/{{ user.project}}/"
         target: "/usr/share/nginx/html/"
       - type: bind
-        source: "{{ user.home }}/gutenify-lynx/nginx.conf"
+        source: "{{ user.home }}/{{ user.project}}/nginx.conf"
         target: "/etc/nginx/nginx.conf"
   become: true
 
