@@ -42,7 +42,7 @@ pipeline {
                             installation: 'Ansible', // Nom configuré dans Jenkins (Manage Jenkins > Global Tool Configuration)
                             playbook: "${workspace}/playbooks/playbook.yaml",
                             inventory: "${inventoryPath}",
-                            vaultCredentialsId: params.VAULT_PASS,
+                            //vaultCredentialsId: params.VAULT_PASS,
                             limit: params.GROUP,
                             extraVars: [
                                 env: params.ENV
