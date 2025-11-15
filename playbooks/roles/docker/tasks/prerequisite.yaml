@@ -8,7 +8,7 @@
 - name: Installer Docker si non présent
   apt:
     name: docker.io
-    state: absent
+    state: present
     update_cache: yes
   when: docker_check.failed
   become: true 
