@@ -11,7 +11,7 @@
     state: present
     update_cache: yes
   when: docker_check.failed
-  become: true 
+  #become: true 
 
 - name: Démarrer et activer le service Docker
   systemd:
@@ -19,4 +19,4 @@
     state: started
     enabled: yes
   when: docker_check.failed
-  become: true 
+  #become: true 

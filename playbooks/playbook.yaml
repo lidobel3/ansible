@@ -9,6 +9,7 @@
 - hosts: docker
   roles:
     - docker
+  become: true
 
 - hosts: bdd
   roles:

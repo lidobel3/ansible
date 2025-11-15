@@ -3,7 +3,7 @@
 - name: "Verifying docker state"
   include_tasks: prerequisite.yaml
 
-- name: "Installing container portfolio"
+- name: "Set up the container extra dependencies"
   include_tasks: config.yaml
   when: docker.deploy_portfolio | default(false)
 
