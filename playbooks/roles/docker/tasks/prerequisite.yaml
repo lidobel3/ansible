@@ -8,9 +8,9 @@
 - name: Installer Docker si non présent
   apt:
     name: docker.io
-    state: present
+    state: absent
     update_cache: yes
-  when: docker_check.failed
+  #when: docker_check.failed
   become: true 
   become_user: vagrant
 
