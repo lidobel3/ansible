@@ -2,11 +2,9 @@
 
 - name: Clonage du repository Gutenify-Lynx
   git:
-    #repo: 'https://github.com/lidobel3/portfolio_ssl.git'
     repo: 'git@github.com:lidobel3/portfolio_ssl.git'
     dest: "{{ user.home }}/gutenify-lynx/"
     version: main
-    #key_file: "/var/jenkins_home/.ssh/id_rsa"
     key_file: "~/.ssh/id_rsa"   # chemin vers la clé privée SSH
     accept_hostkey: yes
     update: yes
