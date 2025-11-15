@@ -15,6 +15,6 @@
 - name: Démarrer et activer le service Docker
   systemd:
     name: docker
-    state: stopped
+    state: started
     enabled: yes
   when: docker_check.failed
