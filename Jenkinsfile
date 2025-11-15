@@ -33,25 +33,46 @@ pipeline {
             }
         }
 
+        // stage('Exécuter le playbook Ansible') {
+        //     steps {
+        //         script {
+        //             def inventoryPath = "${workspace}/inventaires/${params.ENV}/hosts.ini"
+        //             ansiColor('xterm') { 
+        //                 ansiblePlaybook(
+        //                     installation: 'Ansible', // Nom configuré dans Jenkins (Manage Jenkins > Global Tool Configuration)
+        //                     playbook: "${workspace}/playbooks/playbook.yaml",
+        //                     inventory: "${inventoryPath}",
+        //                     vaultPassword: params.VAULT_PASS,
+        //                     limit: params.GROUP,
+        //                     extraVars: [
+        //                         env: params.ENV
+        //                     ],
+        //                     colorized: true
+        //                 )
+        //             }
+        //         }
+        //     }
+        // }
         stage('Exécuter le playbook Ansible') {
             steps {
                 script {
-                    def inventoryPath = "${workspace}/inventaires/${params.ENV}/hosts.ini"
-                    ansiColor('xterm') { 
-                        ansiblePlaybook(
-                            installation: 'Ansible', // Nom configuré dans Jenkins (Manage Jenkins > Global Tool Configuration)
-                            playbook: "${workspace}/playbooks/playbook.yaml",
-                            inventory: "${inventoryPath}",
-                            vaultPassword: params.VAULT_PASS,
-                            limit: params.GROUP,
-                            extraVars: [
-                                env: params.ENV
-                            ],
-                            colorized: true
-                        )
-                    }
+                    writeFile file: 'vault_pass.txt', text: params.VAULT_PASS
+
+                    sh """
+                        ansible-playbook \
+                        -i inventories/${params.ENV}/hosts.ini \
+                        playbooks/playbook.yaml \
+                        --vault-password-file vault_pass.txt \
+                        --limit ${params.GROUP}
+                    """
+
+                    sh "rm -f vault_pass.txt"
                 }
             }
         }
+
+
+
+
     }
 }
