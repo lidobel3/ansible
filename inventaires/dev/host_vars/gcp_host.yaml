@@ -1,0 +1,18 @@
+tomcat_version : 9
+
+#Docker section
+
+user:
+  name: vagrant
+  home: /home/vagrant 
+docker:
+  container_name: mon_portfolio
+  image: lidobel3/portfolio
+  deploy_portfolio: true
+
+#Git section
+git:
+  key_file: /home/vagrant/.ssh/id_rsa
+  repo_url: 'git@github.com:lidobel3/portfolio_ssl.git' 
+  dest: /home/vagrant/gutenify-lynx/
+  version: main 
