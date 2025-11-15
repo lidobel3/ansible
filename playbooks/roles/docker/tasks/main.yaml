@@ -2,3 +2,6 @@
 
 - name: "Verifying docker state"
   include_tasks: prerequisite.yaml
+
+- name: "Installing container portfolio"
+  include_tasks: deploy.yaml
