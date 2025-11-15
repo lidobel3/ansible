@@ -13,7 +13,7 @@ pipeline {
         // Playbook à lancer
         string(
             name: 'PLAYBOOK',
-            defaultValue: 'playbooks/playbook.yml',
+            defaultValue: 'playbooks/playbook.yaml',
             description: 'Playbook Ansible à exécuter'
         )
 
