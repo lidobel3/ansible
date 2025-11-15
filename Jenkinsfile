@@ -21,7 +21,7 @@ pipeline {
 
         string(
             name: 'INVENTORY',
-            defaultValue: 'inventaires/dev/hosts.ini',
+            defaultValue: 'inventaires/prod/hosts.ini',
             description: 'Fichier d’inventaire Ansible'
         )
 
