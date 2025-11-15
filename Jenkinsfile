@@ -50,39 +50,45 @@ pipeline {
 
         stage('Run Ansible') {
             steps {
+                script {
 
-                sh """
-                    # On crée le fichier vault temporaire
-                    echo "${params.VAULT_PASSWORD}" > vault_pass.txt
+                    // Générer un fichier temporaire sécurisé pour vault_pass.txt
+                    sh """
+                        umask 077
+                        echo "${params.VAULT_PASSWORD}" > vault_pass.txt
+                    """
 
-                    # Construction dynamique de la commande
-                    CMD="ansible-playbook ${params.PLAYBOOK} -i ${params.INVENTORY} --vault-password-file vault_pass.txt"
+                    // Construction dynamique de la commande
+                    def cmd = "ansible-playbook ${params.PLAYBOOK} -i ${params.INVENTORY} --vault-password-file vault_pass.txt"
 
-                    # Add limit if provided
-                    if [ ! -z "${params.LIMIT}" ]; then
-                        CMD="$CMD --limit ${params.LIMIT}"
-                    fi
+                    if (params.LIMIT?.trim()) {
+                        cmd += " --limit '${params.LIMIT}'"
+                    }
 
-                    # Add tags if provided
-                    if [ ! -z "${params.TAGS}" ]; then
-                        CMD="$CMD --tags ${params.TAGS}"
-                    fi
+                    if (params.TAGS?.trim()) {
+                        cmd += " --tags '${params.TAGS}'"
+                    }
 
-                    # Add extra vars if provided
-                    if [ ! -z "${params.EXTRA_VARS}" ]; then
-                        CMD="$CMD --extra-vars '${params.EXTRA_VARS}'"
-                    fi
+                    if (params.EXTRA_VARS?.trim()) {
+                        cmd += " --extra-vars '${params.EXTRA_VARS}'"
+                    }
 
-                    echo "Commande exécutée :"
-                    echo "\$CMD"
+                    echo "Commande exécutée (sanitisée) :"
+                    echo cmd.replace("--vault-password-file vault_pass.txt", "--vault-password-file *****")
 
-                    # Run ansible
-                    eval \$CMD
-
-                    # Nettoyage
-                    rm -f vault_pass.txt
-                """
+                    sh """#!/bin/bash
+                        set -e
+                        ${cmd}
+                    """
+                }
             }
+        }
+    }
+
+    post {
+        always {
+            echo "Nettoyage du fichier vault..."
+            sh "rm -f vault_pass.txt || true"
         }
     }
 }
