@@ -1,4 +1,20 @@
 ---
 
-- name: "docker version"
-  shell: "docker version"
+- name: Vérifier si Docker est installé
+  command: docker --version
+  register: docker_check
+  ignore_errors: true
+
+- name: Installer Docker si non présent
+  apt:
+    name: docker.io
+    state: present
+    update_cache: yes
+  when: docker_check.failed
+
+- name: Démarrer et activer le service Docker
+  systemd:
+    name: docker
+    state: started
+    enabled: yes
+  when: docker_check.failed
