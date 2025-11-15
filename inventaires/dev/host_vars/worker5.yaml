@@ -8,4 +8,4 @@ user:
 docker:
   container_name: mon_portfolio
   image: lidobel3/portfolio
-  deploy_portfolio: false
+  deploy_portfolio: true
