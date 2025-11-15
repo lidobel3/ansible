@@ -1,6 +1,6 @@
 - name: Vérification du statut du conteneur
   docker_container_info:
-    name: portfolio
+    name: "{{ docker.container_name }}"
   register: container_info
   ignore_errors: true
 
