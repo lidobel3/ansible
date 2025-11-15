@@ -2,7 +2,7 @@ pipeline {
     agent any
 
     options {
-        ansiColor('xterm')   // Active les couleurs ANSI
+        ansiColor('xterm')
     }
 
     parameters {
@@ -45,14 +45,12 @@ pipeline {
     }
 
     stages {
-
         stage('Run Ansible') {
             steps {
                 script {
 
                     echo "\u001B[34m=== 📦 Préparation du vault ===\u001B[0m"
 
-                    // Création du fichier vault avec permissions sécurisées
                     sh """
                         umask 077
                         echo "${params.VAULT_PASSWORD}" > vault_pass.txt
@@ -60,7 +58,6 @@ pipeline {
 
                     echo "\u001B[33m>>> Génération de la commande Ansible...\u001B[0m"
 
-                    // Construction dynamique
                     def cmd = "ansible-playbook ${params.PLAYBOOK} -i ${params.INVENTORY} --vault-password-file vault_pass.txt"
 
                     if (params.LIMIT?.trim()) {
@@ -83,7 +80,6 @@ pipeline {
 
                     echo "\u001B[35m=== 🚀 Exécution du playbook ===\u001B[0m"
 
-                    // Exécution d’Ansible
                     sh """#!/bin/bash
                         set -e
                         ${cmd}
@@ -92,3 +88,14 @@ pipeline {
                     echo "\u001B[32m✔ Playbook exécuté avec succès !\u001B[0m"
                 }
             }
+        }
+    }
+
+    post {
+        always {
+            echo "\u001B[36m=== 🧹 Nettoyage du fichier vault... ===\u001B[0m"
+            sh "rm -f vault_pass.txt || true"
+            echo "\u001B[32m✔ Nettoyage terminé.\u001B[0m"
+        }
+    }
+}
