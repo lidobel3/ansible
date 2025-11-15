@@ -5,6 +5,7 @@ tomcat_version : 9
 user:
   name: vagrant
   home: /home/vagrant 
+  project: gutenify-lynx
 docker:
   container_name: mon_portfolio
   image: lidobel3/portfolio
