@@ -1,4 +1,4 @@
-- hosts: docker
+- hosts: localhost
   roles:
     - docker
   become: true
