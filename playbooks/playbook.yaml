@@ -1,4 +1,4 @@
-- hosts: localhost
+- hosts: worker5
   roles:
     - docker
   become: true
