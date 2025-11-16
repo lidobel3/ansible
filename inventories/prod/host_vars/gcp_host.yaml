@@ -1,7 +1,4 @@
-tomcat_version : 9
-
 #Docker section
-
 user:
   name: lidobel
   home: /home/lidobel 
