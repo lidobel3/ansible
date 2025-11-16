@@ -7,6 +7,12 @@ pipeline {
 
     parameters {
 
+        string(
+            name: 'BRANCH',
+            defaultValue: 'main',
+            description: 'Branche Git à cloner'
+        )
+
         password(
             name: 'VAULT_PASSWORD',
             defaultValue: '',
@@ -21,7 +27,7 @@ pipeline {
 
         string(
             name: 'INVENTORY',
-            defaultValue: 'inventaires/dev/hosts.ini',
+            defaultValue: 'inventories/dev/hosts.ini',
             description: 'Fichier d’inventaire Ansible'
         )
 
@@ -45,6 +51,17 @@ pipeline {
     }
 
     stages {
+        stage('Clone Repository') {
+            steps {
+                echo "\u001B[34m=== 🔄 Clonage du dépôt Git (branche ${params.BRANCH}) ===\u001B[0m"
+                checkout([
+                    $class: 'GitSCM', 
+                    branches: [[name: "refs/heads/${params.BRANCH}"]],
+                    userRemoteConfigs: [[url: 'https://github.com/lidobel3/ansible.git']]
+                ])
+            }
+        }
+
         stage('Run Ansible') {
             steps {
                 script {
@@ -80,15 +97,10 @@ pipeline {
 
                     echo "\u001B[35m=== 🚀 Exécution du playbook ===\u001B[0m"
 
-                    // sh """#!/bin/bash
-                    //     set -e
-                    //     ${cmd}
-                    // """
                     sh """#!/bin/bash
                     set -e
                     ANSIBLE_FORCE_COLOR=1 PY_COLORS=1 ${cmd}
-                """
-
+                    """
 
                     echo "\u001B[32m✔ Playbook exécuté avec succès !\u001B[0m"
                 }
