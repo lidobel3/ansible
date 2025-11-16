@@ -9,3 +9,4 @@
 
 - name: "Installing container portfolio"
   include_tasks: deploy.yaml
+  when: docker.deploy_portfolio_on | default(false)
