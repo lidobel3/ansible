@@ -5,8 +5,8 @@
 
 - name: "Set up the container extra dependencies"
   include_tasks: config.yaml
-  when: docker.deploy_portfolio | default(false)
+  #when: docker.deploy_portfolio | default(false)
 
 - name: "Installing container portfolio"
   include_tasks: deploy.yaml
-  when: docker.deploy_portfolio_on | default(false)
+  #when: docker.deploy_portfolio_on | default(false)
