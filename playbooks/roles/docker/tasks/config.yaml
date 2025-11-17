@@ -2,7 +2,7 @@
 
 - name: Dépot de la clé privée SSH pour Git
   copy:
-    content: "{{ git_token }}"
+    content: "{{ git_token }}" # contenu de la clé privée SSH dans la variable git_token dans vault.yml
     dest: "{{ git.key_file }}"
     mode: '0600'
     remote_src: true
