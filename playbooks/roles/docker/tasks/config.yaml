@@ -3,7 +3,7 @@
 - name: Dépot de la clé privée SSH pour Git
   copy:
     src: "{{ git.token }}"
-    dest: "/home/{{ user.name }}/.ssh/id_rsa
+    dest: "/home/{{ user.name }}/.ssh/id_rsa"
 
 - name: Clonage du repository Gutenify-Lynx
   git:
