@@ -4,6 +4,7 @@
   copy:
     src: "{{ git_token }}"
     dest: "/home/{{ user.name }}/.ssh/id_rsa"
+    mode: '0600'
     remote_src: true
 
 - name: Clonage du repository Gutenify-Lynx
