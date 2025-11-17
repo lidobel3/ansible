@@ -17,4 +17,4 @@ git:
   repo_url: 'git@github.com:lidobel3/portfolio_ssl.git' 
   dest: /home/vagrant/gutenify-lynx/
   version: main 
-  token: {{ ANSIBLE_VAULT.git_token  }}   }}
+  # token: {{ ANSIBLE_VAULT.git_token  }}   }}
