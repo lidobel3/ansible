@@ -9,7 +9,7 @@ pipeline {
 
         string(
             name: 'BRANCH',
-            defaultValue: 'main',
+            defaultValue: 'intest',
             description: 'Branche Git à cloner'
         )
 
@@ -27,7 +27,7 @@ pipeline {
 
         string(
             name: 'INVENTORY',
-            defaultValue: 'inventories/dev/hosts.ini',
+            defaultValue: 'inventories/inventaires/dev/hosts.ini',
             description: 'Fichier d’inventaire Ansible'
         )
 
