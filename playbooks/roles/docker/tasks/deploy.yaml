@@ -32,5 +32,3 @@
         source: "{{ user.home }}/{{ user.project}}/nginx.conf"
         target: "/etc/nginx/nginx.conf"
   become: true
-
-      
