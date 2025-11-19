@@ -1,0 +1,20 @@
+tomcat_version : 9
+
+#Docker section
+
+user:
+  name: ec2-user
+  home: /home/{{ user.name}} 
+  project: gutenify-lynx
+docker:
+  container_name: mon_portfolio
+  image: lidobel3/portfolio
+  deploy_portfolio: true
+
+#Git section
+git:
+  key_file: /home/{{user.name}}/.ssh/id_rsa
+  repo_url: 'git@github.com:lidobel3/portfolio_ssl.git' 
+  dest: /home/{{user.name}}/{{user.project}}/
+  version: main 
+  # token: {{ ANSIBLE_VAULT.git_token  }}   }}
