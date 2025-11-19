@@ -1,7 +1,4 @@
-tomcat_version : 9
-
 #Docker section
-
 user:
   name: ec2-user
   home: /home/ec2-user
