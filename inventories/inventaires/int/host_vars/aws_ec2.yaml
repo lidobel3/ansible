@@ -7,7 +7,7 @@ user:
   home: /home/ec2-user
   project: gutenify-lynx
 docker:
-  container_name: mon_portfolio
+  container_name: portfolio
   image: lidobel3/portfolio
   deploy_portfolio: true
 
