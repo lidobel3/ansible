@@ -24,8 +24,8 @@
     append: true
 
 - name: Copy file with owner and permissions
-  ansible.builtin.copy:
-    src: files/docker-compose.yaml
+  ansible.builtin.template:
+    src: docker-compose.yaml.j2
     dest: /home/ec2-user/docker-compose.yaml
     owner: ec2-user
     group: ec2-user
