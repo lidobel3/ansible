@@ -12,9 +12,9 @@ pipeline {
             defaultValue: 'intest',
             description: 'Branche Git à cloner'
         )
-        string(
+        choice(
             name: 'ENV',
-            choices: ['dev', 'qa', 'prod'],
+            choices: ['dev', 'staging', 'prod'],
             description: 'Environnement cible'
         )
         password(
