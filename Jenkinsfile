@@ -12,7 +12,11 @@ pipeline {
             defaultValue: 'intest',
             description: 'Branche Git à cloner'
         )
-
+        string(
+            name: 'ENV',
+            choices: ['dev', 'qa', 'prod'],
+            description: 'Environnement cible'
+        )
         password(
             name: 'VAULT_PASSWORD',
             defaultValue: '',
@@ -27,7 +31,7 @@ pipeline {
 
         string(
             name: 'INVENTORY',
-            defaultValue: 'inventories/inventaires/dev/hosts.ini',
+            defaultValue: 'inventories/${params.ENV}/hosts.ini',
             description: 'Fichier d’inventaire Ansible'
         )
 
@@ -65,6 +69,8 @@ pipeline {
         stage('Run Ansible') {
             steps {
                 script {
+                    
+                    def inventory = "inventories/${params.ENV}/hosts.ini"
 
                     echo "\u001B[34m=== 📦 Préparation du vault ===\u001B[0m"
 
