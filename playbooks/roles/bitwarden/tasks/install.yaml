@@ -30,3 +30,11 @@
     owner: ec2-user
     group: ec2-user
     mode: '0755'
+
+- name: delivry env 
+  ansible.builtin.template:
+    src: env.j2
+    dest: /home/ec2-user/.env
+    owner: ec2-user
+    group: ec2-user
+    mode: '0755'
