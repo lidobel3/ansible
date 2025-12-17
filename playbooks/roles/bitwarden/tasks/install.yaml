@@ -22,3 +22,11 @@
     name: "{{ bitwarden_user }}"
     groups: docker
     append: true
+
+- name: Copy file with owner and permissions
+  ansible.builtin.copy:
+    src: files/docker-compose.yaml
+    dest: /home/ec2-user/docker-compose.yaml
+    owner: foo
+    group: foo
+    mode: '0644'
