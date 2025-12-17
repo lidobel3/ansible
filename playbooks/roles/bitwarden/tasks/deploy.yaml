@@ -6,7 +6,7 @@
 #   tags: run
 
 - name: Deploy Bitwarden
-  shell: docker-compose up -f /home/ec2-user/docker-compose.yaml
+  shell: docker-compose  -f /home/ec2-user/docker-compose.yaml up
   notify: Restart Bitwarden
   tags: run
 
