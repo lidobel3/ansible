@@ -1,15 +1,19 @@
-- name: Install required packages
-  apt:
+- name: Install Docker
+  dnf:
     name:
-      - docker.io
+      - docker
       - docker-compose-plugin
     state: present
-    update_cache: true
   tags: install
 
-- name: Ensure Bitwarden directory exists
-  file:
-    path: "{{ bitwarden_data_dir }}"
-    state: directory
-    owner: "{{ bitwarden_user }}"
-    mode: '0755'
+- name: Enable & start Docker
+  systemd:
+    name: docker
+    enabled: true
+    state: started
+
+- name: Add user to docker group
+  user:
+    name: "{{ bitwarden_user }}"
+    groups: docker
+    append: true
