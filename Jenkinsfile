@@ -81,7 +81,8 @@ pipeline {
 
                     echo "\u001B[33m>>> Génération de la commande Ansible...\u001B[0m"
 
-                    def cmd = "ansible-playbook ${params.PLAYBOOK} -i ${params.INVENTORY} --vault-password-file vault_pass.txt"
+                    // def cmd = "ansible-playbook ${params.PLAYBOOK} -i ${params.INVENTORY} --vault-password-file vault_pass.txt"
+                    def cmd = "ansible-playbook ${params.PLAYBOOK} -i ${inventory} --vault-password-file vault_pass.txt"
 
                     if (params.LIMIT?.trim()) {
                         cmd += " --limit '${params.LIMIT}'"
