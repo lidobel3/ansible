@@ -7,8 +7,8 @@
 
 - name: Deploy Bitwarden
   shell: docker-compose  -f /home/ec2-user/docker-compose.yaml up
-  notify: Restart Bitwarden
-  tags: run
+  # notify: Restart Bitwarden
+  # tags: run
 
 # - name: Wait for Bitwarden
 #   uri:
