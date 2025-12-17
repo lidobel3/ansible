@@ -10,11 +10,11 @@
   notify: Restart Bitwarden
   tags: run
 
-- name: Wait for Bitwarden
-  uri:
-    url: "http://localhost:{{ bitwarden_port }}"
-    status_code: 200
-  register: bw
-  retries: 10
-  delay: 5
-  until: bw.status == 200
+# - name: Wait for Bitwarden
+#   uri:
+#     url: "http://localhost:{{ bitwarden_port }}"
+#     status_code: 200
+#   register: bw
+#   retries: 10
+#   delay: 5
+#   until: bw.status == 200
