@@ -29,11 +29,11 @@ pipeline {
             description: 'Playbook Ansible à exécuter'
         )
 
-        string(
-            name: 'INVENTORY',
-            defaultValue: 'inventories/${params.ENV}/hosts.ini',
-            description: 'Fichier d’inventaire Ansible'
-        )
+        // string(
+        //     name: 'INVENTORY',
+        //     defaultValue: 'inventories/${params.ENV}/hosts.ini',
+        //     description: 'Fichier d’inventaire Ansible'
+        // )
 
         string(
             name: 'LIMIT',
