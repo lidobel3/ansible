@@ -1,5 +1,5 @@
 - name: Deploy Bitwarden
-  community.docker.docker_compose:
+  community.docker.docker_compose_v2:
     # project_src: "{{ bitwarden_data_dir }}"
     project_src: files/docker-compose.yaml
   notify: Restart Bitwarden
