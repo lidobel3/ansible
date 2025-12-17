@@ -1,0 +1,15 @@
+- name: Install required packages
+  apt:
+    name:
+      - docker.io
+      - docker-compose-plugin
+    state: present
+    update_cache: true
+  tags: install
+
+- name: Ensure Bitwarden directory exists
+  file:
+    path: "{{ bitwarden_data_dir }}"
+    state: directory
+    owner: "{{ bitwarden_user }}"
+    mode: '0755'

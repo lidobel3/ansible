@@ -1,0 +1,10 @@
+bitwarden_version: "latest"
+
+bitwarden_domain: "vault.example.com"
+bitwarden_port: 8080
+
+bitwarden_data_dir: /opt/bitwarden
+bitwarden_user: bitwarden
+
+bitwarden_admin_token: ""
+bitwarden_smtp_enabled: false

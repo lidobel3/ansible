@@ -1,0 +1,5 @@
+- name: Deploy Bitwarden
+  community.docker.docker_compose:
+    project_src: "{{ bitwarden_data_dir }}"
+  notify: Restart Bitwarden
+  tags: run

@@ -9,6 +9,7 @@
 - hosts: docker
   roles:
     - docker
+    - bitwarden
   become: true
 
 - hosts: bdd
