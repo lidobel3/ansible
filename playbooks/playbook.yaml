@@ -5,7 +5,14 @@
 # - hosts: middle
 #   roles:
 #     - middle
-
+- hosts: localhost
+  connection: local
+  gather_facts: false
+  tasks:
+    - name: Installer la collection community.docker
+      ansible.builtin.command:
+        cmd: ansible-galaxy collection install community.docker
+        
 - hosts: docker
   roles:
     - docker

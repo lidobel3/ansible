@@ -22,11 +22,3 @@
     name: "{{ bitwarden_user }}"
     groups: docker
     append: true
-
-- hosts: localhost
-  connection: local
-  gather_facts: false
-  tasks:
-    - name: Installer la collection community.docker
-      ansible.builtin.command:
-        cmd: ansible-galaxy collection install community.docker
