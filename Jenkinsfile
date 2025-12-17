@@ -14,7 +14,7 @@ pipeline {
         )
         choice(
             name: 'ENV',
-            choices: ['dev', 'staging', 'prod'],
+            choices: ['dev', 'int', 'staging', 'prod'],
             description: 'Environnement cible'
         )
         password(
