@@ -16,6 +16,10 @@
 - hosts: docker
   roles:
     - docker
+  become: true
+
+- hosts: docker
+  roles:
     - bitwarden
   become: true
 
