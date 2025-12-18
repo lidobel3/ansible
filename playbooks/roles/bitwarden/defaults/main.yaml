@@ -1,7 +1,7 @@
 bitwarden_version: "latest"
 
 #bitwarden_domain: "https://vault.example.com"
-bitwarden_domain: "https://192.168.1.17:8000"
+bitwarden_domain: "http://51.44.110.118:8000"
 bitwarden_port: 8000
 
 bitwarden_data_dir: /opt/bitwarden
