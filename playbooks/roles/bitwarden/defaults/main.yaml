@@ -7,5 +7,6 @@ bitwarden_port: 8000
 bitwarden_data_dir: /opt/bitwarden
 bitwarden_user: bitwarden
 
-bitwarden_admin_token: "4fe17c064c45ff11d39b51b1a46f5177c7528c14f4a4362a0a766b194ce91159"
+#bitwarden_admin_token: "4fe17c064c45ff11d39b51b1a46f5177c7528c14f4a4362a0a766b194ce91159"
+bitwarden_admin_token: "$argon2id$v=19$m=19456,t=2,p=1$cXpKdUxHSWhlaUs1QVVsSStkbTRPQVFPSmdpamFCMHdvYjVkWTVKaDdpYz0$E1UgBKjUCD2Roy0jdHAJvXihugpG+N9WcAaR8P6Qn/8^C"
 bitwarden_smtp_enabled: false
