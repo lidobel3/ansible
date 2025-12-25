@@ -18,12 +18,19 @@
     - docker
   become: true
 
+# - hosts: docker
+#   roles:
+#     - bitwarden
+#   become: true
+#   tags: bitwarden
+
 - hosts: docker
-  roles:
-    - bitwarden
   become: true
   tags: bitwarden
-  when: install_bitwarden
+  tasks:
+    - import_role:
+        name: bitwarden
+      when: install_bitwarden
 
 - hosts: bdd
   roles:
