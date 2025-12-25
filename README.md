@@ -56,6 +56,5 @@ Are you sure you want to continue connecting (yes/no)?
 ```shell
 ssh-keyscan -H 192.168.1.150 >> ~/.ssh/known_hosts
 ```
-
-⚠️ Voici la seule alternative pour éviter la demande de validation, commande à executer dans le node controller ou automatiser via une task.
+> **Note :** ⚠️ Voici la seule alternative `ssh-keyscan` pour éviter la demande de validation, commande à executer dans le node controller ou automatiser via une task.
 
