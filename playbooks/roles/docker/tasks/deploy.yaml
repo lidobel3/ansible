@@ -12,7 +12,7 @@
       - python3.8-distutils
     state: present
     update_cache: true
-  when: container_info.rc != 1
+  when: container_info.rc != 0
 
 - name: Arrêter et supprimer le conteneur existant s'il est en cours d'exécution
   docker_container:
