@@ -23,6 +23,7 @@
     - bitwarden
   become: true
   tags: bitwarden
+  when: install_bitwarden
 
 - hosts: bdd
   roles:

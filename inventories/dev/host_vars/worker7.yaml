@@ -1,4 +1,5 @@
 tomcat_version : 9
+install_bitwarden: false
 
 #Docker section
 
