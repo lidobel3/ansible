@@ -41,17 +41,21 @@ bdd
 > Le nouvelle host worker7 a été ajouté, pour tester l'automatisation de l'acceptation 
 
 ```shell
-The authenticity of host 'server.example.com (192.168.1.10)' can't be established.
+The authenticity of host 'server.example.com (192.168.1.150)' can't be established.
 ED25519 key fingerprint is SHA256:xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx.
 Are you sure you want to continue connecting (yes/no)?
 ```
 
 📌 À quoi correspond cette confirmation ?
 
-Cette demande correspond à la vérification de la clé d’hôte SSH (Host Key).
+* Cette demande correspond à la vérification de la clé d’hôte SSH (Host Key).
+* Chaque serveur SSH possède une clé cryptographique unique (ED25519, RSA, ECDSA…).
+* Lors de la première connexion, le client SSH ne connaît pas encore cette clé.
+* Il demande donc à l’utilisateur de confirmer que le serveur contacté est bien le bon.
 
-Chaque serveur SSH possède une clé cryptographique unique (ED25519, RSA, ECDSA…).
+```shell
+ssh-keyscan -H 192.168.1.150 >> ~/.ssh/known_hosts
+```
 
-Lors de la première connexion, le client SSH ne connaît pas encore cette clé.
+⚠️ Voici la seule alternative pour éviter la demande de validation, commande à executer dans le node controller ou automatiser via une task.
 
-Il demande donc à l’utilisateur de confirmer que le serveur contacté est bien le bon.
