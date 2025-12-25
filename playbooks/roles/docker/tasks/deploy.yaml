@@ -4,6 +4,16 @@
   register: container_info
   ignore_errors: true
 
+- name: Installer Python 3.8 et distutils
+  become: true
+  apt:
+    name:
+      - python3.8
+      - python3.8-distutils
+    state: present
+    update_cache: true
+  when: container_info.rc != 1
+
 - name: Arrêter et supprimer le conteneur existant s'il est en cours d'exécution
   docker_container:
     name: "{{ docker.container_name }}"
