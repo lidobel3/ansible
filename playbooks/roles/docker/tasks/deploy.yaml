@@ -18,7 +18,8 @@
   docker_container:
     name: "{{ docker.container_name }}"
     state: absent
-  when: container_info.exists
+  #when: container_info.exists
+  ignore_errors: true
 
 - name: Deploy container 
   docker_container:
