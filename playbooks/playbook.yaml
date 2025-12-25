@@ -1,3 +1,21 @@
+# Exemple de playbook utilisant le rôle
+# playbook_cockpit.yml
+- name: Installer Cockpit sur les serveurs
+  hosts: all
+  become: yes
+  
+  vars:
+    cockpit_idle_timeout: "3600"  # 1 heure
+    cockpit_password_auth: "true"
+  
+  roles:
+    - supervision
+  
+  post_tasks:
+    - name: Afficher l'URL d'accès
+      debug:
+        msg: "Cockpit est accessible sur https://{{ ansible_default_ipv4.address }}:9090"
+
 - hosts: frontend
   roles:
     - frontend

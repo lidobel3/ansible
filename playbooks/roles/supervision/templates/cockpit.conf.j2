@@ -1,0 +1,19 @@
+---
+# roles/cockpit/templates/cockpit.conf.j2
+[WebService]
+# Port d'écoute (par défaut 9090)
+Origins = {{ cockpit_origins | default('https://localhost:9090 wss://localhost:9090') }}
+ProtocolHeader = {{ cockpit_protocol_header | default('X-Forwarded-Proto') }}
+
+# Activer/désactiver la connexion par mot de passe
+PasswordAuth = {{ cockpit_password_auth | default('true') }}
+
+# Timeout de session en minutes
+MaxStartups = {{ cockpit_max_startups | default('10') }}
+
+[Session]
+# Durée de vie de la session en secondes (défaut: 30 minutes)
+IdleTimeout = {{ cockpit_idle_timeout | default('1800') }}
+
+[Log]
+Fatal = {{ cockpit_log_fatal | default('cockpit-ws') }}

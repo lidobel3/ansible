@@ -1,0 +1,17 @@
+---
+# roles/cockpit/defaults/main.yml
+# Configuration par défaut de Cockpit
+cockpit_origins: "https://localhost:9090 wss://localhost:9090"
+cockpit_protocol_header: "X-Forwarded-Proto"
+cockpit_password_auth: "true"
+cockpit_max_startups: "10"
+cockpit_idle_timeout: "1800"
+cockpit_log_fatal: "cockpit-ws"
+
+# Modules supplémentaires à installer (optionnel)
+cockpit_additional_packages: []
+# Exemples:
+# - cockpit-docker
+# - cockpit-podman
+# - cockpit-machines
+# - cockpit-pcp

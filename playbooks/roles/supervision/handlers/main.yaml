@@ -1,0 +1,6 @@
+---
+# roles/cockpit/handlers/main.yml
+- name: restart cockpit
+  systemd:
+    name: cockpit.socket
+    state: restarted
