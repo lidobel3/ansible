@@ -64,8 +64,6 @@
 - name: Démarrer Vault
   become: true
   command: "nohup vault server -config={{ vault_config_path }} &"
-  async: 0
-  poll: 0
 
 - name: Attendre que Vault démarre
   become: true
