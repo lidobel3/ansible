@@ -7,5 +7,5 @@ vault_download_url: "https://releases.hashicorp.com/vault/{{ vault_version }}/va
 vault_install_path: "/usr/local/bin"
 vault_data_path: "/etc/vault.d/data"
 vault_config_path: "/etc/vault.d/vault.hcl"
-vault_listener_address: "192.168.1.150"
+vault_listener_address: "0.0.0.0"
 
