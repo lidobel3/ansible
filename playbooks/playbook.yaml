@@ -55,6 +55,7 @@
   become: true
   roles:
     - hashicorpvault
+  tags: vault
 
 - hosts: bdd
   roles:
