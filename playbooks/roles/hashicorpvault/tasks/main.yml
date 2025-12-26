@@ -78,25 +78,26 @@
 #      [Install]
 #      WantedBy=multi-user.target
 #  notify: reload systemd
+
 - name: Arrêter Vault existant
   become: true
   shell: pkill -f "vault server" || true
   ignore_errors: true
 
-- name: Démarrer Vault
-  become: true
-  command: "nohup vault server -config={{ vault_config_path }} > /var/log/vault.log 2>&1 &"
-  async: 10
-  poll: 5
-  creates: /var/run/vault.pid  # Créez ce fichier dans vault server
+#- name: Démarrer Vault
+#  become: true
+#  command: "nohup vault server -config={{ vault_config_path }} > /var/log/vault.log 2>&1 &"
+#  async: 10
+#  poll: 5
+#  creates: /var/run/vault.pid  # Créez ce fichier dans vault server
 
-- name: Démarrer et activer Vault
-  become: true
-  systemd:
-    name: vault
-    state: started
-    enabled: true
-    daemon_reload: true
+#- name: Démarrer et activer Vault
+#  become: true
+#  systemd:
+#    name: vault
+#    state: started
+#    enabled: true
+#    daemon_reload: true
 
 #- name: Attendre que Vault démarre
 #  become: true
