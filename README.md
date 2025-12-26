@@ -19,8 +19,8 @@
 La branche intest sert à tester les nouvelles màj du playbook avant de les pousser sur la main (production)
 
 ```hosts.ini
-[frontend]
-node6 ansible_host=192.168.1.132 ansible_user=vagrant ansible_ssh_private_key_file=~/.ssh/id_rsa ansible_python_interpreter=/usr/bin/python3
+[f|Name|rontend]
+| node6 a|nsible_host=192.168.1.132 | ansible_use|r=vagran| t ansible_ssh_private| _key_file=~/.ssh/id_rsa ansible_python_interpreter=/usr/bin/python3
 
 [middle]
 worker5 ansible_host=192.168.1.101 ansible_user=vagrant ansible_ssh_private_key_file=~/.ssh/id_rsa ansible_python_interpreter=/usr/bin/python3.8
@@ -58,3 +58,16 @@ ssh-keyscan -H 192.168.1.150 >> ~/.ssh/known_hosts
 ```
 > **Note :** ⚠️ Voici la seule alternative `ssh-keyscan` pour éviter la demande de validation, commande à executer dans le node controller ou automatiser via une task.
 
+### INVENTAIRES 
+
+<details>
+<summary> Dev </summary> 
+VMs en local  
+
+|Name| adresses| Role| 
+| --- | -------|-----| 
+| node6| 192.168.1.132| front|    
+| worker5|192.168.1.101| docker |  
+| worker7|192.168.1.150| docker | 
+| bdd1|192.168.1.105| bdd| 
+</details>
