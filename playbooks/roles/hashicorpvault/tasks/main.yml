@@ -88,7 +88,7 @@
   become: true
   command: "nohup vault server -config={{ vault_config_path }} > /var/log/vault.log 2>&1 &"
   async: 10
-  poll: 5
+  poll: 0
   #creates: /var/run/vault.pid  # Créez ce fichier dans vault server
 
 #- name: Démarrer et activer Vault
