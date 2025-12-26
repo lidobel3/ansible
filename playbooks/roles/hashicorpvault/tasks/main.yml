@@ -60,23 +60,35 @@
     owner: vault
     group: vault
     mode: "0755"
-- name: Créer service systemd Vault
+
+#- name: Créer service systemd Vault
+#  become: true
+#  copy:
+#    dest: /etc/systemd/system/vault.service
+#    content: |
+#      [Unit]
+#      Description=HashiCorp Vault
+#      After=network.target
+
+#      [Service]
+#      ExecStart=/usr/bin/vault server -config={{ vault_config_path }}
+#      Restart=on-failure
+#      LimitNOFILE=65536
+
+#      [Install]
+#      WantedBy=multi-user.target
+#  notify: reload systemd
+- name: Arrêter Vault existant
   become: true
-  copy:
-    dest: /etc/systemd/system/vault.service
-    content: |
-      [Unit]
-      Description=HashiCorp Vault
-      After=network.target
+  shell: pkill -f "vault server" || true
+  ignore_errors: true
 
-      [Service]
-      ExecStart=/usr/bin/vault server -config={{ vault_config_path }}
-      Restart=on-failure
-      LimitNOFILE=65536
-
-      [Install]
-      WantedBy=multi-user.target
-  notify: reload systemd
+- name: Démarrer Vault
+  become: true
+  command: "nohup vault server -config={{ vault_config_path }} > /var/log/vault.log 2>&1 &"
+  async: 10
+  poll: 5
+  creates: /var/run/vault.pid  # Créez ce fichier dans vault server
 
 - name: Démarrer et activer Vault
   become: true
