@@ -50,6 +50,12 @@
         name: bitwarden
       when: install_bitwarden
 
+- name: Installer et configurer HashiCorp Vault
+  hosts: vault_servers
+  become: true
+  roles:
+    - vault
+
 - hosts: bdd
   roles:
     - bdd

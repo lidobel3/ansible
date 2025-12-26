@@ -1,0 +1,94 @@
+---
+# tasks file for vault
+# tasks/main.yml
+---
+- name: Installer les pré-requis
+  become: true
+  apt:
+    name:
+      - curl
+      - unzip
+    state: present
+
+- name: Télécharger Vault
+  become: true
+  get_url:
+    url: "{{ vault_download_url }}"
+    dest: "/tmp/vault.zip"
+
+- name: Décompresser Vault
+  become: true
+  unarchive:
+    src: "/tmp/vault.zip"
+    dest: "/tmp/"
+    remote_src: yes
+
+- name: Déplacer Vault dans /usr/local/bin
+  become: true
+  command: mv /tmp/vault {{ vault_install_path }}/vault creates={{ vault_install_path }}/vault
+
+- name: Créer un utilisateur Vault
+  become: true
+  user:
+    name: vault
+    system: yes
+    home: "/etc/vault.d"
+    shell: "/bin/false"
+
+- name: Créer le dossier de configuration
+  become: true
+  file:
+    path: "/etc/vault.d"
+    state: directory
+    owner: vault
+    group: vault
+    mode: "0755"
+
+- name: Copier le fichier de configuration vault.hcl
+  become: true
+  copy:
+    src: "vault.hcl"
+    dest: "{{ vault_config_path }}"
+    owner: vault
+    group: vault
+    mode: "0644"
+
+- name: Créer le dossier pour stocker les données de Vault
+  become: true
+  file:
+    path: "{{ vault_data_path }}"
+    state: directory
+    owner: vault
+    group: vault
+    mode: "0755"
+
+- name: Démarrer Vault
+  become: true
+  command: "vault server -config={{ vault_config_path }}"
+  async: 0
+  poll: 0
+
+- name: Attendre que Vault démarre
+  become: true
+  wait_for:
+    host: "{{ vault_listener_address }}"
+    port: 8200
+    delay: 10
+    timeout: 60
+    state: started
+
+- name: Initialiser Vault
+  become: true
+  command: "vault operator init"
+  register: vault_init_output
+  when: ansible_facts['distribution'] == "Ubuntu"
+
+- name: Déverrouiller Vault (unseal)
+  become: true
+  command: "vault operator unseal {{ item }}"
+  loop: "{{ vault_init_output.stdout_lines[0:3] }}"
+
+- name: Se connecter à Vault avec le token root
+  become: true
+  command: "vault login {{ vault_init_output.stdout_lines[3] }}"
+
