@@ -63,7 +63,7 @@
 
 - name: Démarrer Vault
   become: true
-  command: "vault server -config={{ vault_config_path }}"
+  command: "vault server -config={{ vault_config_path }} &"
   async: 0
   poll: 0
 
