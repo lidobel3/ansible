@@ -54,7 +54,7 @@
   hosts: vault_servers
   become: true
   roles:
-    - vault
+    - hashicorpvault
 
 - hosts: bdd
   roles:
