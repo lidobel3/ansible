@@ -61,18 +61,22 @@
     group: vault
     mode: "0755"
 
-- name: Démarrer Vault
+- name: Démarrer et activer Vault
   become: true
-  command: "nohup vault server -config={{ vault_config_path }} &"
-
-- name: Attendre que Vault démarre
-  become: true
-  wait_for:
-    host: "{{ vault_listener_address }}"
-    port: 8200
-    delay: 10
-    timeout: 60
+  systemd:
+    name: vault
     state: started
+    enabled: true
+    daemon_reload: true
+
+#- name: Attendre que Vault démarre
+#  become: true
+#  wait_for:
+#    host: "{{ vault_listener_address }}"
+#    port: 8200
+#    delay: 10
+#    timeout: 60
+#    state: started
 
 - name: Initialiser Vault
   become: true
