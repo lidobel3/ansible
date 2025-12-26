@@ -108,11 +108,11 @@
 #    timeout: 60
 #    state: started
 
-- name: Initialiser Vault
-  become: true
-  command: "vault operator init"
-  register: vault_init_output
-  when: ansible_facts['distribution'] == "Ubuntu"
+#- name: Initialiser Vault
+#  become: true
+#  command: "vault operator init"
+#  register: vault_init_output
+#  when: ansible_facts['distribution'] == "Ubuntu"
 
 - name: Déverrouiller Vault (unseal)
   become: true
