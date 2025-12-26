@@ -71,19 +71,3 @@ VMs en local
 | worker7|192.168.1.150| docker | 
 | bdd1|192.168.1.105| bdd| 
 </details>
-
-roles/
-└── vault/
-    ├── defaults/
-    │   └── main.yml
-    ├── handlers/
-    │   └── main.yml
-    ├── tasks/
-    │   ├── install.yml
-    │   ├── config.yml
-    │   ├── service.yml
-    │   └── main.yml
-    ├── templates/
-    │   └── vault.hcl.j2
-    └── meta/
-        └── main.yml
