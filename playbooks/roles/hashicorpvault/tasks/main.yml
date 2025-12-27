@@ -126,7 +126,7 @@
   become: true
   command: "vault operator init"
   environment:
-    VAULT_ADDR: "http://192.168.1.150"
+    VAULT_ADDR: "http://192.168.1.150:8200"
   register: vault_init_output
   when: ansible_facts['distribution'] == "Ubuntu"
 
