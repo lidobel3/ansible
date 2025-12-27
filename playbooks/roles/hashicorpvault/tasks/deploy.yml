@@ -54,14 +54,14 @@
         path: "{{ vault_keys_path }}"
         state: directory
         mode: '0700'
-      delegate_to: localhost
+      #delegate_to: localhost
 
     - name: Sauvegarder les clés
       ansible.builtin.copy:
         content: "{{ vault_init.stdout }}"
         dest: "{{ vault_keys_file }}"
         mode: '0600'
-      delegate_to: localhost
+      #delegate_to: localhost
 
     - name: Parser les nouvelles clés
       set_fact:
