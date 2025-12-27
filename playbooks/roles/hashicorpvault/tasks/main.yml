@@ -89,7 +89,7 @@
   shell: "nohup vault server -config={{ vault_config_path }} > /var/log/vault.log 2>&1 &"
   async: 45
   poll: 10
-  executable: /bin/bash
+  #executable: /bin/bash
 
 - name: Attendre Vault (votre tâche existante)
   wait_for:
