@@ -1,4 +1,4 @@
-je---
+---
 # tasks file for vault
 # tasks/main.yml
 - name: Installer les pré-requis
