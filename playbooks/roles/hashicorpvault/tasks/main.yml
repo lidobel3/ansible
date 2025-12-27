@@ -86,9 +86,16 @@
   ignore_errors: true
 
 - name: Démarrer Vault
-  become: true
   shell: "nohup vault server -config={{ vault_config_path }} > /var/log/vault.log 2>&1 &"
-  executable : /bin/bash
+  async: 45
+  poll: 10
+  executable: /bin/bash
+
+- name: Attendre Vault (votre tâche existante)
+  wait_for:
+    port: 8200
+    delay: 10
+    timeout: 60
 
 #- name: Démarrer Vault
 #  become: true
