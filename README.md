@@ -1,6 +1,27 @@
 # ansible
 
 ### Updates :
+
+<details>
+<summary> 26/12/25 </summary>
+
+Automatisation de l'installation de hashicorp vault  
+
+⚠️ Problème lors du démarrage du moteur  
+
+> Difference importante entre `command` et `shell`
+
+  - [x] Installation de hashicorp vault via ansible
+  - [ ] Démarrage automatique de vault
+
+<!-- - [X] MàJ de python 3 à python 3.8
+  - [x] Installation de python3.8 & python3.8-distutils via ansible
+  - [x] Modification du hosts.ini
+  - [ ] Industrialisation des mise à jour pyhton sur les noeuds à admnistrer  -->
+
+
+</details>
+
 <details>
 <summary> 25/12/25 </summary>
 
@@ -8,7 +29,6 @@
   - [x] Installation de python3.8 & python3.8-distutils via ansible
   - [x] Modification du hosts.ini
   - [ ] Industrialisation des mise à jour pyhton sur les noeuds à admnistrer 
-
 
 </details>
 
