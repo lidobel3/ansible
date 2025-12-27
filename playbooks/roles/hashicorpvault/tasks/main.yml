@@ -1,11 +1,13 @@
 ---
 
-- name: Installation des pre-requis
-  import_tasks: prerequis.yml
+# - name: Installation des pre-requis
+#   import_tasks: prerequis.yml
 
-- name: Déploiement et configuration de Vault
-  import_tasks: deploy.yml  
+# - name: Déploiement et configuration de Vault
+#   import_tasks: deploy.yml  
 
+- name: Test de l'installation de Vault
+  import_tasks: test.yml
 
 # tasks file for vault
 # tasks/main.yml
