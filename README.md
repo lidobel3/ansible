@@ -5,7 +5,7 @@
 <details>
 <summary> 26/12/25 </summary>
 
-Automatisation de l'installation de hashicorp vault  
+Automatisation de l'installation de hashicorp vault sur worker7 uniquement 
 
 ⚠️ Problème lors du démarrage du moteur  
 
