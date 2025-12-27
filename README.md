@@ -14,6 +14,19 @@ Automatisation de l'installation de hashicorp vault sur worker7 uniquement
   - [x] Installation de hashicorp vault via ansible
   - [ ] Démarrage automatique de vault
 
+```shell
+# Créer le rôle dans un répertoire spécifique
+ansible-galaxy init --init-path ./roles/ cockpit
+
+# Spécifier un type (role par défaut, ou collection)
+ansible-galaxy init --type role cockpit
+
+# Forcer l'écrasement si le rôle existe déjà
+ansible-galaxy init --force cockpit
+
+# Créer avec un template alternatif
+ansible-galaxy init --role-skeleton=/chemin/vers/template cockpit
+```
 <!-- - [X] MàJ de python 3 à python 3.8
   - [x] Installation de python3.8 & python3.8-distutils via ansible
   - [x] Modification du hosts.ini
