@@ -3,3 +3,4 @@
 vault_addr: "http://192.168.1.150:8200"
 vault_keys_path: "{{ playbook_dir }}/vault_keys"
 vault_keys_file: "{{ vault_keys_path }}/init_keys_{{ inventory_hostname }}.json"
+primo_install: true
