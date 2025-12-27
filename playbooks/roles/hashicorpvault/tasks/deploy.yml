@@ -86,13 +86,13 @@
       ansible.builtin.stat:
         path: "{{ vault_keys_file }}"
       register: keys_file_stat
-      delegate_to: localhost
+      #delegate_to: localhost
 
     - name: Lire le fichier de clés
       ansible.builtin.slurp:
         src: "{{ vault_keys_file }}"
       register: keys_content
-      delegate_to: localhost
+      #delegate_to: localhost
       when: keys_file_stat.stat.exists
 
     - name: Parser les clés existantes
