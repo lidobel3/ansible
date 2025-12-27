@@ -87,6 +87,7 @@
 
 - name: Démarrer Vault
   shell: "vault server -config={{ vault_config_path }}"
+  register: vault_init_output
   async: 45
   poll: 10
   #executable: /bin/bash
