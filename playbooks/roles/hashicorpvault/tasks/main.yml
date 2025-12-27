@@ -129,7 +129,7 @@
     VAULT_ADDR: "http://192.168.1.150:8200"
   register: vault_init_output
   when: ansible_facts['distribution'] == "Ubuntu"
-  ignore_errors: true
+  #ignore_errors: true
 
 - name: Déverrouiller Vault (unseal)
   become: true
