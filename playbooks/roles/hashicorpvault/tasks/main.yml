@@ -1,4 +1,4 @@
----
+q---
 # tasks file for vault
 # tasks/main.yml
 - name: Installer les pré-requis
@@ -111,6 +111,8 @@
 - name: Initialiser Vault
   become: true
   command: "vault operator init"
+  environment:
+    VAULT_ADDR: "http://192.168.1.150"
   register: vault_init_output
   when: ansible_facts['distribution'] == "Ubuntu"
 
