@@ -86,7 +86,7 @@
   ignore_errors: true
 
 - name: Démarrer Vault
-  shell: "vault server -config={{ vault_config_path }}"
+  shell: "nohup vault server -config={{ vault_config_path }} > /var/log/vault.log 2>&1 &"
   register: vault_init_output
   async: 45
   poll: 10
@@ -123,13 +123,13 @@
 #    timeout: 60
 #    state: started
 
-#- name: Initialiser Vault
-#  become: true
-#  command: "vault operator init"
-#  environment:
-#    VAULT_ADDR: "http://192.168.1.150:8200"
-#  register: vault_init_output
-#  when: ansible_facts['distribution'] == "Ubuntu"
+- name: Initialiser Vault
+  become: true
+  command: "vault operator init"
+  environment:
+    VAULT_ADDR: "http://192.168.1.150:8200"
+  register: vault_init_output
+  when: ansible_facts['distribution'] == "Ubuntu"
   #ignore_errors: true
 
 - name: Déverrouiller Vault (unseal)
