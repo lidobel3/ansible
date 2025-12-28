@@ -51,7 +51,7 @@
         - is_redhat
         - ansible_facts.services['firewalld.service'] is defined
         - ansible_facts.services['firewalld.service'].state == 'running'
-      ignore_errors: yes
+      ignore_errors: true
 
     - name: Ouvrir le port firewall (ufw)
       ufw:
@@ -61,7 +61,7 @@
       when:
         - is_debian
         - ansible_facts.services['ufw.service'] is defined
-      ignore_errors: yes
+      ignore_errors: true
 
     - name: Activer et démarrer le service Cockpit
       systemd:
