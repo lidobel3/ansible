@@ -36,11 +36,12 @@ pipeline {
         )
         text(
             name: 'EXTRA_VARS',
-            defaultValue: '',
+            defaultValue: '2 - Plus verbose (-vv)',
             description: 'Variables supplémentaires (JSON ou KEY=VALUE). Exemple: {"env":"prod"}'
         )
         choice(
             name: 'VERBOSITY',
+            defaultValue: '',
             choices: ['0 - Normal', '1 - Verbose (-v)', '2 - Plus verbose (-vv)', '3 - Debug (-vvv)', '4 - Connection debug (-vvvv)'],
             description: 'Niveau de verbosité Ansible'
         )
