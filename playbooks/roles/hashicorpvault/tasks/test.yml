@@ -3,6 +3,11 @@
 #   args:
 #     executable: /bin/bash
 
+- name: Check du statut de Vault
+  shell: vault status
+  args:
+    executable: /bin/bash
+
 - name: Récupérer le secret via la CLI Vault
   ansible.builtin.shell: |
     export VAULT_ADDR="{{ vault_addr }}"
