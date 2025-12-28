@@ -16,7 +16,7 @@
   when: vault_status.rc != 0  
 
 - name: Test de l'installation de Vault
-  import_tasks: test.yml
+  import_tasks: check_status.yml
 
 # tasks file for vault
 # tasks/main.yml
