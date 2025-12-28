@@ -17,7 +17,7 @@
 
 # playbook_cockpit.yml
 - name: Installer Cockpit sur les serveurs
-  hosts: all
+  hosts: gcp
   become: true
   vars:
     cockpit_idle_timeout: "3600"  # 1 heure
