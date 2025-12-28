@@ -13,9 +13,9 @@
       debug:
         msg: "Cockpit est accessible sur https://{{ ansible_default_ipv4.address }}:9090"
 
-- hosts: frontend
-  roles:
-    - frontend
+# - hosts: frontend
+#   roles:
+#     - frontend
 
 - hosts: frontend
   become: true
