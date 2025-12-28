@@ -21,17 +21,13 @@
   connection: local
   gather_facts: false
   tasks:
-    - name: "Installer la collection {{ item }}"
+    - name: Installer les collections
       ansible.builtin.command:
-        cmd: ansible-galaxy collection install community.docker
-      loop: "{{ ansible_collections }}"
-      register: collection_out
-      # On affiche le résultat seulement si nécessaire pour ne pas polluer les logs
-      changed_when: "'is already installed' not in collection_out.stdout"
-  vars: 
-    ansible_collections:
-      - community.docker
-      - community.hashi_vault
+        # Assure-toi d'avoir {{ item }} ici et non le nom en dur !
+        cmd: "ansible-galaxy collection install {{ item }}"
+      loop:
+        - community.docker
+        - community.hashi_vault
         
 - hosts: docker
   roles:
