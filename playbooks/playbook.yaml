@@ -44,6 +44,9 @@
 
 - name: Installer et configurer HashiCorp Vault
   hosts: vault_servers
+  environment: 
+    VAULT_ADDR: "{{ vault_addr }}"
+    VAULT_TOKEN: "{{ vault_token }}"
   become: true
   roles:
     - hashicorpvault
