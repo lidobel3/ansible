@@ -6,4 +6,4 @@
                   'secret=secret/data/dev/database:username 
                   url={{ vault_addr }} 
                   auth_method=token 
-                  token={{ vault_token }}') }}
+                  token={{ vault_root_token }}') }}
