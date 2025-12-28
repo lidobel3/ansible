@@ -1,10 +1,19 @@
 ---
 
-# - name: Installation des pre-requis
-#   import_tasks: prerequis.yml
+- name: Check du statut de Vault
+  shell: vault status
+  args:
+    executable: /bin/bash
+  register: vault_status
+  ignore_errors: true
 
-# - name: Déploiement et configuration de Vault
-#   import_tasks: deploy.yml  
+- name: Installation des pre-requis
+  import_tasks: prerequis.yml
+  when: vault_status.rc != 0
+
+- name: Déploiement et configuration de Vault
+  import_tasks: deploy.yml
+  when: vault_status.rc != 0  
 
 - name: Test de l'installation de Vault
   import_tasks: test.yml
