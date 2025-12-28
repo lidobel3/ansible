@@ -3,14 +3,11 @@
 - name: Installer Cockpit sur les serveurs
   hosts: all
   become: true
-  
   vars:
     cockpit_idle_timeout: "3600"  # 1 heure
     cockpit_password_auth: "true"
-  
   roles:
     - supervision
-  
   post_tasks:
     - name: Afficher l'URL d'accès
       debug:
@@ -20,9 +17,6 @@
   roles:
     - frontend
 
-# - hosts: middle
-#   roles:
-#     - middle
 - hosts: localhost
   connection: local
   gather_facts: false
@@ -43,12 +37,6 @@
   roles:
     - docker
   become: true
-
-# - hosts: docker
-#   roles:
-#     - bitwarden
-#   become: true
-#   tags: bitwarden
 
 - hosts: docker
   become: true
