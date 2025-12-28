@@ -18,12 +18,6 @@
 - name: Test de l'installation de Vault
   import_tasks: check_status.yml
   when: vault_status.rc != 0
-
-- name: Gestion automatisée des politiques Vault
-  hosts: localhost
-  vars:
-    app_name: "postgres-proxmox"
-    kv_path: "ansible"
   
 - name: Générer et appliquer la politique
   community.hashicorp.vault_policy:
