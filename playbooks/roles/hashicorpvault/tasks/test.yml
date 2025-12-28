@@ -1,4 +1,4 @@
 - name: Lire le secret depuis Vault
-  shell: 'vault kv get -mount="ansible" "database/postgres"'
+  shell: 'vault kv get -address="{{ vault_addr }}" -mount="ansible" "database/postgres"'
   args:
     executable: /bin/bash
