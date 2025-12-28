@@ -9,7 +9,7 @@
 
 - name: Installation des pre-requis
   import_tasks: prerequis.yml
-  when: vault_status.rc != 0
+  when: vault_status.rc != 0 and primo_install_vault
 
 - name: Déploiement et configuration de Vault
   import_tasks: deploy.yml
