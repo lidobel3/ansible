@@ -32,6 +32,15 @@
     ansible_collections:
       - community.docker
       - community.hashi_vault
+
+- hosts: localhost
+  connection: local
+  gather_facts: false
+  tasks:
+    - name: "S'assurer que hvac est installé pour Vault"
+      ansible.builtin.pip:
+        name: hvac
+        state: present
         
 - hosts: docker
   roles:
