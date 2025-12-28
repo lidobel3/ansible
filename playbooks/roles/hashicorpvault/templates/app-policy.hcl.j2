@@ -1,0 +1,8 @@
+# Politique pour l'application : {{ app_name }}
+path "{{ kv_path }}/data/{{ app_name }}/*" {
+  capabilities = ["read", "list"]
+}
+
+path "{{ kv_path }}/metadata/{{ app_name }}/*" {
+  capabilities = ["list"]
+}
