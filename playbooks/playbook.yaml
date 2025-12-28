@@ -1,4 +1,16 @@
-# Exemple de playbook utilisant le rôle
+# Installation de Collections utilisée dans ce playbook 
+- hosts: localhost
+  connection: local
+  gather_facts: false
+  tasks:
+    - name: Installer les collections
+      ansible.builtin.command:
+        # Assure-toi d'avoir {{ item }} ici et non le nom en dur !
+        cmd: "ansible-galaxy collection install {{ item }}"
+      loop:
+        - community.docker
+        - community.hashi_vault
+
 # playbook_cockpit.yml
 - name: Installer Cockpit sur les serveurs
   hosts: all
@@ -24,19 +36,7 @@
     - import_role:
         name: frontend
       when: install_frontend
-
-- hosts: localhost
-  connection: local
-  gather_facts: false
-  tasks:
-    - name: Installer les collections
-      ansible.builtin.command:
-        # Assure-toi d'avoir {{ item }} ici et non le nom en dur !
-        cmd: "ansible-galaxy collection install {{ item }}"
-      loop:
-        - community.docker
-        - community.hashi_vault
-        
+  
 - hosts: docker
   roles:
     - docker
