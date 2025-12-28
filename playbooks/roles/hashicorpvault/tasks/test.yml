@@ -1,8 +1,4 @@
 - name: Lire le secret depuis Vault
-      # Ansible va re-scanner les modules ici et trouver la collection
-  community.hashi_vault.hashi_vault_read:
-    url: "{{ vault_addr }}"
-    token: "{{ vault_root_token }}"
-    secret: "dev/database"
-  register: secret_result
-  delegate_to: localhost
+  shell: 'vault kv get -mount="ansible" "database/postgres"'
+  args:
+    executable: /bin/bash
