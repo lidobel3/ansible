@@ -19,11 +19,11 @@
   import_tasks: check_status.yml
   when: vault_status.rc != 0
   
-- name: Générer et appliquer la politique
-  community.hashi_vault.vault_policy:
-    url: "{{ vault_addr }}"
-    token: "{{ vault_root_token }}"
-    name: "policy-{{ app_name }}"
-    # On utilise lookup pour transformer le template en texte
-    rules: "{{ lookup('template', 'app-policy.hcl.j2') }}"
-    state: present
+# - name: Générer et appliquer la politique
+#   community.hashi_vault.vault_policy:
+#     url: "{{ vault_addr }}"
+#     token: "{{ vault_root_token }}"
+#     name: "policy-{{ app_name }}"
+#     # On utilise lookup pour transformer le template en texte
+#     rules: "{{ lookup('template', 'app-policy.hcl.j2') }}"
+#     state: present
