@@ -37,10 +37,11 @@
   connection: local
   gather_facts: false
   tasks:
-    - name: "S'assurer que hvac est installé pour Vault"
-      ansible.builtin.pip:
-        name: hvac
+    - name: "Installer la librairie hvac via apt (Debian/Ubuntu)"
+      ansible.builtin.apt:
+        name: python3-hvac
         state: present
+        update_cache: yes
         
 - hosts: docker
   roles:
