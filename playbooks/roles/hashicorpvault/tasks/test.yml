@@ -1,13 +1,8 @@
----
 - name: Lire le secret depuis Vault
+      # Ansible va re-scanner les modules ici et trouver la collection
   community.hashi_vault.hashi_vault_read:
     url: "{{ vault_addr }}"
     token: "{{ vault_root_token }}"
-    mount_point: "secret"
     secret: "dev/database"
   register: secret_result
   delegate_to: localhost
-
-- name: Afficher le secret
-  debug:
-    msg: "Le username est : {{ secret_result.data.data.username }}"
