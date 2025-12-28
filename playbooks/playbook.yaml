@@ -3,13 +3,13 @@
   connection: local
   gather_facts: false
   tasks:
-    - name: Installer les collections
+    - name: Installer les collections avec des versions spécifiques
       ansible.builtin.command:
-        # Assure-toi d'avoir {{ item }} ici et non le nom en dur !
-        cmd: "ansible-galaxy collection install {{ item }}"
+        # On utilise item.name et item.version
+        cmd: "ansible-galaxy collection install {{ item.name }}:{{ item.version }} --force"
       loop:
-        - community.docker
-        - community.hashi_vault
+        - { name: 'community.hashi_vault', version: '7.1.0' }
+        - { name: 'community.docker', version: '3.4.7' } # On garde ta version stable actuelle
 
 # playbook_cockpit.yml
 - name: Installer Cockpit sur les serveurs
