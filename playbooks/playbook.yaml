@@ -1,46 +1,50 @@
-# Exemple de playbook utilisant le rôle
+# Installation de Collections utilisée dans ce playbook 
+- hosts: localhost
+  connection: local
+  gather_facts: false
+  tasks:
+    - name: Installer les collections avec des versions spécifiques
+      ansible.builtin.command:
+        # On utilise item.name et item.version
+        cmd: "ansible-galaxy collection install {{ item.name }}:{{ item.version }} --force"
+      loop:
+        - { name: 'community.hashi_vault', version: '7.1.0' }
+        - { name: 'community.docker', version: '3.4.7' } # On garde ta version stable actuelle
+      vars:
+      # On définit le chemin ici pour que les modules suivants le trouvent
+        ansible_collections_paths: 
+          - /var/jenkins_home/.ansible/collections/ansible_collections
+
 # playbook_cockpit.yml
 - name: Installer Cockpit sur les serveurs
   hosts: all
   become: true
-  
   vars:
     cockpit_idle_timeout: "3600"  # 1 heure
     cockpit_password_auth: "true"
-  
   roles:
     - supervision
-  
   post_tasks:
     - name: Afficher l'URL d'accès
       debug:
         msg: "Cockpit est accessible sur https://{{ ansible_default_ipv4.address }}:9090"
 
-- hosts: frontend
-  roles:
-    - frontend
-
-# - hosts: middle
+# - hosts: frontend
 #   roles:
-#     - middle
-- hosts: localhost
-  connection: local
-  gather_facts: false
+#     - frontend
+
+- hosts: frontend
   tasks:
-    - name: Installer la collection community.docker
-      ansible.builtin.command:
-        cmd: ansible-galaxy collection install community.docker
-        
+    - import_role:
+        name: frontend
+      when: install_frontend
+  become: true
+  tags: frontend
+  
 - hosts: docker
   roles:
     - docker
   become: true
-
-# - hosts: docker
-#   roles:
-#     - bitwarden
-#   become: true
-#   tags: bitwarden
 
 - hosts: docker
   become: true
@@ -52,6 +56,9 @@
 
 - name: Installer et configurer HashiCorp Vault
   hosts: vault_servers
+  environment: 
+    VAULT_ADDR: "{{ vault_addr }}"
+    VAULT_TOKEN: "{{ vault_token }}"
   become: true
   roles:
     - hashicorpvault

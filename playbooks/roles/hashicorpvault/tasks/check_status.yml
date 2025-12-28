@@ -1,0 +1,14 @@
+---
+
+- name: Check du statut de Vault
+  shell: vault status
+  args:
+    executable: /bin/bash
+
+- name: Récupérer le secret via la CLI Vault
+  ansible.builtin.shell: 'vault kv get -mount="ansible" -format=json "database/postgres"'
+  register: vault_output
+
+# - name: Parser le résultat
+#   set_fact:
+#     postgres_vars: "{{ vault_output.stdout | from_json }}"
