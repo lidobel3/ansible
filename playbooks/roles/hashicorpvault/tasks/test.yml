@@ -1,9 +1,13 @@
 ---
-- name: Récupérer un secret depuis Vault
+- name: Lire le secret depuis Vault
+  community.hashi_vault.hashi_vault_read:
+    url: "{{ vault_addr }}"
+    token: "{{ vault_root_token }}"
+    mount_point: "secret"
+    secret: "dev/database"
+  register: secret_result
+  delegate_to: localhost
+
+- name: Afficher le secret
   debug:
-    msg: |
-      Username: {{ lookup('community.hashi_vault.hashi_vault', 
-                  'secret=secret/data/dev/database:username 
-                  url={{ vault_addr }} 
-                  auth_method=token 
-                  token={{ vault_root_token }}') }}
+    msg: "Le username est : {{ secret_result.data.data.username }}"
