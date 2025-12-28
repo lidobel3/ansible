@@ -21,7 +21,7 @@
   connection: local
   gather_facts: false
   tasks:
-    - name: Installer la collection community.docker
+    - name: "Installer la collection {{ item }}"
       ansible.builtin.command:
         cmd: ansible-galaxy collection install community.docker
       loop: "{{ ansible_collections }}"
