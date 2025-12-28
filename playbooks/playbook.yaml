@@ -21,7 +21,7 @@
   become: true         # Nécessaire pour installer des paquets
 
   tasks:
-    - name: Installer python3 s'il est absent (via SSH raw)
+    - name: Installer python3.8 s'il est absent (via SSH raw)
       raw: test -e /usr/bin/python3 || (apt -y update && apt -y install python3-minimal)
       changed_when: false
 
