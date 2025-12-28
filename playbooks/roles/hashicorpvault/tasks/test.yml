@@ -9,7 +9,6 @@
     export VAULT_TOKEN="{{ vault_root_token }}"
     vault kv get -mount="ansible" -format=json "database/postgres"
   register: vault_output
-  delegate_to: localhost
 
 - name: Parser le résultat
   set_fact:
