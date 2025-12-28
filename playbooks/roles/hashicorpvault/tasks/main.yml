@@ -17,4 +17,4 @@
 
 - name: Test de l'installation de Vault
   import_tasks: check_status.yml
-  
+  when: vault_status.rc != 0
