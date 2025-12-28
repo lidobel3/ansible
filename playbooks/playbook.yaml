@@ -17,6 +17,14 @@
   roles:
     - frontend
 
+- hosts: frontend
+  become: true
+  tags: frontend
+  tasks:
+    - import_role:
+        name: frontend
+      when: install_frontend
+
 - hosts: localhost
   connection: local
   gather_facts: false
