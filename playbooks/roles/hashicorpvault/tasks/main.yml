@@ -20,7 +20,7 @@
   when: vault_status.rc != 0
   
 - name: Générer et appliquer la politique
-  community.hashicorp.vault_policy:
+  community.hashi_vault:
     url: "{{ vault_addr }}"
     token: "{{ vault_root_token }}"
     name: "policy-{{ app_name }}"
