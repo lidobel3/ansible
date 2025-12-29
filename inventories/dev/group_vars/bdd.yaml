@@ -1,1 +1,2 @@
 postgres_version: 10
+install_bdd: false
