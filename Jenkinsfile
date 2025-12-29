@@ -6,7 +6,7 @@ pipeline {
     parameters {
         string(
             name: 'BRANCH',
-            defaultValue: 'intest',
+            defaultValue: 'gpl',
             description: 'Branche Git à cloner'
         )
         choice(
@@ -41,7 +41,7 @@ pipeline {
         )
         choice(
             name: 'VERBOSITY',
-            defaultValue: '',
+            defaultValue: '2 - Plus verbose (-vv)',
             choices: ['0 - Normal', '1 - Verbose (-v)', '2 - Plus verbose (-vv)', '3 - Debug (-vvv)', '4 - Connection debug (-vvvv)'],
             description: 'Niveau de verbosité Ansible'
         )
