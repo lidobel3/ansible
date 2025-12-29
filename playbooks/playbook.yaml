@@ -91,6 +91,7 @@
   become: true
   roles:
     - prometheus
+    - grafana
 
   post_tasks:
     - name: Afficher les informations de connexion
