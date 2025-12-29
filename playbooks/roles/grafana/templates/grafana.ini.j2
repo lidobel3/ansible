@@ -1,6 +1,12 @@
-[server]
+{# [server]
 http_port = {{ grafana_port }}
-domain = {{ ansible_default_ipv4.address }}
+domain = {{ ansible_default_ipv4.address }} #}
+[server]
+protocol = http
+http_addr = 0.0.0.0
+http_port = {{ grafana_port }}
+# On laisse le domaine par défaut ou on met l'IP publique
+domain = localhost
 
 [security]
 admin_user = {{ grafana_admin_user }}
