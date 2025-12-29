@@ -41,10 +41,19 @@
     group: vault
     mode: "0755"
 
-- name: Copier le fichier de configuration vault.hcl
+# - name: Copier le fichier de configuration vault.hcl
+#   become: true
+#   copy:
+#     src: "vault.hcl"
+#     dest: "{{ vault_config_path }}"
+#     owner: vault
+#     group: vault
+#     mode: "0644"
+
+- name: Depot du template de configuration hcl
   become: true
-  copy:
-    src: "vault.hcl"
+  template:
+    src: "vault.hcl.j2"
     dest: "{{ vault_config_path }}"
     owner: vault
     group: vault

@@ -1,0 +1,11 @@
+# files/vault.hcl
+storage "file" {
+  path = "{{ vault_data_path }}"
+}
+disable_mlock = true
+listener "tcp" {
+  address     = "{{ vault_addr }}"
+  tls_disable = 1
+}
+
+ui = true
