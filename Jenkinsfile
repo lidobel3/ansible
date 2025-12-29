@@ -36,7 +36,6 @@ pipeline {
         )
         text(
             name: 'EXTRA_VARS',
-            defaultValue: '2 - Plus verbose (-vv)',
             description: 'Variables supplémentaires (JSON ou KEY=VALUE). Exemple: {"env":"prod"}'
         )
         choice(
