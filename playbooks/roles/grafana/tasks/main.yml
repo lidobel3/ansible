@@ -1,2 +1,32 @@
 ---
 # tasks file for grafana
+- name: Ajouter la clé GPG Grafana
+  apt_key:
+    url: https://apt.grafana.com/gpg.key
+    state: present
+
+- name: Ajouter le dépôt Grafana
+  apt_repository:
+    repo: "deb https://apt.grafana.com stable main"
+    state: present
+    filename: grafana
+
+- name: Installer Grafana
+  apt:
+    name: grafana
+    state: present
+    update_cache: true
+
+- name: Configurer Grafana
+  template:
+    src: grafana.ini.j2
+    dest: /etc/grafana/grafana.ini
+    mode: '0644'
+  notify: restart grafana
+
+- name: Configurer la datasource Prometheus dans Grafana
+  template:
+    src: prometheus-datasource.yml.j2
+    dest: /etc/grafana/provisioning/datasources/prometheus.yml
+    mode: '0644'
+  notify: restart grafana
