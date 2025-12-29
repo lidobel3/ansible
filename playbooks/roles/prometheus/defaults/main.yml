@@ -10,7 +10,7 @@ alertmanager_dir: "/opt/alertmanager"
 prometheus_data_dir: "/var/lib/prometheus"
 alertmanager_data_dir: "/var/lib/alertmanager"
 # Configuration réseau
-prometheus_port: 9090
+prometheus_port: 9099
 alertmanager_port: 9093
 grafana_port: 3000
 # Utilisateurs système
@@ -20,6 +20,6 @@ prometheus_group: "prometheus"
 prometheus_retention: "15d"
 # Targets à monitorer
 prometheus_targets:
-  - localhost:9090
+  - localhost:9099
   - localhost:9093
   - localhost:9100  # Node exporter si installé
