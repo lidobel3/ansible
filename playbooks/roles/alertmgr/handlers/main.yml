@@ -1,2 +1,12 @@
 ---
 # handlers file for alertmgr
+- name: restart alertmanager
+  systemd:
+    name: alertmanager
+    state: restarted
+    daemon_reload: true
+
+- name: reload alertmanager
+  systemd:
+    name: alertmanager
+    state: reloaded
