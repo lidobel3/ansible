@@ -1,5 +1,6 @@
-
+# Activation/désactivation des différents rôles des PLAYS
 install_frontend: false
 install_docker: false
 install_bitwarden: false
 install_hashicorpvault: false
+install_bdd: false

@@ -78,8 +78,10 @@
       when: install_hashicorpvault
   tags: vault
 
-# - hosts: bdd
-#   roles:
-#     - bdd
-#   when: install_bdd
-#   become: true
+- hosts: bdd
+  become: true
+  tags: bdd
+  tasks:
+    - import_role:
+        name: bdd
+      when: install_bdd
