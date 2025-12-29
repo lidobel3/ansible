@@ -42,10 +42,6 @@
       debug:
         msg: "Cockpit est accessible sur https://{{ ansible_default_ipv4.address }}:9090"
 
-# - hosts: frontend
-#   roles:
-#     - frontend
-
 - hosts: frontend
   tasks:
     - import_role:
@@ -53,11 +49,14 @@
       when: install_frontend
   become: true
   tags: frontend
-  
+
 - hosts: docker
-  roles:
-    - docker
+  tasks:
+    - import_role:
+        name: docker
+      when: install_docker
   become: true
+  tags: docker
 
 - hosts: docker
   become: true
@@ -75,9 +74,11 @@
   become: true
   roles:
     - hashicorpvault
+  when: install_hashicorpvault
   tags: vault
 
 - hosts: bdd
   roles:
     - bdd
+  when: install_bdd
   become: true
