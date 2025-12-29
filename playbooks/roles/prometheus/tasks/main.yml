@@ -96,3 +96,9 @@
     dest: /etc/systemd/system/prometheus.service
     mode: '0644'
   notify: restart prometheus
+
+- name: "Installation de node exporter"
+  apt:
+    name: prometheus-node-exporter
+    state: present
+    update_cache: yes
