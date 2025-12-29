@@ -1,6 +1,5 @@
 ---
 # handlers file for promotheus
----
 - name: restart prometheus
   systemd:
     name: prometheus
