@@ -92,7 +92,7 @@
   roles:
     - prometheus
     - grafana
-    - alermgr
+    - alertmgr
 
   post_tasks:
     - name: Afficher les informations de connexion
