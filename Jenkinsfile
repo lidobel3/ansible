@@ -26,7 +26,7 @@ pipeline {
         )
         string(
             name: 'LIMIT',
-            defaultValue: 'docker',
+            defaultValue: '',
             description: 'Cible : groupe/host (ex: webservers). Laisser vide si non utilisé.'
         )
         string(
