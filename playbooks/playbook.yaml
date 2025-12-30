@@ -27,8 +27,7 @@
 
     - name: Forcer la détection des faits (maintenant que Python est là)
       setup:
-
-
+  
 # playbook_cockpit.yml
 - name: Installer Cockpit sur les serveurs
   hosts: gcp
