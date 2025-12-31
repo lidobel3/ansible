@@ -17,9 +17,9 @@ common:
 schema_config:
   configs:
     - from: 2020-10-24
-      store: boltdb-shipping
+      store: boltdb-shipper
       object_store: filesystem
-      schema: v11
+      schema: v13
       index:
         prefix: index_
         period: 24h
@@ -29,16 +29,23 @@ storage_config:
     active_index_directory: /loki/boltdb-shipper-active
     cache_location: /loki/boltdb-shipper-cache
     cache_ttl: 24h
+    shared_store: filesystem
   filesystem:
     directory: /loki/chunks
 
 limits_config:
   retention_period: 168h
   max_query_length: 720h
+  # Remplace max_look_back_period (déprécié/supprimé)
+  query_range:
+    split_queries_by_interval: 24h
 
-chunk_store_config:
-  max_look_back_period: 0s
+compactor:
+  working_directory: /loki/boltdb-shipper-compactor
+  shared_store: filesystem
+  compaction_interval: 10m
+  retention_enabled: true
+  retention_delete_delay: 2h
+  retention_delete_worker_count: 150
 
-table_manager:
-  retention_deletes_enabled: false
-  retention_period: 336h
+# Suppression de chunk_store_config qui cause l'erreur
