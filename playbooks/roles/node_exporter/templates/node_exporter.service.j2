@@ -1,23 +1,20 @@
 [Unit]
-Description=Prometheus Monitoring System
-Documentation=https://prometheus.io/docs/introduction/overview/
+Description=Node Exporter
+Wants=network-online.target
 After=network-online.target
 
 [Service]
 Type=simple
-User={{ prometheus_user }}
-Group={{ prometheus_group }}
-ExecStart={{ prometheus_dir }}/prometheus \
-  --config.file={{ prometheus_dir }}/prometheus.yml \
-  --storage.tsdb.path={{ prometheus_data_dir }} \
-  --storage.tsdb.retention.time={{ prometheus_retention }} \
-  --web.console.templates={{ prometheus_dir }}/consoles \
-  --web.console.libraries={{ prometheus_dir }}/console_libraries \
-  --web.listen-address=0.0.0.0:{{ prometheus_port }}
-
-ExecReload=/bin/kill -HUP $MAINPID
-Restart=on-failure
-RestartSec=5s
+User={{ node_exporter_user }}
+Group={{ node_exporter_user }}
+ExecStart={{ node_exporter_bin }} \
+  --web.listen-address=:{{ node_exporter_port }} \
+  --collector.filesystem.ignored-mount-points="^/(sys|proc|dev|host|etc)($|/)"
+Restart=always
+RestartSec=3
+LimitNOFILE=65536
+LimitNPROC=65536
+ReadWritePaths=/proc /sys
 
 [Install]
 WantedBy=multi-user.target

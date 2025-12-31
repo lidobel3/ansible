@@ -73,8 +73,15 @@
           - "Grafana Password: {{ grafana_admin_password }}"
           # - "Loki: http://{{ ansible_default_ipv4.address }}:{{ loki_port }}"
 
+- name: Déploiement de Loki sur les serveurs
+  hosts: observability 
+  become: true
+  roles:
+    - loki
+  tags: loki
+
 - name: Déploimenent de node exporter sur les serveurs 
-  hosts: node_exporter
+  hosts: observability
   become: true
   roles:
     - node_exporter
