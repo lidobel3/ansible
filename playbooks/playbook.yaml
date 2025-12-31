@@ -53,7 +53,7 @@
   tags: docker
 
 - name: Déploiement de la stack monitoring sur GCP
-  hosts: gcp
+  hosts: observability
   become: true
   roles:
     - prometheus
