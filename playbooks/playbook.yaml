@@ -86,10 +86,4 @@
   roles:
     - node_exporter
   tags: node_exporter
-
-- name: Déploiement de la stack monitoring sur GCP
-  hosts: gcp
-  become: true
-  roles: 
-    - loki
-  tags: loki
+  
