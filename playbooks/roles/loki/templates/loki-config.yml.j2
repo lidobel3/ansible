@@ -32,8 +32,10 @@ limits_config:
   retention_period: 168h
   max_query_length: 720h
 
+# Compactor SANS shared_store
 compactor:
   working_directory: /data/compactor
-  shared_store: filesystem
   compaction_interval: 10m
   retention_enabled: true
+  retention_delete_delay: 2h
+  retention_delete_worker_count: 150
