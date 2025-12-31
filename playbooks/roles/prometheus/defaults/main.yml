@@ -24,3 +24,4 @@ prometheus_targets:
   - localhost:9093
   - localhost:9100  # Node exporter si installé
   - 88.167.161.100:44445
+  - 51.44.110.118:9100
