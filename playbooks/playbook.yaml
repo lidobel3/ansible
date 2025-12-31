@@ -1,5 +1,7 @@
+---
 # Installation de Collections utilisée dans ce playbook 
-- hosts: localhost
+- name: Installation des collections Ansible Galaxy
+  hosts: localhost
   connection: local
   gather_facts: false
   tasks:
@@ -28,7 +30,6 @@
     - name: Forcer la détection des faits (maintenant que Python est là)
       setup:
 
-# playbook_cockpit.yml
 - name: Installer Cockpit sur les serveurs
   hosts: gcp
   become: true
@@ -50,7 +51,6 @@
       when: install_docker
   become: true
   tags: docker
-
 
 - name: Déploiement de la stack monitoring sur GCP
   hosts: gcp
@@ -86,4 +86,3 @@
   roles: 
     - loki
   tags: loki
-  
