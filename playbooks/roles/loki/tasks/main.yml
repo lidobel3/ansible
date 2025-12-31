@@ -19,8 +19,8 @@
   template:
     src: loki-config.yml.j2
     dest: "{{ loki_config_dir }}/loki-config.yml"
-    owner: root
-    group: root
+    owner: "10001"
+    group: "10001"
     mode: '0644'
   notify: restart loki
 
