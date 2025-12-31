@@ -81,7 +81,7 @@
   tags: loki
 
 - name: Déploimenent de node exporter sur les serveurs 
-  hosts: observability
+  hosts: node_exporter
   become: true
   roles:
     - node_exporter
