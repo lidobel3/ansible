@@ -1,0 +1,62 @@
+---
+- name: Créer les dossiers Loki
+  file:
+    path: "{{ item }}"
+    state: directory
+    owner: root
+    group: root
+    mode: '0755'
+  loop:
+    - "{{ loki_config_dir }}"
+    - "{{ loki_data_dir }}"
+    - "{{ loki_data_dir }}/chunks"
+    - "{{ loki_data_dir }}/rules"
+    - "{{ loki_data_dir }}/boltdb-shipper-active"
+    - "{{ loki_data_dir }}/boltdb-shipper-cache"
+
+- name: Copier la configuration Loki
+  template:
+    src: loki-config.yml.j2
+    dest: "{{ loki_config_dir }}/loki-config.yml"
+    owner: root
+    group: root
+    mode: '0644'
+  notify: restart loki
+
+- name: Assurer que Docker est installé
+  package:
+    name: docker.io
+    state: present
+
+- name: Démarrer le service Docker
+  systemd:
+    name: docker
+    state: started
+    enabled: true
+
+- name: Supprimer le conteneur Loki s'il existe
+  docker_container:
+    name: loki
+    state: absent
+
+- name: Créer et démarrer le conteneur Loki
+  docker_container:
+    name: loki
+    image: "{{ loki_image }}"
+    state: "{{ loki_state }}"
+    restart_policy: unless-stopped
+    ports:
+      - "{{ loki_port }}:{{ loki_port }}"
+    volumes:
+      - "{{ loki_config_dir }}/loki-config.yml:/etc/loki/local-config.yaml"
+      - "{{ loki_data_dir }}:/loki"
+    command: -config.file=/etc/loki/local-config.yaml
+    memory: 1g
+    cpus: 1.0
+  register: loki_container
+
+- name: Activer Loki au démarrage
+  systemd:
+    name: docker-loki.service
+    enabled: "{{ loki_enabled }}"
+    state: "{{ loki_state }}"

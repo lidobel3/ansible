@@ -1,0 +1,6 @@
+---
+- name: restart loki
+  docker_container:
+    name: loki
+    state: started
+    restart: true

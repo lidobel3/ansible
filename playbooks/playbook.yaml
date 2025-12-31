@@ -93,6 +93,7 @@
     - prometheus
     - grafana
     - alertmgr
+    - loki
 
   post_tasks:
     - name: Afficher les informations de connexion
@@ -104,3 +105,4 @@
           - "Grafana: http://{{ ansible_default_ipv4.address }}:{{ grafana_port }}"
           - "Grafana User: {{ grafana_admin_user }}"
           - "Grafana Password: {{ grafana_admin_password }}"
+          - "Loki: http://{{ ansible_default_ipv4.address }}:{{ loki_port }}"
