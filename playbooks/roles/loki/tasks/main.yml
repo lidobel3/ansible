@@ -55,8 +55,8 @@
     cpus: 1.0
   register: loki_container
 
-- name: Activer Loki au démarrage
-  systemd:
-    name: docker-loki.service
-    enabled: "{{ loki_enabled }}"
-    state: "{{ loki_state }}"
+# - name: Activer Loki au démarrage
+#   systemd:
+#     name: docker-loki.service
+#     enabled: "{{ loki_enabled }}"
+#     state: "{{ loki_state }}"
