@@ -1,0 +1,6 @@
+---
+- name: Installation de node exporter
+  import_tasks: install.yml
+
+- name: Configurer et démarrer le service node exporter
+  import_tasks: config.yml

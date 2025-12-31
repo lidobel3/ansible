@@ -1,0 +1,41 @@
+- name: Copier les consoles Prometheus
+  copy:
+    src: "/tmp/prometheus-{{ prometheus_version }}.linux-amd64/{{ item }}/"
+    dest: "{{ prometheus_dir }}/{{ item }}/"
+    owner: "{{ prometheus_user }}"
+    group: "{{ prometheus_group }}"
+    remote_src: true
+  loop:
+    - consoles
+    - console_libraries
+
+- name: Déployer la configuration Prometheus
+  template:
+    src: prometheus.yml.j2
+    dest: "{{ prometheus_dir }}/prometheus.yml"
+    owner: "{{ prometheus_user }}"
+    group: "{{ prometheus_group }}"
+    mode: '0644'
+  notify: restart prometheus
+
+- name: Déployer les règles d'alertes
+  template:
+    src: alerts.yml.j2
+    dest: "{{ prometheus_dir }}/rules/alerts.yml"
+    owner: "{{ prometheus_user }}"
+    group: "{{ prometheus_group }}"
+    mode: '0644'
+  notify: reload prometheus
+
+- name: Créer le service systemd Prometheus
+  template:
+    src: prometheus.service.j2
+    dest: /etc/systemd/system/prometheus.service
+    mode: '0644'
+  notify: restart prometheus
+
+- name: Activer Prometheus au démarrage
+  systemd:
+    name: prometheus
+    enabled: true
+    state: started  
