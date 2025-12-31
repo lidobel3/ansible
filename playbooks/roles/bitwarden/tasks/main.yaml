@@ -1,9 +1,0 @@
----
-
-- name: "Installing prerequisite.yaml"
-  include_tasks: install.yaml
-
-- name: "Deploy Bitwarden"
-  include_tasks: deploy.yaml
-  # when: docker.deploy_portfolio | default(false)
-  

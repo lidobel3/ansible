@@ -1,7 +1,0 @@
-# handlers/main.yml
----
-- name: redémarrer vault
-  become: true
-  service:
-    name: vault
-    state: restarted
