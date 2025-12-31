@@ -50,10 +50,8 @@
     volumes:
       - "{{ loki_config_dir }}/loki-config.yml:/etc/loki/local-config.yaml"
       - "{{ loki_data_dir }}:/loki"
+      - "{{ loki_data_dir }}/compactor:/data/compactor"
     command: -config.file=/etc/loki/local-config.yaml
-    memory: 1g
-    cpus: 1.0
-  register: loki_container
 
 # - name: Activer Loki au démarrage
 #   systemd:
