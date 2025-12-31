@@ -27,7 +27,7 @@
 
     - name: Forcer la détection des faits (maintenant que Python est là)
       setup:
-  
+
 # playbook_cockpit.yml
 - name: Installer Cockpit sur les serveurs
   hosts: gcp
@@ -36,13 +36,14 @@
     cockpit_idle_timeout: "3600"  # 1 heure
     cockpit_password_auth: "true"
   roles:
-    - supervision
+    - cockpit
   post_tasks:
     - name: Afficher l'URL d'accès
       debug:
         msg: "Cockpit est accessible sur https://{{ ansible_default_ipv4.address }}:9090"
 
-- hosts: docker
+- name: Installation de Docker & portfolio
+  hosts: docker
   tasks:
     - import_role:
         name: docker
@@ -50,13 +51,6 @@
   become: true
   tags: docker
 
-- hosts: bdd
-  become: true
-  tags: bdd
-  tasks:
-    - import_role:
-        name: bdd
-      when: install_bdd
 
 - name: Déploiement de la stack monitoring sur GCP
   hosts: gcp
@@ -79,9 +73,17 @@
           - "Grafana Password: {{ grafana_admin_password }}"
           - "Loki: http://{{ ansible_default_ipv4.address }}:{{ loki_port }}"
 
+- name: Déploimenent de node exporter sur les serveurs 
+  hosts: node_exporter
+  become: true
+  roles:
+    - node_exporter
+  tags: node_exporter
+
 - name: Déploiement de la stack monitoring sur GCP
   hosts: gcp
   become: true
   roles: 
     - loki
   tags: loki
+  
