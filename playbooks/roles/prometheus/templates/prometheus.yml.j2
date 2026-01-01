@@ -27,9 +27,9 @@ scrape_configs:
     static_configs:
       - targets: ['localhost:{{ alertmanager_port }}']
 
-  {# - job_name: 'node_exporter'
+  - job_name: 'grafana'
       static_configs:
-        - targets: ['localhost:9100'] #}
+        - targets: ['localhost:{{ grafana_port }}']
 
   - job_name: 'nodes'
     static_configs:
