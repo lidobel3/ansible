@@ -74,7 +74,7 @@
           # - "Loki: http://{{ ansible_default_ipv4.address }}:{{ loki_port }}"
 
 - name: Déploiement de Loki sur les serveurs
-  hosts: observability 
+  hosts: node_exporter 
   become: true
   roles:
     - loki
@@ -86,4 +86,3 @@
   roles:
     - node_exporter
   tags: node_exporter
-  
