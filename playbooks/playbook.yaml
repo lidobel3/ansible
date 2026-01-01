@@ -59,7 +59,7 @@
     - prometheus
     - grafana
     - alertmgr
-    # - loki
+    - loki
 
   post_tasks:
     - name: Afficher les informations de connexion
@@ -73,12 +73,12 @@
           - "Grafana Password: {{ grafana_admin_password }}"
           # - "Loki: http://{{ ansible_default_ipv4.address }}:{{ loki_port }}"
 
-- name: Déploiement de Loki sur les serveurs
-  hosts: node_exporter 
-  become: true
-  roles:
-    - loki
-  tags: loki
+# - name: Déploiement de Loki sur les serveurs
+#   hosts: node_exporter 
+#   become: true
+#   roles:
+#     - loki
+#   tags: loki
 
 - name: Déploimenent de node exporter sur les serveurs 
   hosts: node_exporter
