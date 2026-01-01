@@ -1,5 +1,10 @@
 global:
   resolve_timeout: 5m
+  smtp_smarthost: 'smtp.gmail.com:587'
+  smtp_from: 'belcorpaws1234@gmail.com'
+  smtp_auth_username: 'belcorpaws1234@gmail.com'
+  smtp_auth_password: '{{ GMAIL_APP_PASSWORD }}'
+  smtp_require_tls: true
 
 route:
   group_by: ['alertname', 'cluster', 'service']

@@ -1,2 +1,11 @@
 ---
 # vars file for alertmgr
+# Versions des composants
+alertmanager_version: "0.26.0"
+
+alertmanager_slack_webhook: ""
+alertmanager_email_to: "lidobel3@gmail.com"
+alertmanager_email_from: "belcorpaws1234@gmail.com"
+
+alertmanager_dir: "/opt/alertmanager"
+alertmanager_data_dir: "/var/lib/alertmanager"
