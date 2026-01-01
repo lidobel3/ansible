@@ -20,6 +20,13 @@
   apt:
     name: unzip
     state: present
+  when: ansible_distribution != "Amazon"
+
+- name: Installation de unzip
+  ansible.builtin.dnf:
+    name: unzip
+    state: present
+  when: ansible_distribution == "Amazon"
 
 - name: Décompression du binaire
   unarchive:
