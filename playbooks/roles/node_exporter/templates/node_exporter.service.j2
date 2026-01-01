@@ -9,6 +9,7 @@ User={{ node_exporter_user }}
 Group={{ node_exporter_user }}
 ExecStart={{ node_exporter_bin }} \
   --web.listen-address=:{{ node_exporter_port }} \
+  --collector.systemd \
   --collector.filesystem.ignored-mount-points="^/(sys|proc|dev|host|etc)($|/)"
 Restart=always
 RestartSec=3
