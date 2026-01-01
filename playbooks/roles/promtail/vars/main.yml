@@ -7,7 +7,7 @@ promtail_download_url: "https://github.com/grafana/loki/releases/download/v{{ pr
 
 # L'IP ou le DNS de ton serveur Loki (à adapter selon ton infra)
 # Tu peux aussi utiliser hostvars['monitoring']['ansible_default_ipv4']['address']
-loki_server_ip: "{{ hostvars['gcp']['ansible_default_ipv4']['address'] }}"
+loki_server_ip: "34.59.91.97"
 
 # Liste des fichiers à surveiller par défaut
 promtail_log_path: "/var/log/*.log"
