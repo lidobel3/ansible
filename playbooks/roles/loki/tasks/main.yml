@@ -24,10 +24,16 @@
     mode: '0644'
   notify: restart loki
 
-- name: Assurer que Docker est installé
-  package:
-    name: docker.io
-    state: present
+# - name: Assurer que Docker est installé
+#   package:
+#     name: docker.io
+#     state: present
+
+- name: Assurer que le service Docker est démarré
+  service:
+    name: docker
+    state: started
+    enabled: true
 
 - name: Démarrer le service Docker
   systemd:
