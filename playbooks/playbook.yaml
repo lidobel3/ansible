@@ -105,7 +105,7 @@
         msg:
           - "Alertmanager: http://{{ ansible_default_ipv4.address }}:{{ alertmanager_port }}"
 
-- name: Déploiement de Alert Manager
+- name: Déploiement de Loki
   hosts: observability
   become: true
   roles:
