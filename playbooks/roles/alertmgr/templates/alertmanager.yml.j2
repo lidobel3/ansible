@@ -18,7 +18,8 @@ receivers:
     email_configs:
       - to: '{{ alertmanager_email_to }}'
         from: '{{ alertmanager_email_from }}'
-        smarthost: 'localhost:25'
+        {# smarthost: 'localhost:25' #}
+        send_resolved: true
 {% if alertmanager_slack_webhook %}
     slack_configs:
       - api_url: '{{ alertmanager_slack_webhook }}'
