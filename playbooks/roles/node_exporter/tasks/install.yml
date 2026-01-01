@@ -12,6 +12,7 @@
     dest: "/tmp"
     remote_src: yes
     creates: "{{ node_exporter_bin }}"
+  register: unarchive_result
 
 - name: Installer Node Exporter
   copy:
@@ -22,3 +23,6 @@
     mode: '0755'
     remote_src: yes
   notify: restart node_exporter
+  when:
+    - unarchive_result is defined
+    - not unarchive_result.skipped
