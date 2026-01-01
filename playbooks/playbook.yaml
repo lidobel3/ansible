@@ -85,4 +85,7 @@
   become: true
   roles:
     - node_exporter
-  tags: node_exporter
+    - promtail
+  tags: 
+    - node_exporter
+    - promtail
