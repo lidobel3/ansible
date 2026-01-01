@@ -13,6 +13,7 @@ ExecStart={{ prometheus_dir }}/prometheus \
   --storage.tsdb.retention.time={{ prometheus_retention }} \
   --web.console.templates={{ prometheus_dir }}/consoles \
   --web.console.libraries={{ prometheus_dir }}/console_libraries \
+  --collector.systemd \
   --web.listen-address=0.0.0.0:{{ prometheus_port }}
 
 ExecReload=/bin/kill -HUP $MAINPID
