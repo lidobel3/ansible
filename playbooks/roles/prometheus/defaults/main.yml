@@ -25,3 +25,4 @@ prometheus_targets:
   - localhost:9100  # Node exporter si installé
   - 88.167.161.100:44445
   - 51.44.110.118:9100
+  - localhost:3000  # Grafana (optionnel)
