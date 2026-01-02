@@ -12,3 +12,6 @@ alertmanager_data_dir: "/var/lib/alertmanager"
 
 prometheus_user: "prometheus"
 prometheus_group: "prometheus"
+
+alertmanager_port: 9093
+#prometheus_port: 9090
