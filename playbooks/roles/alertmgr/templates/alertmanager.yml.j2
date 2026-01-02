@@ -5,8 +5,8 @@ global:
   smtp_auth_username: 'belcorpaws1234@gmail.com'
   smtp_auth_password: '{{ GMAIL_APP_PASSWORD }}'
   smtp_require_tls: true
-  smtp_max_attempts: 3   # nombre max de tentatives
-  smtp_timeout: 10s      # timeout par connexion
+  #smtp_max_attempts: 3   # nombre max de tentatives
+  #smtp_timeout: 10s      # timeout par connexion
 
 route:
   group_by: ['alertname', 'cluster', 'service']
