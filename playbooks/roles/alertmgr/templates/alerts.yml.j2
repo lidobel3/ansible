@@ -37,3 +37,12 @@ groups:
         annotations:
           summary: "Low disk space on {{ $labels.instance }}"
           description: "Disk space is below 10%."
+      
+      - alert: InstanceNotInCharge
+        expr: node_power_supply_power_source_state{state="AC Power"} == 0
+        for: 1m
+        labels:
+          severity: critical
+        annotations:
+          summary: "Instance {{ $labels.instance }} not in charge"
+          description: "{{ $labels.instance }} of job {{ $labels.job }} is not in charge."
