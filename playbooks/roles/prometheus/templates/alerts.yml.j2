@@ -2,6 +2,16 @@ groups:
   - name: instance_alerts
     interval: 30s
     rules:
+      - alert: InstanceNotInCharge
+        expr: node_power_supply_power_source_state{state="AC Power"} == 0
+        for: 1m
+        labels:
+          severity: critical
+        annotations:
+{% raw %}
+          summary: "Instance {{ $labels.instance }} not in charge"
+          description: "{{ $labels.instance }} of job {{ $labels.job }} is not in charge."
+{% endraw %}
 
       - alert: InstanceDown
         expr: up == 0
