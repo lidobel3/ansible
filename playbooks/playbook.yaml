@@ -15,22 +15,22 @@
         ansible_collections_paths: 
           - /var/jenkins_home/.ansible/collections/ansible_collections
     
-- name: Installation de Python sans dépendances
-  hosts: gcp
-  gather_facts: false  # TRÈS IMPORTANT : empêche Ansible de chercher Python au début
-  become: true         # Nécessaire pour installer des paquets
+# - name: Installation de Python sans dépendances
+#   hosts: gcp
+#   gather_facts: false  # TRÈS IMPORTANT : empêche Ansible de chercher Python au début
+#   become: true         # Nécessaire pour installer des paquets
 
-  tasks:
-    - name: Installer python3.8 s'il est absent (via SSH raw)
-      raw: test -e /usr/bin/python3 || (apt -y update && apt -y install python3-minimal)
-      changed_when: false
+#   tasks:
+#     - name: Installer python3.8 s'il est absent (via SSH raw)
+#       raw: test -e /usr/bin/python3 || (apt -y update && apt -y install python3-minimal)
+#       changed_when: false
 
-    - name: Forcer la détection des faits (maintenant que Python est là)
-      setup:
+#     - name: Forcer la détection des faits (maintenant que Python est là)
+#       setup:
   
 # playbook_cockpit.yml
 - name: Installer Cockpit sur les serveurs
-  hosts: gcp
+  hosts: worker5
   become: true
   vars:
     cockpit_idle_timeout: "3600"  # 1 heure
@@ -46,38 +46,38 @@
 #   roles:
 #     - frontend
 
-- hosts: frontend
-  tasks:
-    - import_role:
-        name: frontend
-      when: install_frontend
-  become: true
-  tags: frontend
+# - hosts: frontend
+#   tasks:
+#     - import_role:
+#         name: frontend
+#       when: install_frontend
+#   become: true
+#   tags: frontend
   
-- hosts: docker
-  roles:
-    - docker
-  become: true
+# - hosts: docker
+#   roles:
+#     - docker
+#   become: true
 
-- hosts: docker
-  become: true
-  tags: bitwarden
-  tasks:
-    - import_role:
-        name: bitwarden
-      when: install_bitwarden
+# - hosts: docker
+#   become: true
+#   tags: bitwarden
+#   tasks:
+#     - import_role:
+#         name: bitwarden
+#       when: install_bitwarden
 
-- name: Installer et configurer HashiCorp Vault
-  hosts: vault_servers
-  environment: 
-    VAULT_ADDR: "{{ vault_addr }}"
-    VAULT_TOKEN: "{{ vault_token }}"
-  become: true
-  roles:
-    - hashicorpvault
-  tags: vault
+# - name: Installer et configurer HashiCorp Vault
+#   hosts: vault_servers
+#   environment: 
+#     VAULT_ADDR: "{{ vault_addr }}"
+#     VAULT_TOKEN: "{{ vault_token }}"
+#   become: true
+#   roles:
+#     - hashicorpvault
+#   tags: vault
 
-- hosts: bdd
-  roles:
-    - bdd
-  become: true
+# - hosts: bdd
+#   roles:
+#     - bdd
+#   become: true
