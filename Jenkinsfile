@@ -6,7 +6,6 @@ pipeline {
     parameters {
         string(
             name: 'BRANCH',
-            defaultValue: 'intest',
             description: 'Branche Git à cloner'
         )
         choice(
@@ -16,32 +15,26 @@ pipeline {
         )
         password(
             name: 'VAULT_PASSWORD',
-            defaultValue: '',
             description: 'Mot de passe Ansible Vault'
         )
         string(
             name: 'PLAYBOOK',
-            defaultValue: 'playbooks/playbook.yaml',
             description: 'Playbook Ansible à exécuter'
         )
         string(
             name: 'LIMIT',
-            defaultValue: 'docker',
             description: 'Cible : groupe/host (ex: webservers). Laisser vide si non utilisé.'
         )
         string(
             name: 'TAGS',
-            defaultValue: '',
             description: 'Tags Ansible (ex: app,deploy). Laisser vide si non utilisé.'
         )
         text(
             name: 'EXTRA_VARS',
-            defaultValue: '2 - Plus verbose (-vv)',
             description: 'Variables supplémentaires (JSON ou KEY=VALUE). Exemple: {"env":"prod"}'
         )
         choice(
             name: 'VERBOSITY',
-            defaultValue: '',
             choices: ['0 - Normal', '1 - Verbose (-v)', '2 - Plus verbose (-vv)', '3 - Debug (-vvv)', '4 - Connection debug (-vvvv)'],
             description: 'Niveau de verbosité Ansible'
         )
