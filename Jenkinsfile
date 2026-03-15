@@ -6,11 +6,13 @@ pipeline {
     parameters {
         string(
             name: 'BRANCH',
+            defaultValue: 'intest',
             description: 'Branche Git à cloner'
         )
         choice(
             name: 'ENV',
             choices: ['dev', 'int', 'staging', 'prod'],
+            defaultValue: 'dev',
             description: 'Environnement cible'
         )
         password(
