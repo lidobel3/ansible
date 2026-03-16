@@ -1,0 +1,34 @@
+# Core Ansible
+ansible>=9.0.0
+ansible-core>=2.16.0
+
+# Hashicorp Vault (HVAC)
+hvac>=2.3.0
+
+# Useful for REST / API integrations
+requests>=2.31.0
+
+# YAML parsing
+PyYAML>=6.0
+
+# JSON & JMESPath filtering used by Ansible
+jmespath>=1.0.1
+
+# SSH / crypto support
+paramiko>=3.4.0
+cryptography>=42.0.0
+
+# Kubernetes modules (optional but common)
+kubernetes>=29.0.0
+
+# Git interactions
+GitPython>=3.1.40
+
+# Template rendering
+jinja2>=3.1.3
+
+# CLI formatting
+colorama>=0.4.6
+
+# Better error handling
+rich>=13.7.0

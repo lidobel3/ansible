@@ -1,0 +1,25 @@
+---
+collections:
+
+  # Core modules
+  - name: ansible.posix
+  - name: ansible.utils
+
+  # Hashicorp Vault modules
+  - name: community.hashi_vault
+
+  # General community modules
+  - name: community.general
+
+  # Docker automation
+  - name: community.docker
+
+  # Kubernetes automation
+  - name: kubernetes.core
+
+  # Git / SCM automation
+  - name: community.git
+
+  # Cloud modules (optional)
+  - name: amazon.aws
+  - name: azure.azcollection
