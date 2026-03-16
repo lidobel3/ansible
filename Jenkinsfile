@@ -50,36 +50,6 @@ pipeline {
                 ])
             }
         }
-        stage('Install Dependencies') {
-        steps {
-            echo "\u001B[34m=== 📦 Installation des dépendances Python ===\u001B[0m"
-
-            sh """
-            set -e
-
-            if [ -f requirements.txt ]; then
-                echo "Installation requirements.txt"
-                python3 -m pip install --upgrade pip
-                python3 -m pip install -r requirements.txt
-            else
-                echo "Aucun requirements.txt trouvé"
-            fi
-            """
-
-            echo "\u001B[34m=== 📦 Installation des collections Ansible ===\u001B[0m"
-
-            sh """
-            set -e
-
-            if [ -f requirements.yml ]; then
-                echo "Installation requirements.yml"
-                ansible-galaxy collection install -r requirements.yml
-            else
-                echo "Aucun requirements.yml trouvé"
-            fi
-            """
-            }
-        }
         stage('Run Ansible') {
             steps {
                 script {
