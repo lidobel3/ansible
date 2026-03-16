@@ -59,8 +59,8 @@ pipeline {
 
             if [ -f requirements.txt ]; then
                 echo "Installation requirements.txt"
-                pip3 install --upgrade pip
-                pip3 install -r requirements.txt
+                python3 -m pip install --upgrade pip
+                python3 -m pip install -r requirements.txt
             else
                 echo "Aucun requirements.txt trouvé"
             fi
