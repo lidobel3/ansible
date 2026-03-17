@@ -20,6 +20,7 @@ pipeline {
         )
         string(
             name: 'PLAYBOOK',
+            defaultValue: 'playbooks/test_vault.yaml',
             description: 'Playbook Ansible à exécuter'
         )
         string(
