@@ -6,6 +6,7 @@ pipeline {
     parameters {
         string(
             name: 'BRANCH',
+            defaultValue: 'intest',
             description: 'Branche Git à cloner'
         )
         choice(
