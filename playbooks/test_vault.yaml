@@ -1,15 +1,21 @@
 ---
 
-- name: Test Vault
+- name: use ansible vars to supply some options
   hosts: localhost
-  gather_facts: false
   vars:
-    vault_addr: "https://hcpvault.nelixair.com"
-    vault_token: "{{ lookup('env','VAULT_TOKEN') }}"
+    ansible_hashi_vault_url: 'https://hcpvault.nelixair.com'
+    ansible_hashi_vault_auth_method: s=.vv/dSJ&V2$xVuq|:%n{7j
+  set_fact:
+    secret1: "{{ lookup('community.hashi_vault.hashi_vault', 'secret/data/toto') }}"
+    # secret2: "{{ lookup('community.hashi_vault.hashi_vault', 'secret/data/secret2') }}"
 
   tasks:
 
+    # - name: Lire un secret Vault
+    #   ansible.builtin.debug:
+    #     msg: "{{ lookup('community.hashi_vault.hashi_vault',
+    #             'secret=data/db token={{ vault_token }} url={{ vault_addr }} field=password') }}"
+
     - name: Lire un secret Vault
       ansible.builtin.debug:
-        msg: "{{ lookup('community.hashi_vault.hashi_vault',
-                'secret=data/db token={{ vault_token }} url={{ vault_addr }} field=password') }}"
+        msg: "{{ secret1 }}"
