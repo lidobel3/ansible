@@ -33,4 +33,4 @@ end
 
 L'adresse du site en environnement de test : https://192.168.1.101
 
-Le pipeline de déploiement : http://192.168.1.17
+Le pipeline de déploiement : http://192.168.1.17:8081
