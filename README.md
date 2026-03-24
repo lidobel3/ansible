@@ -20,8 +20,11 @@ Détails du déploiement
 	•	Environnement de test accessible à l’adresse : https://192.168.1.101￼
 	•	Pipeline de déploiement : http://192.168.1.17:8081￼
 
+```
+
 Configuration Vagrant
 
+```bash
 Vagrant.configure("2") do |config|
   config.vm.box = "hashicorp/bionic64"
   config.vm.hostname = "worker5"
@@ -32,3 +35,4 @@ Vagrant.configure("2") do |config|
     v.name = "node_5"
   end
 end
+```
