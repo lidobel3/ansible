@@ -1,5 +1,3 @@
-Voici une version améliorée et structurée de ton Markdown. J’ai organisé les sections, utilisé des blocs de code pour les commandes et le Vagrantfile, et clarifié certains points pour plus de lisibilité :
-
 # Déploiement du site Portfolio
 
 ## Informations générales
