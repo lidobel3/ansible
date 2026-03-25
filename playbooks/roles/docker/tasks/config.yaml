@@ -14,4 +14,5 @@
     version: "{{ git.version }}"
     key_file: "{{ git.key_file }}"   # chemin vers la clé privée SSH
     accept_hostkey: yes
+    force: yes
     update: yes
