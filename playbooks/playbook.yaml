@@ -29,3 +29,8 @@
     - name: Afficher l'URL d'accès
       debug:
         msg: "Cockpit est accessible sur https://{{ ansible_default_ipv4.address }}:9090"
+
+- hosts: docker
+  roles:
+    - docker
+  become: true
