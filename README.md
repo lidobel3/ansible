@@ -26,6 +26,9 @@ Ce repo contient actuellement **7 branches**, chacune ayant un objectif spécifi
 - Contient des playbooks expérimentaux ou des modifications en cours de validation.
 - Idéal pour tester de nouvelles fonctionnalités ou rôles avant de les fusionner dans `main`.
 
+⚠️ La branche de production du site https://lidobel.ovh est la branche intest inventaire int 
+Evolution à venir : Création d'un repo portfolio 
+
 ### 4. `gpl`
 - Branche dédiée au projet **GPL de monitoring**.
 - Déploie la **stack complète de monitoring** :
