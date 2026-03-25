@@ -1,5 +1,8 @@
 # Déploiement du site Portfolio
 
+L'inventaire `int` de la branche `intest` cible le serveur AWS 51.44.110.118 
+Pour déployer le site https://lidobel.ovh il faut utiliser cette branche
+
 ## Informations générales
 - La branche `portfolio` contient l'ensemble du code pour déployer le site [https://lidobel.ovh](https://lidobel.ovh).
 - L'inventaire Ansible contient trois environnements : `dev`, `staging` et `prod`.
