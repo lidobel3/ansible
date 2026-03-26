@@ -3,4 +3,4 @@
   tasks:
     - name : Print secret db test
       ansible.builtin.debug:
-        msg: "{{ lookup('community.hashi_vault.hashi_vault', 'secret=secret/data/myapp token={{ vault_token }} url=https://hcpvault.nelixair.com') }}"
+        msg: "{{ lookup('community.hashi_vault.hashi_vault', 'secret=secret/prod/proxmox token={{ vault_token }} url=https://hcpvault.nelixair.com') }}"
