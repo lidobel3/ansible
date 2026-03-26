@@ -1,6 +1,0 @@
----
-
-- name: deploy container
-  import_tasks: deploy.yaml
-
-...

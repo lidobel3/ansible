@@ -1,8 +1,0 @@
----
-
-
-- name: installation
-  import_tasks: install.yaml
-
-- name: Execution script SQL
-  import_tasks: exec.yaml

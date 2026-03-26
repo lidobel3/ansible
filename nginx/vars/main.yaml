@@ -1,6 +1,0 @@
----
-
-nginx_user: www-data
-#nginx_user: toto
-
-...
