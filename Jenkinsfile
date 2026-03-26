@@ -6,7 +6,7 @@ pipeline {
     parameters {
         string(
             name: 'BRANCH',
-            defaultValue: 'intest',
+            defaultValue: 'hashicorpvault',
             description: 'Branche Git à cloner'
         )
         choice(
