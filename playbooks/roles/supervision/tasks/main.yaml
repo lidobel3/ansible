@@ -40,18 +40,18 @@
         dest: /etc/cockpit/cockpit.conf
         mode: '0644'
       notify: restart cockpit
-
-    - name: Ouvrir le port firewall (firewalld)
-      firewalld:
-        service: cockpit
-        permanent: yes
-        state: enabled
-        immediate: yes
-      when: 
-        - is_redhat
-        - ansible_facts.services['firewalld.service'] is defined
-        - ansible_facts.services['firewalld.service'].state == 'running'
-      ignore_errors: true
+# La collection est à un endroit non sourcé
+    # - name: Ouvrir le port firewall (firewalld)
+    #   firewalld:
+    #     service: cockpit
+    #     permanent: yes
+    #     state: enabled
+    #     immediate: yes
+    #   when: 
+    #     - is_redhat
+    #     - ansible_facts.services['firewalld.service'] is defined
+    #     - ansible_facts.services['firewalld.service'].state == 'running'
+    #   ignore_errors: true
 
     - name: Ouvrir le port firewall (ufw)
       ufw:
