@@ -7,10 +7,10 @@
   register: vault_status
   ignore_errors: true
 
-- name: Récupérer le secret via la CLI Vault
-  ansible.builtin.shell: 'vault kv get -address=http://{{ ansible_host }}:{{ hcp_server_port }} -mount="ansible" -format=json "database/postgres"'
-  register: vault_output
-  ignore_errors: true
+# - name: Récupérer le secret via la CLI Vault
+#   ansible.builtin.shell: 'vault kv get -address=http://{{ ansible_host }}:{{ hcp_server_port }} -mount="ansible" -format=json "database/postgres"'
+#   register: vault_output
+#   ignore_errors: true
 
 # - name: Parser le résultat
 #   set_fact:
