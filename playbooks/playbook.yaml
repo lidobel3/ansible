@@ -18,7 +18,7 @@
 
 # playbook_cockpit.yml
 - name: Installer Cockpit sur les serveurs
-  hosts: worker5
+  hosts: worker7
   become: true
   vars:
     cockpit_idle_timeout: "3600"  # 1 heure
@@ -30,13 +30,13 @@
       debug:
         msg: "Cockpit est accessible sur https://{{ ansible_default_ipv4.address }}:9090"
 
-- hosts: docker
+- hosts: worker7
   roles:
     - docker
   become: true
 
 - name: Installer et configurer HashiCorp Vault
-  hosts: vault_servers
+  hosts: worker7
   become: true
   roles:
     - vault
