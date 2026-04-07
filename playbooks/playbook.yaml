@@ -39,4 +39,4 @@
   hosts: worker7
   become: true
   roles:
-    - vault
+    - hashicorpvault
