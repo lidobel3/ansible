@@ -1,11 +1,7 @@
 ---
 
-- name: Check du statut de Vault
-  shell: vault status
-  args:
-    executable: /bin/bash
-  register: vault_status
-  ignore_errors: true
+- name: check status
+  import_tasks: check_status.yml
 
 # à utiliser que si la collection community.hashi_vault est installée
 # - name: Check du statut de Vault
