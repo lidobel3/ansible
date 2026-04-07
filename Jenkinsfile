@@ -6,7 +6,7 @@ pipeline {
     parameters {
         string(
             name: 'BRANCH',
-            defaultValue: 'intest',
+            defaultValue: 'hcp_server_deploy',
             description: 'Branche Git à cloner'
         )
         choice(
@@ -20,7 +20,7 @@ pipeline {
         )
         string(
             name: 'PLAYBOOK',
-            defaultValue: 'playbooks/test_vault.yaml',
+            defaultValue: 'playbooks/playbook.yaml',
             description: 'Playbook Ansible à exécuter'
         )
         string(
