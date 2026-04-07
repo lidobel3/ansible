@@ -1,7 +1,7 @@
 ---
 
 - name: Check du statut de Vault
-  shell: vault status
+  shell: vault status -address=http://{{ ansible_host }}:{{ hcp_server_port }}
   args:
     executable: /bin/bash
   register: vault_status
