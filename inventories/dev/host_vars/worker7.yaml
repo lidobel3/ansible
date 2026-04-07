@@ -20,3 +20,5 @@ git:
   version: main 
   token: "{{ git_ssh_private_key }}"
   # token: {{ ANSIBLE_VAULT.git_token  }}   }}
+
+primo_install_vault: true
