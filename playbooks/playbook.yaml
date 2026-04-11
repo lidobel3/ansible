@@ -30,7 +30,7 @@
       debug:
         msg: "Cockpit est accessible sur https://{{ ansible_default_ipv4.address }}:9090"
 
-- hosts: docker
+- hosts: vault_servers
   roles:
-    - docker
+    - hashicorpvault
   become: true
