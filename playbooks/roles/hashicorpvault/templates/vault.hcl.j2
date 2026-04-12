@@ -5,7 +5,7 @@ storage "file" {
 disable_mlock = true
 
 listener "tcp" {
-  address       = "hcpvault.homelab.local:8200"
+  address       = "0.0.0.0:8200"
   tls_disable   = 0
   tls_cert_file = "/etc/ssl/certs/signed_certificate.pem"
   tls_key_file  = "/etc/ssl/private/private.key"
