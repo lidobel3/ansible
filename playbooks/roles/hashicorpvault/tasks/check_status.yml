@@ -1,11 +1,19 @@
 ---
 
-- name: Check du statut de Vault
-  shell: vault status -address=http://{{ ansible_host }}:{{ hcp_server_port }}
-  args:
-    executable: /bin/bash
+# - name: Check du statut de Vault
+#   shell: vault status -address=http://{{ ansible_host }}:{{ hcp_server_port }}
+#   args:
+#     executable: /bin/bash
+#   register: vault_status
+#   ignore_errors: true
+
+- name: Check Vault health status
+  ansible.builtin.uri:
+    url: "https://hcpvault.homelab.local:{{ hcp_server_port }}/v1/sys/health"
+    method: GET
+    validate_certs: false
   register: vault_status
-  ignore_errors: true
+  failed_when: false
 
 # - name: Récupérer le secret via la CLI Vault
 #   ansible.builtin.shell: 'vault kv get -address=http://{{ ansible_host }}:{{ hcp_server_port }} -mount="ansible" -format=json "database/postgres"'
