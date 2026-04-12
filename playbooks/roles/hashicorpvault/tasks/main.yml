@@ -20,7 +20,7 @@
 
 - name: Test de l'installation de Vault
   import_tasks: check_status.yml
-  when: vault_status.rc != 0
+  # when: vault_status.rc != 0
   
 # - name: Générer et appliquer la politique
 #   community.hashi_vault.vault_policy:
