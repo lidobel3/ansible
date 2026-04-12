@@ -144,44 +144,44 @@
         fail_msg: "❌ Vault est encore scellé"
 
 # ===== DÉVERROUILLAGE (UNSEAL) =====
-- name: Déverrouiller Vault
-  block:
-    - name: Appliquer les clés d'unseal ({{ vault_threshold }}/{{ vault_unseal_keys | length }})
-      ansible.builtin.shell: |
-        vault operator unseal -address={{ vault_addr }} "{{ item }}"
-      loop: "{{ vault_unseal_keys[:vault_threshold] }}"
-      register: unseal_steps
-      environment:
-        VAULT_ADDR: "{{ vault_addr }}"
-      no_log: true
+# - name: Déverrouiller Vault
+#   block:
+#     - name: Appliquer les clés d'unseal ({{ vault_threshold }}/{{ vault_unseal_keys | length }})
+#       ansible.builtin.shell: |
+#         vault operator unseal -address={{ vault_addr }} "{{ item }}"
+#       loop: "{{ vault_unseal_keys[:vault_threshold] }}"
+#       register: unseal_steps
+#       environment:
+#         VAULT_ADDR: "{{ vault_addr }}"
+#       no_log: true
 
-    - name: Attendre Vault
-      wait_for:
-        host: "{{ ansible_host }}"  # ← Ajoutez cette ligne
-        port: 8200
-        delay: 10
-        timeout: 60
+#     - name: Attendre Vault
+#       wait_for:
+#         host: "{{ ansible_host }}"  # ← Ajoutez cette ligne
+#         port: 8200
+#         delay: 10
+#         timeout: 60
 
-    - name: Vérifier l'unseal
-      ansible.builtin.uri:
-        url: "{{ vault_addr }}/v1/sys/seal-status"
-        method: GET
-        return_content: yes
-        ca_path: "/etc/ssl/certs/ca_chain.crt"
-      register: seal_status
+#     - name: Vérifier l'unseal
+#       ansible.builtin.uri:
+#         url: "{{ vault_addr }}/v1/sys/seal-status"
+#         method: GET
+#         return_content: yes
+#         ca_path: "/etc/ssl/certs/ca_chain.crt"
+#       register: seal_status
 
-    - name: Confirmer le déverrouillage
-      assert:
-        that:
-          - not seal_status.json.sealed
-        success_msg: "🎉 Vault est déverrouillé !"
-        fail_msg: "❌ Vault est toujours scellé après unseal"
+#     - name: Confirmer le déverrouillage
+#       assert:
+#         that:
+#           - not seal_status.json.sealed
+#         success_msg: "🎉 Vault est déverrouillé !"
+#         fail_msg: "❌ Vault est toujours scellé après unseal"
 
-  when: vault_is_sealed
-  rescue:
-    - name: Erreur unseal
-      debug:
-        msg: "⚠️  Échec du déverrouillage - vérifiez les clés"
+#   when: vault_is_sealed
+#   rescue:
+#     - name: Erreur unseal
+#       debug:
+#         msg: "⚠️  Échec du déverrouillage - vérifiez les clés"
 
 # ===== STATUT FINAL =====
 - name: Récupérer le statut final
