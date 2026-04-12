@@ -88,10 +88,10 @@
 # ===== CHARGEMENT DES CLÉS EXISTANTES =====
 - name: Charger les clés existantes
   block:
-    # - name: Vérifier l'existence du fichier
-    #   ansible.builtin.stat:
-    #     path: "{{ vault_keys_file }}"
-    #   register: keys_file_stat
+    - name: Vérifier l'existence du fichier
+      ansible.builtin.stat:
+        path: "{{ vault_keys_file }}"
+      register: keys_file_stat
 
     - name: Lire le fichier de clés
       ansible.builtin.slurp:
@@ -99,33 +99,6 @@
       register: keys_raw
       when: keys_file_stat.stat.exists
 
-    # - name: Parser les clés existantes
-    #   set_fact:
-    #     vault_unseal_keys: "{{ (keys_content.content | b64decode | from_json).unseal_keys_b64 }}"
-    #     vault_root_token: "{{ (keys_content.content | b64decode | from_json).root_token }}"
-    #   when: keys_file_stat.stat.exists
-
-    # - name: Clés introuvables
-    #   fail:
-    #     msg: |
-    #       ❌ ERREUR : Vault est initialisé mais aucune clé n'est disponible !
-    #       Fichier attendu : {{ vault_keys_file }}
-          
-    #       Solutions possibles :
-    #       1. Fournir manuellement les clés d'unseal
-    #       2. Réinitialiser complètement Vault (perte de données)
-      # when: not keys_file_stat.stat.exists
-    # - name: Lire les clés unseal depuis fichier
-    #   ansible.builtin.slurp:
-    #     src: "{{ vault_keys_file }}"
-    #   register: keys_raw
-
-    # - name: Parser les clés unseal (5 lignes)
-    #   set_fact:
-    #     vault_unseal_keys: >-
-    #       {{ (keys_raw.content | b64decode).split('\n')
-    #         | reject('equalto', '')
-    #         | list }}
     - name: Charger et nettoyer clés unseal
       set_fact:
         vault_unseal_keys: >-
@@ -137,24 +110,15 @@
             | list
           }}
 
-    - debug:
-        msg: "{{ item }}"
-      loop: "{{ vault_unseal_keys }}"
+    # - debug:
+    #     msg: "{{ item }}"
+    #   loop: "{{ vault_unseal_keys }}"
 
     - name: Vérifier format des clés
       fail:
         msg: "Clé invalide détectée (taille > 100 chars)"
       when: item | length > 100
       loop: "{{ vault_unseal_keys }}"
-
-    # - name: Déverrouiller Vault
-    #   ansible.builtin.shell: |
-    #     vault operator unseal -address={{ vault_addr }} "{{ item }}"
-    #   loop: "{{ vault_unseal_keys[:vault_threshold] }}"
-    #   register: unseal_steps
-    #   #no_log: true
-    #   environment:
-    #     VAULT_ADDR: "{{ vault_addr }}"
 
     - name: Déverrouiller Vault
       ansible.builtin.shell: |
@@ -169,7 +133,7 @@
         url: "{{ vault_addr }}/v1/sys/seal-status"
         method: GET
         return_content: yes
-        validate_certs: false
+        ca_path: "/etc/ssl/certs/ca_chain.crt"
       register: seal_status
 
     - name: Confirmer unseal réussi
@@ -178,8 +142,6 @@
           - not seal_status.json.sealed
         success_msg: "🎉 Vault est déverrouillé"
         fail_msg: "❌ Vault est encore scellé"
-
-  # when: vault_is_initialized and vault_is_sealed
 
 # ===== DÉVERROUILLAGE (UNSEAL) =====
 - name: Déverrouiller Vault
