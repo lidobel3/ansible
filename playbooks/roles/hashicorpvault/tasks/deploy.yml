@@ -93,11 +93,11 @@
     #     path: "{{ vault_keys_file }}"
     #   register: keys_file_stat
 
-    # - name: Lire le fichier de clés
-    #   ansible.builtin.slurp:
-    #     src: "{{ vault_keys_file }}"
-    #   register: keys_content
-    #   when: keys_file_stat.stat.exists
+    - name: Lire le fichier de clés
+      ansible.builtin.slurp:
+        src: "{{ vault_keys_file }}"
+      register: keys_raw
+      when: keys_file_stat.stat.exists
 
     # - name: Parser les clés existantes
     #   set_fact:
