@@ -22,6 +22,7 @@
     method: GET
     status_code: [200, 429, 472, 473, 501, 503]
     return_content: yes
+    ca_path: "/etc/ssl/certs/ca_chain.crt"
   register: vault_health
   failed_when: false
 
