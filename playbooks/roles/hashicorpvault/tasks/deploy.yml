@@ -16,15 +16,8 @@
     delay: 10
     timeout: 60
 
-- name: Vérifier l'état de Vault
-  ansible.builtin.uri:
-    url: "{{ vault_addr }}/v1/sys/health"
-    method: GET
-    status_code: [200, 429, 472, 473, 501, 503]
-    return_content: yes
-    ca_path: "/etc/ssl/certs/ca_chain.crt"
-  register: vault_health
-  failed_when: false
+- name: Check Vault health
+  include_tasks: tasks/check_status.yml
 
 - name: Extraire le statut
   set_fact:
@@ -128,13 +121,8 @@
       environment:
         VAULT_ADDR: "{{ vault_addr }}"
 
-    - name: Vérifier statut seal
-      ansible.builtin.uri:
-        url: "{{ vault_addr }}/v1/sys/seal-status"
-        method: GET
-        return_content: yes
-        ca_path: "/etc/ssl/certs/ca_chain.crt"
-      register: seal_status
+    - name: Check Vault health
+      include_tasks: tasks/check_status.yml
 
     - name: Confirmer unseal réussi
       ansible.builtin.assert:

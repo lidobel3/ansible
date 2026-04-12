@@ -7,14 +7,16 @@
 #   register: vault_status
 #   ignore_errors: true
 
-- name: Check Vault health status
+- name: Vérifier l'état de Vault
   ansible.builtin.uri:
-    url: "https://192.168.1.150:{{ hcp_server_port }}/v1/sys/health"
+    url: "{{ vault_addr }}/v1/sys/health"
     method: GET
-    validate_certs: false
-  register: vault_status
+    status_code: [200, 429, 472, 473, 501, 503]
+    return_content: yes
+    ca_path: "/etc/ssl/certs/ca_chain.crt"
+  register: vault_health
   failed_when: false
-
+  
 # - name: Récupérer le secret via la CLI Vault
 #   ansible.builtin.shell: 'vault kv get -address=http://{{ ansible_host }}:{{ hcp_server_port }} -mount="ansible" -format=json "database/postgres"'
 #   register: vault_output
