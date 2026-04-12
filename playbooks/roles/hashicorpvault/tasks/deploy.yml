@@ -156,25 +156,25 @@
   environment:
     VAULT_ADDR: "{{ vault_addr }}"
 
-- name: Résumé final
-  debug:
-    msg: |
-      ╔════════════════════════════════════════╗
-      ║       STATUT FINAL DE VAULT            ║
-      ╚════════════════════════════════════════╝
+# - name: Résumé final
+#   debug:
+#     msg: |
+#       ╔════════════════════════════════════════╗
+#       ║       STATUT FINAL DE VAULT            ║
+#       ╚════════════════════════════════════════╝
       
-      📊 Initialisé : {{ (final_vault_status.stdout | from_json).initialized }}
-      🔒 Scellé     : {{ (final_vault_status.stdout | from_json).sealed }}
-      📦 Version    : {{ (final_vault_status.stdout | from_json).version }}
-      💾 Storage    : {{ (final_vault_status.stdout | from_json).storage_type }}
+#       📊 Initialisé : {{ (final_vault_status.stdout | from_json).initialized }}
+#       🔒 Scellé     : {{ (final_vault_status.stdout | from_json).sealed }}
+#       📦 Version    : {{ (final_vault_status.stdout | from_json).version }}
+#       💾 Storage    : {{ (final_vault_status.stdout | from_json).storage_type }}
       
-      {% if not (final_vault_status.stdout | from_json).sealed %}
-      ✅ Vault est opérationnel !
+#       {% if not (final_vault_status.stdout | from_json).sealed %}
+#       ✅ Vault est opérationnel !
       
-      Pour vous connecter :
-      export VAULT_ADDR="{{ vault_addr }}"
-      export VAULT_TOKEN="{{ vault_root_token }}"
-      vault status
-      {% else %}
-      ⚠️  Vault est toujours scellé
-      {% endif %}
+#       Pour vous connecter :
+#       export VAULT_ADDR="{{ vault_addr }}"
+#       export VAULT_TOKEN="{{ vault_root_token }}"
+#       vault status
+#       {% else %}
+#       ⚠️  Vault est toujours scellé
+#       {% endif %}
