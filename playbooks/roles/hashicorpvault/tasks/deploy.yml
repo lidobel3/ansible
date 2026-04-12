@@ -48,6 +48,7 @@
       register: vault_init
       environment:
         VAULT_ADDR: "{{ vault_addr }}"
+        VAULT_CACERT: "/etc/ssl/certs/ca_chain.crt"
 
     - name: Créer le dossier des clés
       ansible.builtin.file:
