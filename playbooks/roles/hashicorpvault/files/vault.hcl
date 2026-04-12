@@ -1,11 +1,15 @@
-# files/vault.hcl
 storage "file" {
   path = "/etc/vault.d/data"
 }
+
 disable_mlock = true
+
 listener "tcp" {
-  address     = "192.168.1.150:8200"
-  tls_disable = 1
+  address       = "192.168.1.150:8200"
+  tls_disable   = 0
+  tls_cert_file = "/etc/ssl/certs/signed_certificate.pem"
+  tls_key_file  = "/etc/ssl/private/private.key"
+  tls_client_ca_file = "/etc/ssl/certs/ca_chain.crt"
 }
 
 ui = true
