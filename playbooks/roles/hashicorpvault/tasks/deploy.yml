@@ -1,6 +1,6 @@
 - name: Arrêter Vault existant
   become: true
-  shell: pkill -f "vault server"
+  shell: pkill "vault"
   ignore_errors: true
 
 - name: Démarrer Vault
@@ -132,7 +132,7 @@
         vault operator unseal -address={{ vault_addr }} "{{ item }}"
       loop: "{{ vault_unseal_keys[:vault_threshold] }}"
       register: unseal_steps
-      no_log: true
+      #no_log: true
       environment:
         VAULT_ADDR: "{{ vault_addr }}"
 
