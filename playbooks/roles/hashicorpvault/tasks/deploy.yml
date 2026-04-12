@@ -160,6 +160,7 @@
         url: "{{ vault_addr }}/v1/sys/seal-status"
         method: GET
         return_content: yes
+        ca_path: "/etc/ssl/certs/ca_chain.crt"
       register: seal_status
 
     - name: Confirmer le déverrouillage
