@@ -4,11 +4,16 @@
   import_tasks: check_status.yml
 
 # à utiliser que si la collection community.hashi_vault est installée
-- name: Check du statut de Vault
-  community.hashi_vault.vault_status:
+- name: login to hashicorp vault server
+  community.hashi_vault.vault_login:
     url: "{{ vault_addr }}"
+    token: "{{ vault_token }}"
   register: vault_status
   ignore_errors: true
+
+- name: print result
+  debug:
+    msg: vault_status
 
 - name: Installation des pre-requis
   import_tasks: prerequis.yml
