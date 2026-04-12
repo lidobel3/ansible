@@ -16,7 +16,7 @@
 
 - name: Déploiement et configuration de Vault
   import_tasks: deploy.yml
-  when: vault_status.rc != 0  
+  # when: vault_status.rc != 0  
 
 - name: Test de l'installation de Vault
   import_tasks: check_status.yml
