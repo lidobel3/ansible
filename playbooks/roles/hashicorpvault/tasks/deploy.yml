@@ -115,24 +115,52 @@
     #       1. Fournir manuellement les clés d'unseal
     #       2. Réinitialiser complètement Vault (perte de données)
       # when: not keys_file_stat.stat.exists
-    - name: Lire les clés unseal depuis fichier
-      ansible.builtin.slurp:
-        src: "{{ vault_keys_file }}"
-      register: keys_raw
+    # - name: Lire les clés unseal depuis fichier
+    #   ansible.builtin.slurp:
+    #     src: "{{ vault_keys_file }}"
+    #   register: keys_raw
 
-    - name: Parser les clés unseal (5 lignes)
+    # - name: Parser les clés unseal (5 lignes)
+    #   set_fact:
+    #     vault_unseal_keys: >-
+    #       {{ (keys_raw.content | b64decode).split('\n')
+    #         | reject('equalto', '')
+    #         | list }}
+    - name: Charger et nettoyer clés unseal
       set_fact:
         vault_unseal_keys: >-
-          {{ (keys_raw.content | b64decode).split('\n')
+          {{
+            (keys_raw.content | b64decode)
+            .splitlines()
+            | map('trim')
             | reject('equalto', '')
-            | list }}
+            | list
+          }}
+
+    - debug:
+        msg: "{{ item }}"
+      loop: "{{ vault_unseal_keys }}"
+
+    - name: Vérifier format des clés
+      fail:
+        msg: "Clé invalide détectée (taille > 100 chars)"
+      when: item | length > 100
+      loop: "{{ vault_unseal_keys }}"
+
+    # - name: Déverrouiller Vault
+    #   ansible.builtin.shell: |
+    #     vault operator unseal -address={{ vault_addr }} "{{ item }}"
+    #   loop: "{{ vault_unseal_keys[:vault_threshold] }}"
+    #   register: unseal_steps
+    #   #no_log: true
+    #   environment:
+    #     VAULT_ADDR: "{{ vault_addr }}"
 
     - name: Déverrouiller Vault
       ansible.builtin.shell: |
         vault operator unseal -address={{ vault_addr }} "{{ item }}"
       loop: "{{ vault_unseal_keys[:vault_threshold] }}"
-      register: unseal_steps
-      #no_log: true
+      no_log: true
       environment:
         VAULT_ADDR: "{{ vault_addr }}"
 
