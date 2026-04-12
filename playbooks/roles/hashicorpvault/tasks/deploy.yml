@@ -56,11 +56,17 @@
         state: directory
         mode: '0700'
 
+    - name: Vérifier si fichier clés existe
+      ansible.builtin.stat:
+        path: "{{ vault_keys_file }}"
+      register: keys_file_stat
+
     - name: Sauvegarder les clés
       ansible.builtin.copy:
         content: "{{ vault_init.stdout }}"
         dest: "{{ vault_keys_file }}"
         mode: '0600'
+      when: not keys_file_stat.stat.exists
 
     - name: Parser les nouvelles clés
       set_fact:
