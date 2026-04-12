@@ -10,6 +10,8 @@
     token: "{{ vault_token }}"
   register: vault_status
   delegate_to: localhost
+  run_once: true
+  become: false
   ignore_errors: true
 
 - name: print result
