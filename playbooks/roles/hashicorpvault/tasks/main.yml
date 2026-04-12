@@ -4,11 +4,11 @@
   import_tasks: check_status.yml
 
 # à utiliser que si la collection community.hashi_vault est installée
-# - name: Check du statut de Vault
-#   community.hashi_vault.vault_status:
-#     url: "{{ vault_addr }}"
-#   register: vault_status
-#   ignore_errors: true
+- name: Check du statut de Vault
+  community.hashi_vault.vault_status:
+    url: "{{ vault_addr }}"
+  register: vault_status
+  ignore_errors: true
 
 - name: Installation des pre-requis
   import_tasks: prerequis.yml
