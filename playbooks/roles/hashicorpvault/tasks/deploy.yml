@@ -88,10 +88,10 @@
 # ===== CHARGEMENT DES CLÉS EXISTANTES =====
 - name: Charger les clés existantes
   block:
-    # - name: Vérifier l'existence du fichier
-    #   ansible.builtin.stat:
-    #     path: "{{ vault_keys_file }}"
-    #   register: keys_file_stat
+    - name: Vérifier l'existence du fichier
+      ansible.builtin.stat:
+        path: "{{ vault_keys_file }}"
+      register: keys_file_stat
 
     - name: Lire le fichier de clés
       ansible.builtin.slurp:
