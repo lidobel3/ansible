@@ -9,7 +9,7 @@
 
 - name: Check Vault health status
   ansible.builtin.uri:
-    url: "https://hcpvault.homelab.local:{{ hcp_server_port }}/v1/sys/health"
+    url: "https://192.168.1.150:{{ hcp_server_port }}/v1/sys/health"
     method: GET
     validate_certs: false
   register: vault_status
