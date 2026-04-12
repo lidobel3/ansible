@@ -9,6 +9,7 @@
     url: "{{ vault_addr }}"
     token: "{{ vault_token }}"
   register: vault_status
+  delegate_to: localhost
   ignore_errors: true
 
 - name: print result
