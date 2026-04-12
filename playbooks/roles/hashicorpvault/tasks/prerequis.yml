@@ -68,5 +68,5 @@
     mode: "{{ item.mode }}"
   loop:
     - { src: "signed_certificate.pem", dest: "/etc/ssl/certs/signed_certificate.pem", owner: "root", group: "root", mode: "0644" }
-    - { src: "private_key.pem", dest: "/etc/ssl/private/private.key", owner: "vagrant", group: "vagrant", mode: "0600" }
+    - { src: "private_key.pem", dest: "/etc/ssl/private/private.key", owner: "root", group: "root", mode: "0600" }
     - { src: "ca_chain.crt", dest: "/etc/ssl/certs/ca_chain.crt", owner: "root", group: "root", mode: "0644" }
