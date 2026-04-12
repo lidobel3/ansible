@@ -155,6 +155,13 @@
         VAULT_ADDR: "{{ vault_addr }}"
       no_log: true
 
+    - name: Attendre Vault
+      wait_for:
+        host: "{{ ansible_host }}"  # ← Ajoutez cette ligne
+        port: 8200
+        delay: 10
+        timeout: 60
+
     - name: Vérifier l'unseal
       ansible.builtin.uri:
         url: "{{ vault_addr }}/v1/sys/seal-status"
