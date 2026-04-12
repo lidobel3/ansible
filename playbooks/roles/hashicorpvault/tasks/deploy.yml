@@ -74,7 +74,7 @@
       debug:
         msg: "✅ Vault initialisé - Clés sauvegardées dans {{ vault_keys_file }}"
 
-  when: not vault_is_initialized
+  # when: not vault_is_initialized
   rescue:
     - name: Erreur initialisation
       fail:
