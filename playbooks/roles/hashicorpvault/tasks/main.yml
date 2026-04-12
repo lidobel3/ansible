@@ -3,20 +3,20 @@
 - name: check status
   import_tasks: check_status.yml
 
-# à utiliser que si la collection community.hashi_vault est installée
-- name: login to hashicorp vault server
-  community.hashi_vault.vault_login:
-    url: "{{ vault_addr }}"
-    token: "{{ vault_token }}"
-  register: vault_status
-  delegate_to: localhost
-  run_once: true
-  become: false
-  ignore_errors: true
+# Impossible à utiliser tant que l'IP n'aura pas été rajoutée au SAN du certificat
+# - name: login to hashicorp vault server
+#   community.hashi_vault.vault_login:
+#     url: "{{ vault_addr }}"
+#     token: "{{ vault_token }}"
+#   register: vault_status
+#   delegate_to: localhost
+#   run_once: true
+#   become: false
+#   ignore_errors: true
 
-- name: print result
-  debug:
-    msg: vault_status
+# - name: print result
+#   debug:
+#     msg: vault_status
 
 - name: Installation des pre-requis
   import_tasks: prerequis.yml
