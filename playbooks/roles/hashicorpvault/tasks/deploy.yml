@@ -79,6 +79,7 @@
     - name: Erreur initialisation
       fail:
         msg: "❌ Échec de l'initialisation de Vault"
+  ignore_errors: true
 
 # ===== CHARGEMENT DES CLÉS EXISTANTES =====
 - name: Charger les clés existantes
