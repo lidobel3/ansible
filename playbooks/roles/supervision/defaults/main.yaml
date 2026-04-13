@@ -1,7 +1,8 @@
 ---
 # roles/cockpit/defaults/main.yml
 # Configuration par défaut de Cockpit
-cockpit_origins: "https://localhost:9090 wss://localhost:9090"
+#cockpit_origins: "https://localhost:9090 wss://localhost:9090"
+cockpit_origins: "https://cockpit.homelab.local:9090 wss://cockpit.homelab.local:9090"
 cockpit_protocol_header: "X-Forwarded-Proto"
 cockpit_password_auth: "true"
 cockpit_max_startups: "10"
